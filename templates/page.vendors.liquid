@@ -1,0 +1,43 @@
+{% include 'breadcrumb' %}
+<header class="page-header">
+    <h2 style="text-align: center;">{{ page.title }}</h2>
+</header>
+
+{% comment %}
+  Regular page content goes here.
+{% endcomment %}
+<div class="rte">
+  {{ page.content }}
+</div>
+
+{% include 'brands' %}
+<hr>
+<div class="row">
+    {% assign counter = 0 %}
+    {% for vendor in shop.vendors %}
+    {% assign counter = counter | plus: 1 %}
+    {% endfor %}
+    {% assign counter_divided_by_3 = counter | divided_by: 3 | floor %}
+
+    <ul class="vendor-list block-grid three-up mobile one-up row">
+    {% for product_vendor in shop.vendors %}
+    {% assign its_a_match = false %}
+    {% capture my_collection_handle %}
+    {{ product_vendor | handleize | strip | escape  }}
+    {% endcapture %}
+    {% assign my_collection_handle_stripped = my_collection_handle | strip | escape %}
+    {% for collection in collections %}
+    {% if my_collection_handle_stripped == collection.handle %}
+    {% assign its_a_match = true %}
+    {% endif %}
+    {% endfor %}
+    {% if its_a_match %}
+      <li class="vendor-list-item col-xs-12 col-sm-4"><a href="/{{ product_vendor | handleize }}">{{ product_vendor }}</a></li>
+    {% else %}
+      <li class="vendor-list-item col-xs-12 col-sm-4"><a href="/{{ product_vendor | handleize }}">{{ product_vendor }}</a></li>
+    {% endif %}
+    {% endfor %}
+    </ul>
+  </div>
+
+

@@ -1,0 +1,656 @@
+<div class="CarProfile__loader active">
+  <div class="lds-ripple"><div></div><div></div></div>
+</div>
+<div class="CarProfile CarProfileBuilder CarProfileBuilderEdit">
+  <h1>{{ settings.profile_builder_title_edit }}</h1>
+  <h2 class="CarProfile__yearTitle"></h2>  
+  <div class="CarProfile__signUp"></div>
+
+  <div class="CarProfile__step" data-step="2">
+    <h3>Update mods list</h3>
+    
+    <div class="CarProfile__modList" data-mods="engineMods">
+      <h3>Engine</h3>
+      <div class="modList"></div>
+      <form class="modListForm">
+        <input type="text">
+        <button type="submit">
+          {% render 'icon', icon: 'plus' %}
+          Add Mod
+        </button>
+      </form>
+    </div>
+
+    <div class="CarProfile__modList" data-mods="exhaustOrDownPipeMods">
+      <h3>Exhaust/Downpipe</h3>
+      <div class="modList"></div>
+      <form class="modListForm">
+        <input type="text">
+        <button type="submit">
+          {% render 'icon', icon: 'plus' %}
+          Add Mod
+        </button>
+      </form>
+    </div>
+
+    <div class="CarProfile__modList" data-mods="suspensionMods">
+      <h3>Suspension</h3>
+      <div class="modList"></div>
+      <form class="modListForm">
+        <input type="text">
+        <button type="submit">
+          {% render 'icon', icon: 'plus' %}
+          Add Mod
+        </button>
+      </form>
+    </div>
+
+    <div class="CarProfile__wheels">
+      <h3>Wheels & Tires</h3>
+
+      <div class="wheelInput wheelBranding">
+        <label>Wheel Brand/Model</label>
+        <div class="wheelInput__content">
+          <input type="text" data-value="wheelBrandOrModel" value="">
+        </div>
+      </div>
+
+      <div class="wheelInput wheelBranding">
+        <label>Tire Brand/Model</label>
+        <div class="wheelInput__content">
+          <input type="text" data-value="tireBrandOrModel" value="">
+        </div>
+      </div>
+
+      <div class="wheelDrop selectWheelDifference" data-option="wheelsAndTiresSameSize">
+        <label>Are front & rear the same size?</label>
+        <div class="wheelDrop__content">
+          <button class="wheelDropSelect">
+            <p>Yes, Same Size</p>
+            <span class="down-icon"></span>
+          </button>
+          <div class="wheelDropOptions">
+            <a data-value="yes" class="wheelDropOptionSelection active">Yes, Same Size</a>
+            <a data-value="no" class="wheelDropOptionSelection">No, Staggered Fitment</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sameSizeWheels">
+
+        <div class="wheelDrop" data-option="diameter">
+          <label>Diameter</label>
+          <div class="wheelDrop__content">
+            <button class="wheelDropSelect">
+              <p>Select Diameter</p>
+              <span class="down-icon"></span>
+            </button>
+            <div class="wheelDropOptions"></div>
+          </div>
+        </div>
+
+        <div class="wheelDrop" data-option="width">
+          <label>Width</label>
+          <div class="wheelDrop__content">
+            <button class="wheelDropSelect">
+              <p>Select Width</p>
+              <span class="down-icon"></span>
+            </button>
+            <div class="wheelDropOptions"></div>
+          </div>
+        </div>
+
+        <div class="wheelInput offsetInput">
+          <label>Offset</label>
+          <div class="wheelInput__content">
+            <input type="number" data-value="offset" value="">
+          </div>
+        </div>
+
+        <div class="wheelDrop" data-option="tireWidth">
+          <label>Tire Width</label>
+          <div class="wheelDrop__content">
+            <button class="wheelDropSelect">
+              <p>Select Tire Width</p>
+              <span class="down-icon"></span>
+            </button>
+            <div class="wheelDropOptions"></div>
+          </div>
+        </div>
+
+        <div class="wheelDrop" data-option="tireAspectRatio">
+          <label>Tire Aspect Ratio</label>
+          <div class="wheelDrop__content">
+            <button class="wheelDropSelect">
+              <p>Select Tire Aspect Ratio</p>
+              <span class="down-icon"></span>
+            </button>
+            <div class="wheelDropOptions"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="staggeredWheels">
+
+
+        <div class="wheelSide">
+          <h4>Front</h4>
+
+          <div class="wheelDrop" data-option="diameterFront">
+            <label>Diameter</label>
+            <div class="wheelDrop__content">
+              <button class="wheelDropSelect">
+                <p>Select Diameter</p>
+                <span class="down-icon"></span>
+              </button>
+              <div class="wheelDropOptions"></div>
+            </div>
+          </div>
+
+          <div class="wheelDrop" data-option="widthFront">
+            <label>Width</label>
+            <div class="wheelDrop__content">
+              <button class="wheelDropSelect">
+                <p>Select Width</p>
+                <span class="down-icon"></span>
+              </button>
+              <div class="wheelDropOptions"></div>
+            </div>
+          </div>
+
+          <div class="wheelInput offsetInput">
+            <label>Offset</label>
+            <div class="wheelInput__content">
+              <input type="number" data-value="offsetFront" value="">
+            </div>
+          </div>
+
+          <div class="wheelDrop" data-option="tireWidthFront">
+            <label>Tire Width</label>
+            <div class="wheelDrop__content">
+              <button class="wheelDropSelect">
+                <p>Select Tire Width</p>
+                <span class="down-icon"></span>
+              </button>
+              <div class="wheelDropOptions"></div>
+            </div>
+          </div>
+
+          <div class="wheelDrop" data-option="tireAspectRatioFront">
+            <label>Tire Aspect Ratio</label>
+            <div class="wheelDrop__content">
+              <button class="wheelDropSelect">
+                <p>Select Tire Aspect Ratio</p>
+                <span class="down-icon"></span>
+              </button>
+              <div class="wheelDropOptions"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wheelSide">
+          <h4>Rear</h4>
+
+          <div class="wheelDrop" data-option="diameterRear">
+            <label>Diameter</label>
+            <div class="wheelDrop__content">
+              <button class="wheelDropSelect">
+                <p>Select Diameter</p>
+                <span class="down-icon"></span>
+              </button>
+              <div class="wheelDropOptions"></div>
+            </div>
+          </div>
+
+          <div class="wheelDrop" data-option="widthRear">
+            <label>Width</label>
+            <div class="wheelDrop__content">
+              <button class="wheelDropSelect">
+                <p>Select Width</p>
+                <span class="down-icon"></span>
+              </button>
+              <div class="wheelDropOptions"></div>
+            </div>
+          </div>
+
+          <div class="wheelInput offsetInput">
+            <label>Offset</label>
+            <div class="wheelInput__content">
+              <input type="number" data-value="offsetRear" value="">
+            </div>
+          </div>
+
+          <div class="wheelDrop" data-option="tireWidthRear">
+            <label>Tire Width</label>
+            <div class="wheelDrop__content">
+              <button class="wheelDropSelect">
+                <p>Select Tire Width</p>
+                <span class="down-icon"></span>
+              </button>
+              <div class="wheelDropOptions"></div>
+            </div>
+          </div>
+
+          <div class="wheelDrop" data-option="tireAspectRatioRear">
+            <label>Tire Aspect Ratio</label>
+            <div class="wheelDrop__content">
+              <button class="wheelDropSelect">
+                <p>Select Tire Aspect Ratio</p>
+                <span class="down-icon"></span>
+              </button>
+              <div class="wheelDropOptions"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wheelDrop" data-option="frontWheelSpacers">
+        <label>Front Wheel Spacers</label>
+        <div class="wheelDrop__content">
+          <button class="wheelDropSelect">
+            <p>Select Front Wheel Spacers</p>
+            <span class="down-icon"></span>
+          </button>
+          <div class="wheelDropOptions"></div>
+        </div>
+      </div>
+
+      <div class="wheelDrop" data-option="rearWheelSpacers">
+        <label>Rear Wheel Spacers</label>
+        <div class="wheelDrop__content">
+          <button class="wheelDropSelect">
+            <p>Select Rear Wheel Spacers</p>
+            <span class="down-icon"></span>
+          </button>
+          <div class="wheelDropOptions"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="CarProfile__modList" data-mods="exteriorMods">
+      <h3>Exterior</h3>
+      <div class="modList"></div>
+      <form class="modListForm">
+        <input type="text">
+        <button type="submit">
+          {% render 'icon', icon: 'plus' %}
+          Add Mod
+        </button>
+      </form>
+    </div>
+
+    <div class="CarProfile__modList" data-mods="lightingMods">
+      <h3>Lighting</h3>
+      <div class="modList"></div>
+      <form class="modListForm">
+        <input type="text">
+        <button type="submit">
+          {% render 'icon', icon: 'plus' %}
+          Add Mod
+        </button>
+      </form>
+    </div>
+
+    <div class="CarProfile__modList" data-mods="interiorMods">
+      <h3>Interior</h3>
+      <div class="modList"></div>
+      <form class="modListForm">
+        <input type="text">
+        <button type="submit">
+          {% render 'icon', icon: 'plus' %}
+          Add Mod
+        </button>
+      </form>
+    </div>
+
+    <div class="CarProfile__modList" data-mods="brakeMods">
+      <h3>Brakes</h3>
+      <div class="modList"></div>
+      <form class="modListForm">
+        <input type="text">
+        <button type="submit">
+          {% render 'icon', icon: 'plus' %}
+          Add Mod
+        </button>
+      </form>
+    </div>
+
+    <div class="CarProfile__modList" data-mods="transmissionMods">
+      <h3>Transmission</h3>
+      <div class="modList"></div>
+      <form class="modListForm">
+        <input type="text">
+        <button type="submit">
+          {% render 'icon', icon: 'plus' %}
+          Add Mod
+        </button>
+      </form>
+    </div>
+
+    <div class="CarProfile__modList" data-mods="otherModsOrInfo">
+      <h3>Other Mods/Info</h3>
+      <div class="modList"></div>
+      <form class="modListForm">
+        <input type="text">
+        <button type="submit">
+          {% render 'icon', icon: 'plus' %}
+          Add Mod
+        </button>
+      </form>
+    </div>
+
+    <div class="CarProfile__modList futureMods" data-mods="plannedFutureMods">
+      <h3>PLANNED FUTURE MODS!</h3>
+      <div class="modList"></div>
+      <form class="modListForm">
+        <input type="text">
+        <button type="submit">
+          {% render 'icon', icon: 'plus' %}
+          Add Mod
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="CarProfile__step" data-step="3">
+    <div class="CarProfile__modList maintenanceMods" data-mods="maintenanceMods">
+      <h3>Maintenance Timeline</h3>
+      <div class="modList"></div>
+      <h3 class="modListForm__header">New Timeline Entry</h3>
+      <form class="modListForm maintenanceForm">
+        <input id="mileage" class="modListForm__input" type="text" placeholder="Mileage" required>          
+        <input autocomplete="off" class="modListForm__input" type="text" id="datepicker" placeholder="Select a Date">
+        <div class="modListForm__mod-added--wrap modListForm__input">
+          <div class="ModSelectionList">
+            <div class="ModSelectionList__header">
+              <p class="ModSelectionList__header-title">Previously added mods for this vehicle</p>
+            </div>
+            <div class="ModSelectionList__mod-list">
+
+            </div>
+            <div class="ModSelectionList__new-mod">
+              <input class="ModSelectionList__new-mod--input" type="text" placeholder="Enter a new mod">
+              <sub class="ModSelectionList__new-mod--input-subheader">Select the relevant category from below</sub>
+              <div class="ModSelectionList__new-mod--input-submit">Enter</div>
+
+              <div class="ModSelectionList__new-mod--mod-categories">
+                <div class="ModSelectionList__new-mod--mod-category selected-category" data-mods="engineMods">
+                  Engine
+                </div>
+                <div class="ModSelectionList__new-mod--mod-category" data-mods="exhaustOrDownPipeMods">
+                  Exhaust/Downpipe
+                </div>
+                <div class="ModSelectionList__new-mod--mod-category" data-mods="suspensionMods">
+                  Suspension
+                </div>
+                <div class="ModSelectionList__new-mod--mod-category" data-mods="exteriorMods">
+                  Exterior
+                </div>
+                <div class="ModSelectionList__new-mod--mod-category" data-mods="lightingMods">
+                  Lighting
+                </div>
+                <div class="ModSelectionList__new-mod--mod-category" data-mods="interiorMods">
+                  Interior
+                </div>
+                <div class="ModSelectionList__new-mod--mod-category" data-mods="brakeMods">
+                  Brakes
+                </div>
+                <div class="ModSelectionList__new-mod--mod-category" data-mods="transmissionMods">
+                  Transmission
+                </div>
+                <div class="ModSelectionList__new-mod--mod-category" data-mods="otherModsOrInfo">
+                  Other Mods/Info
+                </div>
+              </div>
+            </div>
+          </div>
+          <input id="modsAdded" class="modListForm__input--mods" autocomplete="off" type="text" placeholder="Mods Added">
+        </div>
+        <input id="servicePerformed" class="modListForm__input" type="text" placeholder="Service Performed">
+        <input id="notes" class="modListForm__input full-width" type="text" placeholder="Notes">
+        <input id="linkedMod" type="text" class="hidden">
+        <div class="CarProfile__mod-photos">          
+          <div class="CarProfile__photo--itemWrap addImageBox">
+            <div class="CarProfile__photo--item">
+              <label for="modImageFileUploader">
+                {% render 'icon', icon: 'camera' %}
+                <p>Upload Photos</p>
+                {% render 'icon', icon: 'plus' %}
+              </label>
+              <input type="file" id="modImageFileUploader" accept="image/*" multiple>
+            </div>
+          </div>
+          <!-- <div class="CarProfile__photosLoader">
+            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+          </div> -->
+        </div>
+        <button type="submit" class="save-mod-entry__btn">
+          {% render 'icon', icon: 'plus' %}
+          Save Entry
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="CarProfile__step imagesStep" data-step="4">
+    <h3>Update Photos (Limited to 10)</h3>
+    <sub>To reorder your images, drag and drop one image over another you wish to place it infront of</sub>
+    <p class="photosError">Add at least one photo</p>
+
+    <div class="CarProfile__photos no-grid">
+      <div class="addImageBox imagesStep4">
+        <div class="CarProfile__photo--item-list">
+
+        </div>
+        <div class="CarProfile__photo--item image-uploader">
+          <label for="imageFileUploader">
+            {% render 'icon', icon: 'camera' %}
+            <p>Upload Photos</p>
+            {% render 'icon', icon: 'plus' %}
+          </label>
+          <input type="file" id="imageFileUploader" accept="image/*" multiple>
+        </div>
+      </div>
+      <div class="CarProfile__photosLoader">
+        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+      </div>
+    </div>
+
+    <div class="CarProfile__igName">
+      <h3>Photographer Instagram Name</h3>
+      <div class="igInput">
+        <div class="igInput__container">
+          <div class="igAt">@</div>
+          <input type="text" id="photographerIgName">
+        </div>
+        <p>* Optional (Will add link to your photographer's listing)</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="CarProfile__step" data-step="5">
+    <div class="CarProfile__summary">
+      <div class="CarProfile__summarySection">
+        <h3>Mods list</h3>
+        <div class="firstModSection"></div>
+        <div class="CarProfile__summarySection-mods ">
+          <h4>Engine</h4>
+          <ul class="CarProfile__summarySection--modsList" data-mods="engineMods"></ul>
+        </div>
+
+        <div class="CarProfile__summarySection-mods">
+          <h4>Exhaust/Downpipe</h4>
+          <ul class="CarProfile__summarySection--modsList" data-mods="exhaustOrDownPipeMods"></ul>
+        </div>
+
+        <div class="CarProfile__summarySection-mods">
+          <h4>Suspension</h4>
+          <ul class="CarProfile__summarySection--modsList" data-mods="suspensionMods"></ul>
+        </div>
+
+        <div class="CarProfile__summarySection-mods">
+          <h4>Exterior</h4>
+          <ul class="CarProfile__summarySection--modsList" data-mods="exteriorMods"></ul>
+        </div>
+
+        <div class="CarProfile__summarySection-mods">
+          <h4>Lighting</h4>
+          <ul class="CarProfile__summarySection--modsList" data-mods="lightingMods"></ul>
+        </div>
+
+        <div class="CarProfile__summarySection-mods">
+          <h4>Interior</h4>
+          <ul class="CarProfile__summarySection--modsList" data-mods="interiorMods"></ul>
+        </div>
+
+        <div class="CarProfile__summarySection-mods">
+          <h4>Brakes</h4>
+          <ul class="CarProfile__summarySection--modsList" data-mods="brakeMods"></ul>
+        </div>
+
+        <div class="CarProfile__summarySection-mods">
+          <h4>Transmission</h4>
+          <ul class="CarProfile__summarySection--modsList" data-mods="transmissionMods"></ul>
+        </div>
+
+        <div class="CarProfile__summarySection-mods">
+          <h4>Other mods/info</h4>
+          <ul class="CarProfile__summarySection--modsList" data-mods="otherModsOrInfo"></ul>
+        </div>
+
+        <div class="CarProfile__summarySection-mods">
+          <h4>Planned future mods</h4>
+          <ul class="CarProfile__summarySection--modsList" data-mods="plannedFutureMods"></ul>
+        </div>
+        
+        <div class="CarProfile__summarySection-mods">
+          <h4>Maintenance</h4>
+          <ul class="CarProfile__summarySection--modsList" data-mods="maintenanceMods"></ul>
+        </div>
+
+      </div>
+      <div class="CarProfile__summarySection CarProfile__summarySection--wheelsContainer">
+        <h3>Wheels & Tires</h3>
+        <div class="CarProfile__summarySection--wheels">
+          <div class="wheelsInfo wheelsInfo__brands">
+            <h4>Brands</h4>
+            <div class="wheelInfoLine" data-wheel-value="wheelBrandOrModel">
+              <div class="wheelInfoLine__key"><p>Wheel Brand/Model:</p></div>
+              <div class="wheelInfoLine__value"><p></p></div>
+            </div>
+            <div class="wheelInfoLine" data-wheel-value="tireBrandOrModel">
+              <div class="wheelInfoLine__key"><p>Tire Brand/Model:</p></div>
+              <div class="wheelInfoLine__value"><p></p></div>
+            </div>
+          </div>
+          <div class="wheelsInfo wheelsInfo__sameSize">
+            <h4>Same Size Wheels</h4>
+            <div class="wheelInfoLine" data-wheel-value="sameSizeWheels.diameter">
+              <div class="wheelInfoLine__key"><p>Diameter:</p></div>
+              <div class="wheelInfoLine__value"><p></p></div>
+            </div>
+            <div class="wheelInfoLine" data-wheel-value="sameSizeWheels.width">
+              <div class="wheelInfoLine__key"><p>Width:</p></div>
+              <div class="wheelInfoLine__value"><p></p></div>
+            </div>
+            <div class="wheelInfoLine" data-wheel-value="sameSizeWheels.offset">
+              <div class="wheelInfoLine__key"><p>Offset:</p></div>
+              <div class="wheelInfoLine__value"><p></p></div>
+            </div>
+            <div class="wheelInfoLine" data-wheel-value="sameSizeWheels.tireWidth">
+              <div class="wheelInfoLine__key"><p>Tire Width:</p></div>
+              <div class="wheelInfoLine__value"><p></p></div>
+            </div>
+            <div class="wheelInfoLine" data-wheel-value="sameSizeWheels.tireAspectRatio">
+              <div class="wheelInfoLine__key"><p>Tire Aspect Ratio:</p></div>
+              <div class="wheelInfoLine__value"><p></p></div>
+            </div>
+          </div>
+          <div class="wheelsInfo wheelsInfo__front">
+            <h4>Front</h4>
+            <div class="wheelInfoLine" data-wheel-value="differentWheels.diameterFront">
+              <div class="wheelInfoLine__key"><p>Diameter:</p></div>
+              <div class="wheelInfoLine__value"><p></p></div>
+            </div>
+            <div class="wheelInfoLine" data-wheel-value="differentWheels.widthFront">
+              <div class="wheelInfoLine__key"><p>Width:</p></div>
+              <div class="wheelInfoLine__value"><p></p></div>
+            </div>
+            <div class="wheelInfoLine" data-wheel-value="differentWheels.offsetFront">
+              <div class="wheelInfoLine__key"><p>Offset:</p></div>
+              <div class="wheelInfoLine__value"><p></p></div>
+            </div>
+            <div class="wheelInfoLine" data-wheel-value="differentWheels.tireWidthFront">
+              <div class="wheelInfoLine__key"><p>Tire Width:</p></div>
+              <div class="wheelInfoLine__value"><p></p></div>
+            </div>
+            <div class="wheelInfoLine" data-wheel-value="differentWheels.tireAspectRatioFront">
+              <div class="wheelInfoLine__key"><p>Tire Aspect Ratio:</p></div>
+              <div class="wheelInfoLine__value"><p></p></div>
+            </div>
+          </div>
+          <div class="wheelsInfo wheelsInfo__rear">
+            <h4>Rear</h4>
+            <div class="wheelInfoLine" data-wheel-value="differentWheels.diameterRear">
+              <div class="wheelInfoLine__key"><p>Diameter:</p></div>
+              <div class="wheelInfoLine__value"><p></p></div>
+            </div>
+            <div class="wheelInfoLine" data-wheel-value="differentWheels.widthRear">
+              <div class="wheelInfoLine__key"><p>Width:</p></div>
+              <div class="wheelInfoLine__value"><p></p></div>
+            </div>
+            <div class="wheelInfoLine" data-wheel-value="differentWheels.offsetRear">
+              <div class="wheelInfoLine__key"><p>Offset:</p></div>
+              <div class="wheelInfoLine__value"><p></p></div>
+            </div>
+            <div class="wheelInfoLine" data-wheel-value="differentWheels.tireWidthRear">
+              <div class="wheelInfoLine__key"><p>Tire Width:</p></div>
+              <div class="wheelInfoLine__value"><p></p></div>
+            </div>
+            <div class="wheelInfoLine" data-wheel-value="differentWheels.tireAspectRatioRear">
+              <div class="wheelInfoLine__key"><p>Tire Aspect Ratio:</p></div>
+              <div class="wheelInfoLine__value"><p></p></div>
+            </div>
+          </div>
+          <div class="wheelsInfo wheelsInfo__spacers">
+            <h4>Spacers</h4>
+            <div class="wheelInfoLine" data-wheel-value="frontWheelSpacers">
+              <div class="wheelInfoLine__key"><p>Front Wheel Spacers:</p></div>
+              <div class="wheelInfoLine__value"><p></p></div>
+            </div>
+            <div class="wheelInfoLine" data-wheel-value="rearWheelSpacers">
+              <div class="wheelInfoLine__key"><p>Rear Wheel Spacers:</p></div>
+              <div class="wheelInfoLine__value"><p></p></div>
+            </div>      
+          </div>
+        </div>
+      </div>
+      <div class="CarProfile__summarySection">
+        <h3>Maintenance Timeline</h3>
+        <div class="CarProfile__summarySection--maintenanceMods"></div>
+      </div>
+      <div class="CarProfile__summarySection">
+        <h3>Your photos</h3>
+        <div class="CarProfile__summarySection--images"></div>
+      </div>
+      <div class="CarProfile__summarySection CarProfile__summarySection--termsAndConditions">
+        <h3>Terms and conditions</h3>
+        <div class="CarProfile__terms">
+          {% assign termsPage = pages[settings.terms_and_service_page] %}
+            {{ termsPage.content }}
+        </div>
+        <div class="CarProfile__checkBox">
+          <input type="checkbox" id="agreeToTerms">
+          <label for="agreeToTerms">I agree to terms and conditions</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="CarProfile__btns">
+    <button class="prev">< Previous step</button>
+    <button class="next">Next step ></button>
+    <button class="completeSubmission">Resubmit Profile</button>
+  </div>
+</div>

@@ -1,0 +1,64 @@
+{% if settings.display_breadcrumb %}
+{% comment %}
+  Documentation - http://docs.shopify.com/support/your-website/navigation/creating-a-breadcrumb-navigation
+{% endcomment %}
+{% unless template == 'index' %}
+<div class="breadcrumb hidden-xs">
+  <a href="/" title="Back to the frontpage">Home</a>
+  {% if template contains 'product' %}
+  {% if collection %}
+  <span class="arrow">/</span>
+  {% if collection.handle %}
+  {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+  {{ collection.title | link_to: url }}
+  {% endif %}
+  {% endif %}
+
+  <span class="arrow">/</span>
+  <span>{{ product.title }}</span>
+
+  {% elsif template contains 'collection' and collection.handle %}
+
+  {% if current_tags %}
+  <span class="arrow">/</span>
+  {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+  {{ collection.title | link_to: url }}
+  {% assign splittedTags = current_tags.first | split: '__' %}
+  {% assign splittedCollectionHandles = '' | split: ',' %}
+  {% for tag in splittedTags %}
+  	{% assign newHandle = tag %}
+  	{% if forloop.index0 > 0 %}
+  		{% assign prevIndex = forloop.index0 | minus: 1 %}
+  		{% assign newHandle = splittedCollectionHandles[prevIndex] | append: '__' | append: tag %}
+  	{% endif %}
+  	{% assign newHandle = newHandle | split: ',' %}
+  	{% assign splittedCollectionHandles = splittedCollectionHandles | concat: newHandle %}
+  	<span class="arrow">/</span>
+  	<a href="{{ url }}/{{ newHandle }}">{{ tag | replace: '_', ' ' | replace: '-', '/' | capitalize }}</a>
+  {% endfor %}
+  
+
+  {% else %}
+  <span class="arrow">/</span>
+  <a>{{ collection.title }}</a>
+  {% endif %}
+
+  {% elsif template == 'article' %}
+
+  <span class="arrow">/</span>
+  {{ blog.title | link_to: blog.url }}
+  <span class="arrow">/</span>
+  <span>{{ article.title }}</span>
+
+  {% elsif template contains 'page' %}
+
+  <span class="arrow">/</span>
+  <span>{{ page.title }}</span>
+
+  {% else %}
+  <span class="arrow">/</span>
+  <span>{{ page_title }}</span>
+  {% endif %}
+</div>
+{% endunless %}
+{% endif %}

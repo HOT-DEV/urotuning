@@ -1,0 +1,227 @@
+{% comment %}
+For Redirecting to the Zonos International Checkout
+  In your Shopify theme files, place the onclick="zonosCheckout(event)" atrribute 
+  on any buttons and links you would like to redirect to the Zonos International Checkout.
+
+Hide Elements for International Customers
+  In the style tag below, place the .z-intl selector before the element you want to hide.
+  .z-intl will style the selector using the CSS rules when
+  Zonos Hello is on an international country.
+  Seperate elements by commas and place the .z-intl selector before the element's selector.
+
+  Example:
+  <style>.z-intl .element-to-hide, .z-intl .other-element-to-hide, #zonos {display: none; visibility: hidden;}</style>
+
+Currency Conversion
+  To manually update currency conversion, call znDisplayCurrency().
+{% endcomment %}
+
+{% if shop.metafields.iglobal.enabled %}
+
+{% if shop.metafields.iglobal.live == "true" %}
+  <script src="https://hello.zonos.com/hello.js?siteKey={{ shop.metafields.iglobal.helloSiteKey }}"></script>
+{% endif %}
+
+{% assign domesticSelectors = shop.metafields.zonos.domesticSelectors | split: ',' %}
+<style>
+  .z-intl .additional-checkout-buttons, .z-intl .additional-checkout-button, #zonos,
+  {% for domesticSelector in domesticSelectors %}
+  .z-intl {{domesticSelector}}{% if forloop.last == false %},{% endif %}
+  {% endfor %}
+  
+</style>
+<style>
+     #zonos.left.US {display: none;}
+     #zonos.left.CA.intl {display: none;}
+</style> 
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.min.js"></script>
+
+
+<script>
+  var z_store = {
+    store: "{{ shop.metafields.iglobal.store }}",
+    live: {{ shop.metafields.iglobal.live | default: false }},
+    foreignCurrency: {{ shop.metafields.iglobal.foreignCurrency | default: false }},
+    currencySelectors: "{{ shop.metafields.iglobal.currencySelectors | default: '.money' }}",
+    quoteProduct: {{ shop.metafields.zonos.quoteProduct | default: false }} && {% if product %} true {% else %} false {% endif %},
+    quoteCart: {{ shop.metafields.zonos.quoteCart | default: false }},
+    urlPath: "{{ request.path }}",
+    customerId: "{{ customer.id }}"
+  };
+
+  function znGetCookie(cookieName) {
+    var getCookieValue = "(?:(?:^|.*;\\s*)" + cookieName + "\\s*\\=\\s*([^;]*).*$)|^.*$";
+    var regex = new RegExp(getCookieValue);
+    return document.cookie.replace(regex, "$1");
+  }
+
+  var zTestModeUrlIndex = window.location.toString().indexOf('zTestMode');
+  var zTestModeCookie = znGetCookie('zTestMode') === "true";
+  var zTestModeParam = window.location.toString().indexOf('zonos=true') !== -1;
+
+  if (zTestModeUrlIndex !== -1) {
+    var testModeEnabled = window.location.toString().indexOf('zTestMode=true') !== -1;
+    document.cookie = 'zTestMode=' + testModeEnabled + ';path=/;domain=' + window.location.host;
+    zTestModeCookie = testModeEnabled;
+  }
+
+  function znLoadHello() {
+    var script = document.createElement('script');
+    script.src = "https://hello.zonos.com/hello.js?siteKey={{ shop.metafields.iglobal.helloSiteKey }}";
+    document.head.appendChild(script);
+  }
+
+  if (!z_store.live && (zTestModeParam || zTestModeCookie)) {
+    znLoadHello();
+  }
+
+
+  function znGoogleAnalyticsClientTracking(tracker) {
+    z_store.clientId = t.get('clientId');
+  }
+
+  // Sets up a Google Analytics function if one isn't already set on the site
+  typeof ga != 'undefined' && ga(znGoogleAnalyticsClientTracking);
+
+  function znSubmitForm(cart) {
+    var form = document.createElement('form');
+    form.method = 'post';
+    form.action = '/a/iglobal/cart';
+
+    var tempCart = {
+      cart: cart,
+      country: znGetCookie("zCountry") || zonos.country(),
+      currency: znGetCookie("zCurrency"),
+      c: z_store && z_store.customerId,
+      clientId: z_store.clientId
+    };
+
+    for (var item in tempCart) {
+      var input = document.createElement('input');
+      input.type = "hidden";
+      input.name = item;
+      input.value = tempCart[item];
+      form.appendChild(input);
+    }
+
+    document.querySelector('body').appendChild(form);
+    form.submit();
+  }
+
+  function znCheckout() {
+    var httpRequest = new XMLHttpRequest;
+    httpRequest.open("GET", "/cart.json", true);
+    httpRequest.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status >= 200 && this.status < 400) {
+        znSubmitForm(this.responseText);
+      } 
+    }
+    httpRequest.send();
+  }
+
+  function znIsCountryDomestic() {
+    // Uses igCountry for backwards compatibility
+    return (znGetCookie("zCountry") || znGetCookie("igCountry")) && zonos !== 'undefined' && !zonos.isDomestic(znGetCookie("zCountry") || znGetCookie("igCountry"));
+  }
+
+  zonosCheckout = function(event) {
+    if ((z_store.live || zTestModeParam || zTestModeCookie) && znIsCountryDomestic() || !zonos.isDomestic()) {
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+      }
+      znCheckout();
+    }
+  }
+
+  function znDutyTaxEstimateOnDetailPage() {
+    if (z_store.quoteProduct) {
+      zonos.quote({
+        items: [{ price: {{ product.price | divided_by: 100 }}, name: "{{product.title | replace: '"', '\"'}}", url: "{{ shop.secure_url }}{{ product.url }}", image: "https:{{ product.featured_image | product_img_url: 'medium' }}"}],
+        currencyCode: '{{ shop.currency }}'
+      });
+    }
+  }
+
+  function znDutyTaxEstimateOnCartPage() {
+    if (z_store.quoteCart && z_store.urlPath.indexOf("cart") >= 0) {
+      zonos.quote({
+        items: [
+          {% for item in cart.items %}
+          { price: {{ item.price}} /100, quantity: {{item.quantity}}, name: "{{ item.title | replace: '"', '\"'}}", url: "{{ shop.secure_url }}{{item.url}}", image: "https:{{item.image| product_img_url: 'medium'}}"},
+          {% endfor %}
+        ],currencyCode: '{{ shop.currency }}'});
+    }
+  }
+
+  function znCustomizations() {
+    // All calls to Zonos should be made in this function to guarantee that Zonos Hello has been loaded.
+    znCurrencyConversionEnabled();
+
+    znDutyTaxEstimateOnCartPage();
+    znDutyTaxEstimateOnDetailPage();
+  }
+
+  function showForeignCurrency() {
+    return z_store && z_store.foreignCurrency == true && z_store.currencySelectors;
+  }
+
+  function znSetCurrencySelectors() {
+    if (showForeignCurrency()) {
+      zonos.config({currencySelectors: z_store.currencySelectors});
+    } else {
+      zonos.config({currencySelectors: ""});
+    }
+  }
+
+  var znIntervalID = null;
+  znDisplayCurrency = function() {
+    if (typeof zonos !== 'undefined' && zonos.config) {
+      znSetCurrencySelectors();
+      znIntervalID && clearInterval(znIntervalID);
+    } else if (znIntervalID === null) {
+      znIntervalID = setInterval(znDisplayCurrency, 100);
+    }
+  }
+
+  function znCurrencyConversionEnabled() {
+    if (showForeignCurrency()) {
+      znDisplayCurrency();
+      document.arrive(z_store.currencySelectors, znDisplayCurrency);
+    }
+  }
+
+  var znListenForCountryChange = true;
+  function zonosLoaded() {
+    if (!znListenForCountryChange) {
+      document.removeEventListener('z-country-change', zonosLoaded);
+      return;
+    }
+
+    document.arrive("#zonos", {existing: true}, function(event) {
+	  console.log('Hello is loaded');
+      if (document.getElementsByClassName('US').length != 0) {
+		console.log('is US and != 0');
+        document.getElementById('zonos').style.display = 'none'
+      }
+      if (document.getElementsByClassName('CA').length != 0) {
+		console.log('is CA and != 0');
+        document.getElementById('zonos').style.display = 'none'
+      }
+    });
+    znListenForCountryChange = false;
+    znCustomizations();
+  }
+
+  function znOnPageLoad() {
+    document.addEventListener('z-country-change', zonosLoaded);
+  }
+  
+  znOnPageLoad();
+
+</script>
+
+{% endif %}

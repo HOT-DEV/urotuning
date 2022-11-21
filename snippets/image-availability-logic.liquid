@@ -1,0 +1,121 @@
+<div class="row">
+{% for tag in product.tags %}
+{% if tag contains 'Avail-InStock-DS' and product.variants.first.inventory_quantity > 1  %}
+<img src="https://www.urotuned.com/availability-images/Avail-InStock.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-InStock-DS' and product.variants.first.inventory_quantity < 1  %}
+<img src="https://www.urotuned.com/availability-images/Avail-DS.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-InStock-OOS' and product.variants.first.inventory_quantity > 1  %}
+<img src="https://www.urotuned.com/availability-images/Avail-InStock.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-InStock-OOS' and product.variants.first.inventory_quantity < 1  %}
+<img src="https://www.urotuned.com/availability-images/Avail-Backorder.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-InStock-MTO1-2D' and product.variants.first.inventory_quantity > 1  %}
+<img src="https://www.urotuned.com/availability-images/Avail-InStock.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-InStock-MTO1-2D' and product.variants.first.inventory_quantity < 1  %}
+<img src="https://www.urotuned.com/availability-images/Avail-MTO1-2D.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-InStock-MTO2-5D' and product.variants.first.inventory_quantity > 1  %}
+<img src="https://www.urotuned.com/availability-images/Avail-InStock.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-InStock-MTO2-5D' and product.variants.first.inventory_quantity < 1  %}
+<img src="https://www.urotuned.com/availability-images/Avail-MTO2-5D.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-InStock-MTO1-2W' and product.variants.first.inventory_quantity > 1  %}
+<img src="https://www.urotuned.com/availability-images/Avail-InStock.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-InStock-MTO1-2W' and product.variants.first.inventory_quantity < 1  %}
+<img src="https://www.urotuned.com/availability-images/Avail-MTO1-2W.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-InStock-MTO2-4W' and product.variants.first.inventory_quantity > 1  %}
+<img src="https://www.urotuned.com/availability-images/Avail-InStock.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-InStock-MTO2-4W' and product.variants.first.inventory_quantity < 1  %}
+<img src="https://www.urotuned.com/availability-images/Avail-MTO2-4W.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-InStock-MTO4W' and product.variants.first.inventory_quantity > 1  %}
+<img src="https://www.urotuned.com/availability-images/Avail-InStock.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-InStock-MTO4W' and product.variants.first.inventory_quantity < 1  %}
+<img src="https://www.urotuned.com/availability-images/Avail-MTO4W.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-InStock-MTO-AWE' and product.variants.first.inventory_quantity > 1  %}
+<img src="https://www.urotuned.com/availability-images/Avail-InStock.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-InStock-MTO-AWE' and product.variants.first.inventory_quantity < 1  %}
+<img src="https://www.urotuned.com/availability-images/Avail-MTO-AWE.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-InStock-Germany' and product.variants.first.inventory_quantity < 1  %}
+<img src="https://www.urotuned.com/availability-images/Avail-Germany.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-Backorder' %}
+<img src="https://www.urotuned.com/availability-images/Avail-Backorder.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-DS' %}
+<img src="https://www.urotuned.com/availability-images/Avail-DS.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-MTO' %}
+<img src="https://www.urotuned.com/availability-images/Avail-MTO.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-MTO1-2D' %}
+<img src="https://www.urotuned.com/availability-images/Avail-MTO1-2D.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-MTO1-2W' %}
+<img src="https://www.urotuned.com/availability-images/Avail-MTO1-2W.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-MTO2-4W' %}
+<img src="https://www.urotuned.com/availability-images/Avail-MTO2-4W.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-MTO2-5D' %}
+<img src="https://www.urotuned.com/availability-images/Avail-MTO2-5D.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-MTO4W' %}
+<img src="https://www.urotuned.com/availability-images/Avail-MTO4W.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-MTO-AWE' %}
+<img src="https://www.urotuned.com/availability-images/Avail-MTO-AWE.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-NLA' %}
+<img src="https://www.urotuned.com/availability-images/Avail-NLA.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-Pre-Order' %}
+<img src="https://www.urotuned.com/availability-images/Avail-Pre-Order.jpg">
+{% break %}
+{% endif %}
+{% if tag contains 'Avail-Germany' %}
+<img src="https://www.urotuned.com/availability-images/Avail-Germany.jpg">
+{% break %}
+{% endif %}
+
+{% endfor %}
+</div>

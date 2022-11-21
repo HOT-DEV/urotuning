@@ -1,0 +1,82 @@
+<section class="home-instagram wow fadeIn" data-wow-delay="500ms">
+  
+  
+  {% comment %}
+  <div class="container">
+    <div style="max-width: 500px;margin: 0 auto !important;float: none !important; background: #D20102; color: #fff!important; padding: 30px 20px 0px; margin-bottom: 50px;">
+
+    <div class="widget-title">
+      <div class="row" style="margin-bottom: 10px;">
+        <a href="https://www.urotuning.com/blogs/news"><img class="lazyload" data-src="{{ 'blog_header.png' | asset_url }}" width="120px"></a>
+    </div>
+
+      <div style="max-width: 100px;margin: 10px auto 10px!important;float: none !important; background: #fff; height: 3px; "></div>
+      <h3 style="color: #fff!important;">
+        {% if settings.blog_title != blank %}
+        {{ settings.blog_title }}
+        {% endif %}
+      </h3>
+      <p class="instagram-des" style="color: #fff!important;">
+        DISCOVER YOUR NEW OBSESSION
+      </p><br>
+    </div>
+    </div>
+
+    {% endcomment %}
+    
+    <div class="container" style="padding-top: 30px">
+    
+      <div class="widget-title wow fadeIn">
+  <fieldset class="box-title">
+    <legend align="center"><a href="https://www.urotuning.com/blogs/news">BLOG POSTS</a>
+      </legend>
+    </fieldset>
+  </div>
+    
+    {% assign blog_handle = 'news' %}
+
+    {% unless blogs[blog_handle].empty? or blogs[blog_handle].articles.size == 0 %}
+
+
+      {% assign container_width = 'col-xs-12 col-sm-12' %}
+      {% assign article_width = 'col-xs-12 col-sm-6' %}
+
+    <div class="grid">
+      <div class="grid__item grid-item {{ container_width }}">
+        <div class="grid" style="padding-left: 10px; padding-right: 10px">
+          <section class="banner-home-top">
+            <ul class="row">
+          {% for article in blogs[blog_handle].articles limit: 4 %}
+
+              <li class="col-xs-12 col-sm-3 wow fadeInUp" data-wow-delay="500ms">
+                <a href="{{ article.url }}">
+                  <img class="lazyload" data-src="{{ article.image | img_url: '300x' }}">
+                  <div class="mob_spc">
+                    <p align="left">
+                      <span>
+
+                        <span style="font-weight:bold">{{ article.title }}</span>
+
+                          <p align="left" class="blog_author"><sup>
+                            <span class="blog_author">Posted
+                              <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+                                {{ article.published_at | date: '%b %d, %Y' }}
+                              </time></span>
+                          </sup></p>
+
+                      </span>
+                    </h4>
+                  </div>
+                </a>
+          	</li>
+
+          {% endfor %}
+        </ul>
+      </section>
+        </div>
+      </div>
+    </div>
+    {% endunless %}
+    </div>
+  </div>
+</section>

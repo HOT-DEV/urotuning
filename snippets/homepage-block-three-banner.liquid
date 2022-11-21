@@ -1,0 +1,156 @@
+{% if settings.display_three_block_banner %}
+<section class="banner-home-top ">
+  <ul class="row">
+    <li class="col-xs-4 col-sm-2 wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load }}ms">
+      <a href="{{ settings.three_block_banner_link_1 }}" title="{{ settings.three_block_banner_text_1 | escape }}">
+        <img class="lazyload" data-src="{{ 'top-banner-home-1.png' | asset_img_url: '400x400' }}" alt="{{ settings.three_block_banner_text_1 | escape }}">
+        {% if settings.display_banner_text_1 %}
+          <h4>
+            <span style="
+              {% if settings.three_block_banner_size_1 != blank %}
+                  font-size: {{ settings.three_block_banner_size_1 }}px;
+              {% elsif settings.three_block_banner_size != blank %}
+                  font-size: {{ settings.three_block_banner_size }}px;
+              {% endif %}
+              {% if settings.three_block_banner_color_1 != blank %}
+                  color: {{ settings.three_block_banner_color_1 }};
+              {% elsif settings.three_block_banner_color != blank %}
+                  color: {{ settings.three_block_banner_color }};
+              {% endif %}"
+            >
+                {% if settings.three_block_banner_text_1 != blank %}
+                {{ settings.three_block_banner_text_1 }}
+                {% endif %}
+            </span>
+          </h4>
+        {% endif %}
+      </a>
+	</li>
+    <li class="col-xs-4 col-sm-2 wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load | times: 2 }}ms">
+      <a href="{{ settings.three_block_banner_link_2 }}" title="{{ settings.three_block_banner_text_2 | escape }}">
+        <img class="lazyload" data-src="{{ 'top-banner-home-2.png' | asset_img_url: '400x400' }}" alt="{{ settings.three_block_banner_text_2 | escape }}">
+        {% if settings.display_banner_text_2 %}
+        <h4>
+          <span style="
+            {% if settings.three_block_banner_size_2 != blank %}
+                font-size: {{ settings.three_block_banner_size_2 }}px;
+            {% elsif settings.three_block_banner_size != blank %}
+                font-size: {{ settings.three_block_banner_size }}px;
+            {% endif %}
+            {% if settings.three_block_banner_color_2 != blank %}
+                color: {{ settings.three_block_banner_color_2 }};
+            {% elsif settings.three_block_banner_color != blank %}
+                color: {{ settings.three_block_banner_color }};
+            {% endif %}"
+          >
+            {% if settings.three_block_banner_text_2 != blank %}
+            {{ settings.three_block_banner_text_2 }}
+            {% endif %}
+          </span>
+        </h4>
+        {% endif %}
+      </a>
+	</li>
+    <li class="col-xs-4 col-sm-2 wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load | times: 3 }}ms">
+      <a href="{{ settings.three_block_banner_link_3 }}" title="{{ settings.three_block_banner_text_3 }}">
+        <img class="lazyload" data-src="{{ 'top-banner-home-3.png' | asset_img_url: '400x400' }}" alt="{{ settings.three_block_banner_text_3 | escape }}">
+        {% if settings.display_banner_text_3 %}
+        <h4>
+          <span style="
+              {% if settings.three_block_banner_size_3 != blank %}
+                  font-size: {{ settings.three_block_banner_size_3 }}px;
+              {% elsif settings.three_block_banner_size != blank %}
+                  font-size: {{ settings.three_block_banner_size }}px;
+              {% endif %}
+              {% if settings.three_block_banner_color_3 != blank %}
+                  color: {{ settings.three_block_banner_color_3 }};
+              {% elsif settings.three_block_banner_color != blank %}
+                  color: {{ settings.three_block_banner_color }};
+              {% endif %}"
+            >
+            {% if settings.three_block_banner_text_3 != blank %}
+            {{ settings.three_block_banner_text_3 }}
+            {% endif %}
+          </span>
+          </h4>
+        {% endif %}
+      </a>
+	</li>
+  <li class="col-xs-4 col-sm-2 wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load | times: 4 }}ms">
+    <a href="{{ settings.three_block_banner_link_4 }}" title="{{ settings.three_block_banner_text_4 }}">
+      <img class="lazyload" data-src="{{ 'top-banner-home-4.png' | asset_img_url: '400x400' }}" alt="{{ settings.three_block_banner_text_4 | escape }}">
+      {% if settings.display_banner_text_4 %}
+      <h4>
+        <span style="
+            {% if settings.three_block_banner_size_4 != blank %}
+                font-size: {{ settings.three_block_banner_size_4 }}px;
+            {% elsif settings.three_block_banner_size != blank %}
+                font-size: {{ settings.three_block_banner_size }}px;
+            {% endif %}
+            {% if settings.three_block_banner_color_4 != blank %}
+                color: {{ settings.three_block_banner_color_4 }};
+            {% elsif settings.three_block_banner_color != blank %}
+                color: {{ settings.three_block_banner_color }};
+            {% endif %}"
+          >
+          {% if settings.three_block_banner_text_4 != blank %}
+          {{ settings.three_block_banner_text_4 }}
+          {% endif %}
+        </span>
+        </h4>
+      {% endif %}
+    </a>
+  </li>
+  <li class="col-xs-4 col-sm-2 wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load | times: 5 }}ms">
+    <a href="{{ settings.three_block_banner_link_5 }}" title="{{ settings.three_block_banner_text_5 }}">
+      {{ 'top-banner-home-5.png' | asset_url | img_tag }}
+      {% if settings.display_banner_text_5 %}
+      <h5>
+        <span style="
+            {% if settings.three_block_banner_size_5 != blank %}
+                font-size: {{ settings.three_block_banner_size_5 }}px;
+            {% elsif settings.three_block_banner_size != blank %}
+                font-size: {{ settings.three_block_banner_size }}px;
+            {% endif %}
+            {% if settings.three_block_banner_color_5 != blank %}
+                color: {{ settings.three_block_banner_color_5 }};
+            {% elsif settings.three_block_banner_color != blank %}
+                color: {{ settings.three_block_banner_color }};
+            {% endif %}"
+          >
+          {% if settings.three_block_banner_text_5 != blank %}
+          {{ settings.three_block_banner_text_5 }}
+          {% endif %}
+        </span>
+        </h5>
+      {% endif %}
+    </a>
+  </li>
+  <li class="col-xs-4 col-sm-2 wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load | times: 6 }}ms">
+    <a href="{{ settings.three_block_banner_link_6 }}" title="{{ settings.three_block_banner_text_6 }}">
+      {{ 'top-banner-home-6.png' | asset_url | img_tag }}
+      {% if settings.display_banner_text_6 %}
+      <h6>
+        <span style="
+            {% if settings.three_block_banner_size_6 != blank %}
+                font-size: {{ settings.three_block_banner_size_6 }}px;
+            {% elsif settings.three_block_banner_size != blank %}
+                font-size: {{ settings.three_block_banner_size }}px;
+            {% endif %}
+            {% if settings.three_block_banner_color_6 != blank %}
+                color: {{ settings.three_block_banner_color_6 }};
+            {% elsif settings.three_block_banner_color != blank %}
+                color: {{ settings.three_block_banner_color }};
+            {% endif %}"
+          >
+          {% if settings.three_block_banner_text_6 != blank %}
+          {{ settings.three_block_banner_text_6 }}
+          {% endif %}
+        </span>
+        </h6>
+      {% endif %}
+    </a>
+  </li>
+  </ul>
+</section>
+{% endif %}

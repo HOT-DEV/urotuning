@@ -1,0 +1,91 @@
+
+{% comment %}
+  This page template is a requirement if you are submitting your theme to the Shopify Theme Store.
+  Be sure to select page.contact as the template from the admin page to have this template take effect.
+
+  For information on adding more fields, visit:
+    - http://docs.shopify.com/support/configuration/store-customization/adding-fields-to-the-liquid-contact-form
+{% endcomment %}
+
+
+
+<div class="contactus-page container">
+  {% include 'breadcrumb' %}
+
+  {% comment %}
+    Regular page content goes here.
+  {% endcomment %}
+  <div class="rte">
+    {{ page.content }}
+  </div>
+
+  {% comment %}
+    Contact form starts here
+  {% endcomment %}
+  <div>
+    {% form 'contact' %}
+
+    {% comment %}
+      Successful message
+    {% endcomment %}
+    {% if form.posted_successfully? %}
+    <p class="note form-success">
+      Thanks for contacting us! We'll get back to you as soon as possible.
+    </p>
+    {% endif %}
+
+    {% include 'form-errors-custom' %}
+    <br>
+    <div id="wufoo-z1flzw4h0afgzmr"><a href="https://urotuning.wufoo.com/forms/z1flzw4h0afgzmr">Email form</a>. </div> <script type="text/javascript"> var z1flzw4h0afgzmr; (function(d, t) { var s = d.createElement(t), options = { 'userName':'urotuning', 'formHash':'z1flzw4h0afgzmr', 'autoResize':true, 'height':'708', 'async':true, 'host':'wufoo.com', 'header':'show', 'ssl':true }; s.src = ('https:' == d.location.protocol ?'https://':'http://') + 'secure.wufoo.com/scripts/embed/form.js'; s.onload = s.onreadystatechange = function() { var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return; try { z1flzw4h0afgzmr = new WufooForm(); z1flzw4h0afgzmr.initialize(options); z1flzw4h0afgzmr.display(); } catch (e) { } }; var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr); })(document, 'script'); </script>
+    
+    
+      {% comment %}
+    <div class="row">
+      <div class="col-xs-12 col-sm-8">
+        <div id="contactFormWrapper">
+          <h2>{{ settings.contact_title }}</h2>
+          <p class="line"></p>
+          <p>{{ settings.contact_text_desc }}</p>
+          <label for="contactFormName">Your Name</label>
+          <input style="width:100%" type="text" id="contactFormName" name="contact[name]" autocapitalize="words" placeholder="{{ settings.contact_your_name }}">
+
+          <label for="contactFormPhone">Your Phone</label>
+          <input style="width:100%" type="tel" name="contact[phone]" id="contactFormPhone" pattern="[0-9]*" placeholder="{{ settings.contact_phone_number }}">
+
+          <label for="contactFormEmail">Your Email<em>*</em></label>
+          <input style="width:100%" type="email" name="contact[email]" id="contactFormEmail" autocorrect="off" autocapitalize="off" placeholder="{{ settings.contact_your_email }}">
+
+          <label for="contactFormMessage">Your Comment<em>*</em></label>
+          <textarea style="width:100%" rows="10" name="contact[body]" id="contactFormMessage" placeholder="{{ settings.contact_your_comment }}"></textarea>
+
+          <input type="submit" class="btn left" value="Submit Contact">
+        </div>
+      </div>
+       {% endcomment %}
+      
+      <hr>
+
+      {% if settings.display_location %}
+      <div class="col-xs-12 col-sm-4">
+        <div class="location">
+          {% if settings.location_code != blank %}
+          {{ settings.location_code }}
+        </div>
+      </div>
+      {% endif %}
+      {% endif %}
+    </div>
+    {% endform %}
+  </div>
+</div>
+
+{% comment %}
+  Google Map
+{% endcomment %}
+{% if settings.display_google_map %}
+<div class="map">
+  {% if settings.google_map_code != blank %}
+  {{ settings.google_map_code }}
+  {% endif %}
+</div>
+{% endif %}

@@ -1,0 +1,743 @@
+{% comment %}
+W3 Accessories code variable for passing through quantity to product page.
+{% endcomment %}
+<script type="text/javascript">  var w3ProductData = {{ product | json }}; </script>
+{{ 'w3-uro.js' | asset_url | script_tag }}
+
+
+
+<style>
+  .img-wrapper {
+    overflow: hidden;
+    max-height: 400px;
+  }
+
+  .img-container {
+    max-height: inherit;
+    transform: translateY(50%);
+  }
+
+  .img-wrapper img {
+    display: block;
+    transform: translateY(-50%);
+    width: 100%;
+  }
+</style>
+<div class="img-wrapper">
+  <div class="img-container">
+    <img src="{{ product.metafields["global"]["Featured-Image"] }}">
+  </div>
+</div>
+{% comment %}{% include 'product-banner' %}{% endcomment %}
+<div class="container">
+  <div>{% include 'breadcrumb' %}</div>
+
+  <div class="row">
+    {% include 'product-sidebar' %}
+    <div class="col-xs-9 col-main">
+      <div itemscope itemtype="http://schema.org/Product" class="product">
+        <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+        <meta itemprop="image" content="{{ product.featured_image | img_url: '600x600' }}">
+        <meta itemprop="description" content="{{ product.description | strip_html  | replace: '"', "'" }}" />
+        <meta itemprop="brand" content="{{ product.vendor }}" />
+        <meta itemprop="mpn" content="{{ product.selected_or_first_available_variant.sku }}" />
+        <meta itemprop="sku" content="{{ product.selected_or_first_available_variant.sku }}" />
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-7 product-img-box {% if settings.product_image_border%} grid-item-border {% endif %}">
+            {% if product.images.size == 0 %}
+            <div class="product-photo-container">
+              <img src="{{ '' | product_img_url: 'grande' }}" alt="" width="100%">
+            </div>
+            {% else %}
+            <div class="product-photo-container">
+              {% assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image %}
+              <a href="{{ featured_image | img_url: 'grande' }}" >
+                <img id="product-featured-image" src="{{ featured_image | img_url: 'grande' }}" alt="{{ featured_image.alt | escape }}" data-zoom-image="{{ featured_image.src | img_url: 'original' }}" width="100%"/>
+              </a>
+            </div>
+            {% if product.images.size > 0 %}
+            <div class="more-view-wrapper more-view-wrapper-owlslider">
+              <ul id="more-view-carousel" class="product-photo-thumbs owl-carousel">
+                {% for image in product.images %}
+                <li class="grid-item"  {% if product.images.size < 2 %} style="display:none!important" {% endif %}>
+                  <a href="javascript:void(0)" data-image="{{ image.src | product_img_url: 'grande' }}" data-zoom-image="{{ image.src | product_img_url: 'original' }}">
+                    <img class="lazyload" data-src="{{ image.src | product_img_url: 'compact' }}" alt="{{ image.alt | escape }}">
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+            {% endif %}
+          </div>
+          <div class="col-xs-12 col-sm-5 product-shop">
+            <div style="max-width: 100%;margin: 0 auto !important;float: none !important; box-shadow: 0 5px 25px #777; padding: 20px 30px 20px; border-radius: 5px;">
+              <header class="product-title {% if collection.previous_product or collection.next_product and settings.display_prev_next_product and collection %}has-btn{% endif %}">
+                <h2 itemprop="name">{{ product.title }}</h2>
+              </header>
+              <div class="ruk_rating_snippet" data-sku="{{ product.handle }};{{ product.variants | map: 'sku' | join: ';' }};{{ product.variants | map: 'id' | join: ';' }}"></div>
+              <hr>
+
+
+              <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+                <meta itemprop="price" content="{{product.selected_or_first_available_variant.price|money_without_currency | remove: ','}}" />
+                <meta itemprop="availability" content="http://schema.org/{% if product.selected_or_first_available_variant.available %}InStock{% else %}OutOfStock{% endif %}"/>
+                <meta itemprop="itemCondition" itemtype="http://schema.org/OfferItemCondition" content="http://schema.org/NewCondition"/>
+                {% if product.description contains '[countdown]' %}
+                {% assign des = product.description | split:'[/countdown]' | last %}
+                {% if settings.show_desc == 'short' %}
+                <div class="short-description">{{ des | strip_html | truncatewords: 50 }}</div>
+                {% elsif settings.show_desc == 'full' %}
+                <div class="short-description">{{ des }}</div>
+                {% endif %}
+                {% else %}
+                {% if settings.show_desc == 'short' %}
+                <div class="short-description">{{ product.description | strip_html | truncatewords: 50 }}</div>
+                {% elsif settings.show_desc == 'full' %}
+                <div class="short-description">{{ product.description }}</div>
+                {% endif %}
+                {% endif %}
+
+
+                  <div class="row">
+                    <div>
+                      <div class="prices">
+                        {% if product.compare_at_price > product.price %}
+                        <span style="color: #000000!important; font-size: 14px; font-weight: 700">As low as.. </span><br><span class="compare-price"><i>{{ product.compare_at_price_max | money }}</i></span><span class="bold_option_price_display price on-sale" >{{ product.price | money }}</span><span style="color: #000!important; font-size: 14px; font-weight: 700"> per wheel</span>
+                        {% else %}
+                        <span style="color: #f62f2f!important; font-size: 14px; font-weight: 700">As low as.. </span><span class="bold_option_price_display price" >{{ product.price | money }}</span><span style="color: #000!important; font-size: 14px; font-weight: 700"> per wheel</span>
+                        {% endif %}
+                     <p style="font-size: 12px; font-weight: bold;" class="affirm-as-low-as" data-page-type="cart" data-amount="{{ product.price }}"></p>
+
+                      </div>
+                    </div>
+             
+
+                  </div>
+
+                    
+                <center><a class="CUSTOMKIT" href="#collapse-tab5">GET A QUOTE NOW!</a></CENTER>
+
+<br><br>
+                
+                    {% capture mm_vend %}https://urotuned.com/mfg_img/{{ product.vendor | handleize }}.jpg{% endcapture %}
+                      {% capture mm_vendurl %}https://www.urotuning.com/{{ product.vendor | handleize }}{% endcapture %}
+                      <div>
+                        <a href="{{ mm_vendurl }}"><img src="{{ mm_vend }}" style="max-height: 35px;"></a>
+                      </div>
+                <span style="color: #333!important; font-size: 14px; font-weight: 500">UroTuning is dedicated to selling Revolve wheels with a focus on customer service and complete satisfaction.
+               </span>
+                <br><br>
+                <div><img src="{{ 'low-price.jpg' | asset_url }}" style="max-height: 45px;"></div>
+                
+                 <span style="color: #333!important; font-size: 14px; font-weight: 500">UroTuning offers the Revolve lineup at the lowest prices available anywhere online guaranteed.
+               </span>
+                
+                
+            {% if settings.show_tab == 'vertical' %}
+            <div class="panel-group" id="accordion">
+              {% if settings.display_product_detail_description %}
+              <div class="panel product-description rte wow fadeInUp">
+                <div class="panel-heading">
+                  <h4 class="panel-title active">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse-tab1">
+                      {{ settings.product_description_title }}
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapse-tab1" class="panel-collapse collapse in">
+                  <div class="panel-body" itemprop="description">
+                    {% if product.description contains '[countdown]' %}
+                    {% assign des = product.description | split:'[/countdown]</p>' | last %}
+                    {{ des }}
+                    {% else %}
+                    {{ product.description }}
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+
+              {% if settings.display_custom_tab %}
+              <div class="panel wow fadeInUp" data-wow-delay="100ms">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse-tab2">
+                      {{ settings.custom_tab_title }}
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapse-tab2" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    {{ settings.custom_tab_content}}
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+
+              {% if settings.display_size_chart %}
+              <div class="panel wow fadeInUp" data-wow-delay="200ms">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse-tab3">
+                      {{ settings.custom_size_chart_title }}
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapse-tab3" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    {{ 'custom_size_chart_content.jpg' | asset_url | img_tag }}
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+
+              {% if settings.display_product_reviews %}
+              <div class="panel wow fadeInUp" data-wow-delay="300ms">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse-tab4">
+                      {{ settings.product_review_title }}
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapse-tab4" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    {% comment %}
+                    Add product review widget, must install Product Review App:
+                    https://apps.shopify.com/product-reviews
+                    {% endcomment %}
+                    <div id="ReviewsWidget"></div>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+            </div>
+            {% endif %}
+
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    {% if settings.show_tab == 'horizontal' %}
+    <div class="panel-group">
+      <ul class="nav nav-tabs">
+        {% if settings.display_product_detail_description %}
+        <li class="active"><a href="#collapse-tab1">{{ settings.product_description_title }}</a></li>
+        {% endif %}
+
+        {% if settings.display_product_reviews %}
+        <li><a href="#collapse-tab5">Best Price Quote</a></li>
+        {% endif %}
+
+        {% if settings.display_product_reviews %}
+        <li><a href="#collapse-tab4">{{ settings.product_review_title }}</a></li>
+        {% endif %}
+
+        {% if settings.display_product_reviews %}
+        {% comment %}
+        <li><a href="#collapse-tab6">Q&A</a></li>
+        {% endcomment %}
+        {% endif %}
+
+        {% if settings.display_custom_tab %}
+        <li><a href="#collapse-tab2">{{ settings.custom_tab_title }}</a></li>
+        {% endif %}
+
+        {% if settings.display_size_chart %}
+        <li><a href="#collapse-tab3">{{ settings.custom_size_chart_title }}</a></li>
+        {% endif %}
+
+
+      </ul>
+
+      <p><h2 itemprop="name"><b>The {{ product.title | remove: "Custom Forged Wheel" }}</b></h2></p>
+      
+      <div class="tab-content">
+        {% if settings.display_product_detail_description %}
+        {% if product.description contains '[countdown]' %}
+        {% assign des = product.description | split:'[/countdown]</p>' | last %}
+        <div id="collapse-tab1" >{{ des }}</div>
+        {% else %}
+        <div id="collapse-tab1" class="description_product">{{ product.description }}</div>
+        {% endif %}
+        {% endif %}
+        
+        <h1><strong>Why Revolve?</strong></h1>
+<p><span>At Revolve Wheels, we combine quality, authenticity & value with a sense of culture to formulate a set of guidelines to fuel our growth and inspiration in the automotive industry. Our ethics is to provide our clients with innovative designs that are both functional and stylish, manufactured from the highest level of forged material, individually engineered, precision machined, and hand finished in Southern California, USA. Above all we’re car enthusiasts, and passion drives our progress, creating a community of people who didn’t just adopt a lifestyle, but birthed a new one.</span></p>
+<h2><strong>Quality Engineered</strong></h2>
+<p>Our aged and heat-treated Aerospace Grade 6061-T6 raw aluminum forgings are locally sourced and forged right here in the USA. This process aligns the grain structure, reduces porosity, and increases uniformity in the material, creating the highest quality standards. Our wheel assembly hardware is sourced in the USA and manufactured from high-quality aerospace-grade steel material forged to an equivalent 10.9 high tensile strength category. We offer our assembly bolts in multiple configurations such as Exposed, Hidden, and 50 / 50 (Half Exposed & Half Hidden) for visual aesthetics. </p>
+<h2><strong>Perfect Fitment</strong></h2>
+<p>Revolve wheels are available in diameters ranging from 17" to 22", and widths from 7" all the way up to 13"! With all these options in sizes and designs it allows us to configure a wheel to fit any look and of course the perfect fitment!Lab iD and Lab Uncharted wheels are available in a wide array of combinations!</p>
+<h2><strong>Center Profiles</strong></h2>
+        <p>Flat, Concave, and Deep Concave profiles are available for each Revolve Wheel design. While some high offset applications may not be able to accommodate concave centers with deep outers, we specifically engineer every application to maximize the outer lip size with your profile for that perfectly tailored fitment you’re looking for.</p>
+<h2><strong>Finishes & Colors</strong></h2>
+<p>All Revolve forged wheels are available in almost any finish and color you can imagine. Please inquire using the form below with any special requests.</p>
+<h2><strong>Here to Help</strong></h2>
+        <p>Need help or just don't know what you need? <B><a href="https://www.urotuning.com/pages/rotiform-custom-wheel-options" target="_blank" title="Rotiform Wheel customization options" rel="noopener noreferrer">Click here to learn more about the Revolve Wheel options.</a></B> <br>You can also call or text us at 813-444-7021 and one of our Revolve Wheel experts will be happy to help.</p>
+<hr />
+<p><em>NOTE: Wheel shown in picture is not representative of all configurations. Vehicle specific fitment will change offset, dish and center profile. Please consult with one of our Revolve wheel experts for specific details.</em></p>
+
+        {% if settings.display_product_reviews %}
+        <div class='fitment-description-tab'>
+          <a name="collapse-tab5"></a>
+          <ul class="nav nav-tabs">
+            {% if settings.display_product_reviews %}
+            <li class="active"><a href="#collapse-tab5">Best Price Quote</a></li>
+            {% endif %}
+          </ul>
+          
+<iframe height="915" title="Embedded Wufoo Form" allowtransparency="true" frameborder="0" scrolling="no" style="width:100%;border:none" src="https://urotuning.wufoo.com/embed/z1rbqxej1dup5qs/"> <a href="https://urotuning.wufoo.com/forms/z1rbqxej1dup5qs/">Fill out my Wufoo form!</a> </iframe> 
+
+        </div>
+        {% endif %}
+
+        {% if settings.display_product_reviews %}
+        <div>
+          <a name="collapse-tab4"></a>
+          <ul class="nav nav-tabs">
+            {% if settings.display_product_reviews %}
+            <li class="active"><a href="#collapse-tab4">{{ settings.product_review_title }}</a></li>
+            {% endif %}
+          </ul>
+
+          <div id="ReviewsWidget"></div>
+         
+        </div>
+        {% endif %}
+
+        {% if settings.display_custom_tab %}
+        <div>
+          <a name="collapse-tab2"></a>
+          <ul class="nav nav-tabs">
+            {% if settings.display_product_reviews %}
+            <li class="active"><a href="#collapse-tab2">Shipping & Returns</a></li>
+            {% endif %}
+          </ul>
+          {{ settings.custom_tab_content}}
+        </div>
+        {% endif %}
+
+        {% if settings.display_size_chart %}
+        <hr>
+        <div>
+          <a name="collapse-tab3"></a>
+          {{ 'custom_size_chart_content.jpg' | asset_url | img_tag }}
+        </div>
+        {% endif %}
+
+
+      </div>
+    </div>
+    <script>
+      jQuery('#myTab a').click(function (e) {
+        e.preventDefault();
+        jQuery(this).tab('show');
+      })
+    </script>
+    {% endif %}
+
+    {% if settings.display_product_detail_share %}
+    {% comment %}
+    {% include 'share' with product %}
+    {% endcomment %}
+    <div class="share_toolbox">
+      <p>{{ settings.text_share }}</p>
+      <ul>
+        {% if settings.social_title_1 != blank %}
+        <li><a href="{{ settings.social_link_1 }}?subject={{product.title}}&body={{canonical_url}}" target="_blank" title="{{ settings.social_title_1 }}">{{ 'social_icon_1.png' | asset_url | img_tag }}</a></li>
+        {% endif %}
+        {% if settings.social_title_2 != blank %}
+        <li><a href="{{ settings.social_link_2 }}{{ canonical_url }}&p[images][0]={{featured_image}}" target="_blank" title="{{ settings.social_title_2 }}">{{ 'social_icon_2.png' | asset_url | img_tag }}</a></li>
+        {% endif %}
+        {% if settings.social_title_3 != blank %}
+        <li><a href="{{ settings.social_link_3 }}{{ canonical_url }}" target="_blank" title="{{ settings.social_title_3 }}">{{ 'social_icon_3.png' | asset_url | img_tag }}</a></li>
+        {% endif %}
+        {% if settings.social_title_4 != blank %}
+        <li><a href="{{ settings.social_link_4 }}{{ canonical_url }}&media=http:{{ featured_image | img_url: 'grande' }}&description={{product.title}}" target="_blank" title="{{ settings.social_title_4 }}">{{ 'social_icon_4.png' | asset_url | img_tag }}</a></li>
+        {% endif %}
+        {% if settings.social_title_5 != blank %}
+        <li><a href="{{ settings.social_link_5 }}{{ canonical_url }}" target="_blank" title="{{ settings.social_title_5 }}">{{ 'social_icon_5.png' | asset_url | img_tag }}</a></li>
+        {% endif %}
+      </ul>
+    </div>
+    {% endif %}
+
+
+    {{ 'option_selection.js' | shopify_asset_url | script_tag }}
+
+{% comment %}FREQUENTLY PURCHASED TOGETHER Slider{% endcomment %}
+<div class="findify-element" id="product-findify-rec-4"></div>
+        
+<hr>
+
+  </div>
+</div>
+{% comment %}Recently Viewed Slider{% endcomment %}
+<div class="findify-element" id="product-findify-rec-1"></div>
+
+<script>
+  //Shopify.Image.preload({{ product.images | json }}, 'grande');
+
+  {% if settings.display_subtotal and product.available %}
+  //update price when changing quantity
+  function updatePricing() {
+    //try pattern one before pattern 2
+    var regex = /([0-9]+[.|,][0-9]+[.|,][0-9]+)/g;
+    var unitPriceTextMatch = jQuery('.product .price').text().match(regex);
+
+    if (!unitPriceTextMatch) {
+      regex = /([0-9]+[.|,][0-9]+)/g;
+      unitPriceTextMatch = jQuery('.product .price').text().match(regex);
+    }
+
+    if (unitPriceTextMatch) {
+      var unitPriceText = unitPriceTextMatch[0];
+      var unitPrice = unitPriceText.replace(/[.|,]/g,'');
+      var quantity = parseInt(jQuery('#quantity').val());
+      var totalPrice = unitPrice * quantity;
+
+      var totalPriceText = Shopify.formatMoney(totalPrice, window.money_format);
+
+      totalPriceText = totalPriceText.match(regex)[0];
+
+      var regInput = new RegExp(unitPriceText, "g");
+      var totalPriceHtml = jQuery('.product .price').html().replace(regInput ,totalPriceText);
+
+      jQuery('.product .total-price span').html(totalPriceHtml);
+    }
+  }
+  jQuery('#quantity').on('change', updatePricing);
+  {% endif %}
+
+  var selectCallback = function(variant, selector) {
+           if(variant == null)
+    {
+      //alert("Not available");
+      setTimeout(function(){ jQuery('#addToCartCopy').val('Unavailable').addClass('disabled').attr('disabled', 'disabled'); }, 0);
+      return false;
+    }
+
+    //   $('.affirm-as-low-as').attr('data-amount',variant.price);
+    //   affirm.ui.refresh();
+
+    if (variant) {
+      $('.variant-sku').text(variant.sku);
+      znDisplayCurrency && setTimeout(znDisplayCurrency, 1000);
+    }
+    else {
+      $('.variant-sku').empty();
+    }
+
+    {% assign dropship = true %}
+    {% for variant in product.variants %}
+    {% if variant.inventory_quantity > 0 %}
+    {% assign dropship = false %}
+    {% break %}
+    {% endif %}
+    {% endfor %}
+    {% unless dropship %}
+    var prodIcon = jQuery('.iconforprod');
+    if (variant.available) {
+      prodIcon.removeClass('lt_show').addClass('gt_show');
+    } else {
+      // Variant is sold out, disable the submit button
+      prodIcon.removeClass('gt_show').addClass('lt_show');
+    }
+    {% endunless %}
+
+
+    var addToCart = jQuery('#product-add-to-cart'),
+        productPrice = jQuery('.product .price'),
+        comparePrice = jQuery('.product .compare-price');
+
+
+
+    if (variant) {
+
+      if (variant.available) {
+        // We have a valid product variant, so enable the submit button
+        addToCart.removeClass('disabled').removeAttr('disabled').val('Add to Cart');
+
+
+      } else {
+        // Variant is sold out, disable the submit button
+        addToCart.val('Sold Out').addClass('disabled').attr('disabled', 'disabled');
+      }
+
+      // Regardless of stock, update the product price
+      productPrice.html(Shopify.formatMoney(variant.price, "{{ shop.money_format }}"));
+
+                                            // Also update and show the product's compare price if necessary
+                                            if ( variant.compare_at_price > variant.price ) {
+                        productPrice.addClass("on-sale")
+      comparePrice
+      .html(Shopify.formatMoney(variant.compare_at_price, "{{ shop.money_format }}"))
+                                .show();
+            } else {
+            comparePrice.hide();
+      productPrice.removeClass("on-sale");
+    }
+    {% if settings.use_color_swatch %}
+    // BEGIN SWATCHES
+    var form = jQuery('#' + selector.domIdPrefix).closest('form');
+    for (var i=0,length=variant.options.length; i<length; i++) {
+      var radioButton = form.find('.swatch[data-option-index="' + i + '"] :radio[value="' + variant.options[i] +'"]');
+      if (radioButton.size()) {
+        radioButton.get(0).checked = true;
+      }
+    }
+    // END SWATCHES
+    {% endif %}
+
+    {% if settings.display_subtotal and product.available %}
+    updatePricing();
+    {% endif %}
+
+
+    if(window.BOLD
+       && BOLD.common
+       && BOLD.common.eventEmitter
+       && typeof BOLD.common.eventEmitter.emit == 'function'){
+      BOLD.common.eventEmitter.emit("BOLD_COMMON_variants_changed", {variant: variant});   
+    }
+
+  } else {
+    // The variant doesn't exist. Just a safeguard for errors, but disable the submit button anyway
+    addToCart.val('Unavailable').addClass('disabled').attr('disabled', 'disabled');
+  }
+
+  //update variant inventory
+  {% if settings.display_availability %}
+  if (variant.available) {
+    if (variant.inventory_management!=null) {
+      jQuery(".product-inventory span").text(variant.inventory_quantity + " in stock");
+    } else {
+      jQuery(".product-inventory span").text("Many in stock");
+    }
+  } else {
+    jQuery(".product-inventory span").text("Out of stock");
+  }
+  {% endif %}
+
+  /*begin variant image*/
+  if (variant && variant.featured_image) {
+    var originalImage = jQuery("#product-featured-image");
+    var newImage = variant.featured_image;
+    var element = originalImage[0];
+    Shopify.Image.switchImage(newImage, element, function (newImageSizedSrc, newImage, element) {
+      jQuery('#more-view-carousel img').each(function() {
+        var grandSize = jQuery(this).attr('src');
+        grandSize = grandSize.replace('compact','grande');
+        if (grandSize == newImageSizedSrc) {
+          jQuery(this).parent().trigger('click');
+          return false;
+        }
+      });
+    });
+  }
+  /*end of variant image*/
+  };
+
+  jQuery(function($) {
+    {% if product.available and product.variants.size > 1 %}
+    new Shopify.OptionSelectors('product-selectors', {
+      product: {{ product | json }},
+      onVariantSelected: selectCallback,
+      enableHistoryState: true
+      // Grab the variant currently selected with ?variant=ID in the URL, or the first in stock variant, on page load.
+
+    });
+
+    {% comment %}
+    Use color swatch and linked options (copyright by @carolineschnapp)
+    {% endcomment %}
+    {% if settings.use_color_swatch and product.available and product.options.size > 1 %}
+    Shopify.linkOptionSelectors({{ product | json }});
+    {% endif %}
+
+    {% if settings.use_color_swatch != true %}
+    jQuery('.single-option-selector').selectize();
+    jQuery('.selectize-input input').attr("disabled","disabled");
+    {% endif %}
+
+    {% endif %}
+
+    // Add label if only one product option and it isn't 'Title'. Could be 'Size'.
+    {% if product.options.size == 1 and product.options.first != 'Title' %}
+    $('.selector-wrapper:eq(0)').prepend('<label>{{ product.options.first }}</label>');
+                                         {% endif %}
+
+                                         // Hide selectors if we only have 1 variant and its title contains 'Default'.
+                                         {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
+                                         $('.selector-wrapper').hide();
+    {% endif %}
+
+    // Auto-select first available variant on page load. Otherwise the product looks sold out.
+    {% assign found_one_in_stock = false %}
+    {% for variant in product.variants %}
+    {% if variant.available and found_one_in_stock == false %}
+    {% assign found_one_in_stock = true %}
+    {% for option in product.options %}
+    $('.single-option-selector:eq({{ forloop.index0 }})').val({{ variant.options[forloop.index0] | json }}).trigger('change');
+    {% endfor %}
+    {% endif %}
+    {% endfor %}
+
+    {% if settings.display_product_reviews %}
+    var reviewsTimeout = setInterval(function() {
+      if (jQuery(".spr-badge-caption").length>0) {
+        jQuery(".spr-badge-caption").on('click', function() {
+          jQuery('html,body').animate({
+            scrollTop: jQuery(".panel:last").offset().top},
+                                      '400');
+          jQuery("#collapse-tab4").collapse('show');
+        });
+        clearInterval(reviewsTimeout);
+      }
+    },1000);
+
+    {% endif %}
+
+  });
+
+
+</script>
+
+<script>
+  jQuery(document).ready(function(){
+    if (jQuery(".product-infor .product-inventory > span").html() == 'Many in stock'){
+      jQuery(".product-infor").addClass("ManyStock");
+    }
+
+    var $selectedCar = getSelectedCar(getSelectedCars());
+    
+    if ($selectedCar) {
+      showFitmentStatus($selectedCar.attr('href').slice($selectedCar.attr('href').lastIndexOf('/')).slice(1));
+    } else {
+      $('.car-selector-container').show();
+    }
+  });
+</script>
+
+
+
+</div>
+
+<link rel="stylesheet" href="https://d1azc1qln24ryf.cloudfront.net/40686/revsglobal-pr-mod/style-cf.css?-c0avz5">
+<script src="https://widget.reviews.io/combined/dist.js?v1"></script>
+<link rel="stylesheet" href="https://widget.reviews.io/combined/style.css?v1">
+<script>
+    new ReviewsWidget('#ReviewsWidget', {
+        store: 'urotuning-com',
+        widget: 'combined-widget',
+        options: {
+            types: 'product_review,store_review,questions', // store_review,product_review,questions (choose what content you prefer to show in this widget)
+            per_page: 10, // Any number (set how many reviews/questions you want to show per page)
+
+            /* Company Reviews Settings */
+            store_review:{
+                enable_social_sharing:true,
+                enable_helpful:true,
+                enable_smart_filters:false,
+                enable_rating_filters:false,
+                enable_featured_review_photos:true,
+                enable_featured_social_photos:true,
+                enable_toggle_filters:false,
+                enable_list_summary:true,
+                show_mention_text:true,
+                show_dates:true,
+                show_replies:true,
+                show_avatars:true,
+                show_photos:true,
+                show_verify_status:true
+            },
+
+            /* Product Reviews Settings */
+            product_review: {
+                sku: '{{ product.handle }};{{ product.variants | map: "sku" | join: ";" }};{{ product.variants | map: "id" | join: ";" }}',
+                enable_write_review:false,
+                enable_smart_filters:false,
+                enable_rating_filters:false,
+                enable_toggle_filters:false,
+                enable_social_sharing:true,
+                enable_helpful:true,
+                enable_featured_review_photos:true,
+                enable_featured_social_photos:true,
+                show_mention_text:true,
+                show_dates:true,
+                show_replies:true,
+                show_avatars:true,
+                show_photos:true,
+                show_verify_status:true
+
+            },
+
+            /* Questions & Answers Settings */
+            questions:{
+                enable_ask_question:true,
+                show_dates:false,
+                grouping:''
+            }
+        },
+
+        /* Customise Colours & Fonts */
+        styles: {
+            starColor:'#ff9900',
+            textColor:'#333333',
+            primaryColor:'#d20000',
+            neutralColor:'#ececec',
+            backgroundColor:'#ffffff',
+            formColor:'#dcdcdc',
+            baseTextSize:'14px',
+            review_style:'',
+            header_style:''
+        },
+
+        /* Customise Buttons */
+        buttons:{
+            smart_filter:'solid',
+            write_review:'solid',
+            selected_page:'outline'
+        },
+
+        /* Avatar Settings */
+        avatars:{
+            enable_gravatar:true,
+            gravatar_fallback:'identicon'
+        },
+
+        /* Other Options*/
+        reviewsLogo:{
+            show_logo:true,
+            style:'black'
+        }
+    });
+</script>
+
+<script src="https://widget.reviews.io/rich-snippet/dist.js"></script>
+<script>
+richSnippet({
+    store: 'urotuning-com',
+    sku: '{{ product.handle }};{{ product.variants | map: "sku" | join: ";" }};{{ product.variants | map: "id" | join: ";" }}'
+});
+</script>
+
+         <script src="https://widget.reviews.io/product/dist.js"></script>
+<script src="https://widget.reviews.io/rating-snippet/dist.js"></script>
+<link rel="stylesheet" href="https://widget.reviews.io/rating-snippet/dist.css" />
+<script>
+ratingSnippet("ruk_rating_snippet",{
+store: "urotuning-com",
+color: "#ff9900",
+linebreak: false,
+link: false,
+text: "Reviews"
+});
+</script>

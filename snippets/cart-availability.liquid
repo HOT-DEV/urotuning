@@ -1,0 +1,341 @@
+{% if item.product.options.size > 1 %}
+{% assign current_variant = item.product.selected_or_first_available_variant %}
+{% assign current_variant_rule = item.variant.inventory_quantity %}
+<div class="row iconforprod {% if item.variant.inventory_quantity >= 1 %} gt_show{% else %} lt_show{% endif %}">
+
+{% if item.product.tags contains 'Avail-InStock-DS' or item.product.tags contains 'Avail-InStock-Preorder' or item.product.tags contains 'Avail-InStock-OOS' or item.product.tags contains 'Avail-InStock-MTO1-2D' or item.product.tags contains 'Avail-InStock-MTO2-5D' or item.product.tags contains 'Avail-InStock-MTO1-2W' or item.product.tags contains 'Avail-InStock-MTO2-4W' or item.product.tags contains 'Avail-InStock-MTO4W' or item.product.tags contains 'Avail-InStock-MTO-AWE' or item.product.tags contains 'Avail-Backorder' or item.product.tags contains 'Avail-DS' or item.product.tags contains 'Avail-MTO' or item.product.tags contains 'Avail-MTO1-2D' or item.product.tags contains 'Avail-MTO1-2W' or item.product.tags contains 'Avail-MTO2-4W' or item.product.tags contains 'Avail-MTO2-5D' or item.product.tags contains 'Avail-MTO4W' or item.product.tags contains 'Avail-MTO-AWE' or item.product.tags contains 'Avail-NLA' or item.product.tags contains 'Avail-Pre-Order' or item.product.tags contains 'Avail-InStock' or item.product.tags contains 'Avail-InStock-MTO' or item.product.tags contains 'Avail-InStock-ETA' or item.product.tags contains 'Avail-InStock-Klii' or item.product.tags contains 'Avail-InStock-Germany' %}
+
+  {% if item.product.tags contains 'Avail-InStock-DS' %}
+    <img class="greaterthan" src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  	<span class="greaterthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+  <img class="lessthan" src="https://www.urotuned.com/availability-images-new/Avail-DS.jpg">
+  	<span class="lessthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Direct Ship</span>
+  <span class="lessthan">
+    {% include 'tooltip_box',tooltip_message:'This product will ship direct from our supplier. Availability is subject to suppliers stock.' %}
+  </span>
+  {% elsif item.product.tags contains 'Avail-InStock-Preorder' %}
+    <img class="greaterthan" src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  	<span class="greaterthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+    <img class="lessthan" src="https://www.urotuned.com/availability-images-new/Avail-Pre-Order.jpg">
+  	<span class="lessthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Pre-Order ETA {{ item.product.metafields["global"]["ETA"]}}</span>
+  <span class="lessthan">
+    {% include 'tooltip_box',tooltip_message:'This product is available for Pre Order Only. ETA for shipment is the current estimated date listed.' %}
+  </span>
+  {% elsif item.product.tags contains 'Avail-InStock-OOS' %}
+    <img class="greaterthan" src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  	<span class="greaterthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+    <img class="lessthan" src="https://www.urotuned.com/availability-images-new/Avail-Backorder.jpg">
+  	<span class="lessthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">On Backorder</span>
+    <span class="lessthan">
+    {% include 'tooltip_box',tooltip_message:'This product is currently on Backorder.' %}
+  </span>
+  {% elsif item.product.tags contains 'Avail-InStock-ETA' %}
+    <img class="greaterthan" src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  	<span class="greaterthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+    <img class="lessthan" src="https://www.urotuned.com/availability-images-new/Avail-ETA.jpg">
+  	<span class="lessthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Ships on 2/25</span>
+    <span class="lessthan">
+    {% include 'tooltip_box',tooltip_message:'This product is on order and should ship within the time frame shown.' %}
+  </span>
+  {% elsif item.product.tags contains 'Avail-InStock-Klii' %}
+    <img class="greaterthan" src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  	<span class="greaterthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+    <img class="lessthan" src="https://www.urotuned.com/availability-images-new/Avail-ETA.jpg">
+  	<span class="lessthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Ships on 7/8</span>
+    <span class="lessthan">
+    {% include 'tooltip_box',tooltip_message:'This product is on order and should ship within the time frame shown.' %}
+  </span>
+  {% elsif item.product.tags contains 'Avail-InStock-MTO1-2D' %}
+    <img class="greaterthan" src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  	<span class="greaterthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+    <img class="lessthan" src="https://www.urotuned.com/availability-images-new/Avail-MTO1-2D.jpg">
+  	<span class="lessthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Ships in 0-2 Days</span>
+    <span class="lessthan">
+    {% include 'tooltip_box',tooltip_message:'This product usually ships within 2 business days.' %}
+  </span>
+  {% elsif item.product.tags contains 'Avail-InStock-MTO2-5D' %}
+    <img class="greaterthan" src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  	<span class="greaterthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+    <img class="lessthan" src="https://www.urotuned.com/availability-images-new/Avail-MTO1-2D.jpg">
+  	<span class="lessthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Ships in 2-5 Days</span>
+    <span class="lessthan">
+    {% include 'tooltip_box',tooltip_message:'This product usually ships within 2-5 business days.' %}
+  </span>
+  {% elsif item.product.tags contains 'Avail-InStock-MTO1-2W' %}
+    <img class="greaterthan" src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  	<span class="greaterthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+    <img class="lessthan" src="https://www.urotuned.com/availability-images-new/Avail-MTO1-2D.jpg">
+  	<span class="lessthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Ships in 1-2 Weeks</span>
+    <span class="lessthan">
+    {% include 'tooltip_box',tooltip_message:'This product usually ships within 1-2 weeks.' %}
+  </span>
+  {% elsif item.product.tags contains 'Avail-InStock-MTO2-4W' %}
+    <img class="greaterthan" src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  	<span class="greaterthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+    <img class="lessthan" src="https://www.urotuned.com/availability-images-new/Avail-MTO1-2D.jpg">
+  	<span class="lessthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Ships in 1-4 Weeks</span>
+    <span class="lessthan">
+    {% include 'tooltip_box',tooltip_message:'This product usually ships within 1-4 weeks.' %}
+  </span>
+  {% elsif item.product.tags contains 'Avail-InStock-MTO4W' %}
+    <img class="greaterthan" src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  	<span class="greaterthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+    <img class="lessthan" src="https://www.urotuned.com/availability-images-new/Avail-MTO1-2D.jpg">
+  	<span class="lessthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Ships 4+ Weeks</span>
+    <span class="lessthan">
+    {% include 'tooltip_box',tooltip_message:'This product usually ships within 4+ weeks.' %}
+  </span>
+  {% elsif item.product.tags contains 'Avail-InStock-MTO-AWE' %}
+  	<div style="text-align: left;">
+  		<img class="greaterthan" src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  		<span class="greaterthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+  	</div>
+  	<div style="text-align: left;">
+      <img class="lessthan" src="https://www.urotuned.com/availability-images-new/Avail-MTO.jpg">
+      <span class="lessthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">
+        Made to Order
+      </span>
+      <br>
+      <span class="lessthan" style="font-size:x-small; color: #666;">
+        Ships Direct from AWE
+      </span>
+        <span class="lessthan">
+    {% include 'tooltip_box',tooltip_message:'This product is made to order. ETA will be provided once order is submitted to AWE.' %}
+  </span>
+  	</div>
+  {% elsif item.product.tags contains 'Avail-InStock-MTO' %}
+    <img class="greaterthan" src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  	<span class="greaterthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+    <img class="lessthan" src="https://www.urotuned.com/availability-images-new/Avail-MTO.jpg">
+  	<span class="lessthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em;">Made to Order</span>
+    <span class="lessthan">
+    {% include 'tooltip_box',tooltip_message:'This product is made to order. ETA will be provided once order is submitted to supplier.' %}
+  </span>
+  {% elsif item.product.tags contains 'Avail-InStock-Germany' %}
+    <img class="greaterthan" src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  	<span class="greaterthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+    <img class="lessthan" src="https://www.urotuned.com/availability-images-new/Avail-Germany.jpg">
+  	<span class="lessthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Ships from Germany</span>
+    <span class="lessthan">
+    {% include 'tooltip_box',tooltip_message:'This product ships from Germany and is subject to extended lead times.' %}
+  </span>
+
+  {% elsif item.product.tags contains 'Avail-Backorder' %}
+    <img src="https://www.urotuned.com/availability-images-new/Avail-Backorder.jpg">
+  	<span style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">On Backorder</span>
+  {% elsif item.product.tags contains 'Avail-DS' %}
+    <img src="https://www.urotuned.com/availability-images-new/Avail-DS.jpg">
+  	<span style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Direct Ship</span>
+  {% elsif item.product.tags contains 'Avail-MTO' %}
+    <img src="https://www.urotuned.com/availability-images-new/Avail-MTO.jpg">
+  	<span style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Made to Order</span>
+  {% elsif item.product.tags contains 'Avail-MTO1-2D' %}
+    <img src="https://www.urotuned.com/availability-images-new/Avail-MTO1-2D.jpg">
+  	<span style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Ships in 1-2 Days</span>
+  {% elsif item.product.tags contains 'Avail-MTO1-2W' %}
+    <img src="https://www.urotuned.com/availability-images-new/Avail-MTO1-2D.jpg">
+  	<span style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Ships in 1-2 Weeks</span>
+  {% elsif item.product.tags contains 'Avail-MTO2-4W' %}
+    <img src="https://www.urotuned.com/availability-images-new/Avail-MTO1-2D.jpg">
+  	<span style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Ships in 2-4 Weeks</span>
+  {% elsif item.product.tags contains 'Avail-MTO2-5D' %}
+    <img src="https://www.urotuned.com/availability-images-new/Avail-MTO1-2D.jpg">
+  	<span style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Ships in 2-5 Days</span>
+  {% elsif item.product.tags contains 'Avail-MTO4W' %}
+    <img src="https://www.urotuned.com/availability-images-new/Avail-MTO1-2D.jpg">
+  	<span style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Ships in 4+ Weeks</span>
+  {% elsif item.product.tags contains 'Avail-MTO-AWE' %}
+    <img src="https://www.urotuned.com/availability-images-new/Avail-MTO.jpg">
+  	<span style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Made to Order</span>
+  {% elsif item.product.tags contains 'Avail-NLA' %}
+    <img src="https://www.urotuned.com/availability-images-new/Avail-NLA.jpg">
+  	<span style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Discontinued</span>
+  {% elsif item.product.tags contains 'Avail-Pre-Order' %}
+    <img src="https://www.urotuned.com/availability-images-new/Avail-Pre-Order.jpg">
+  	<span style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Pre-Order</span>
+  {% elsif item.product.tags contains 'Avail-InStock' %}
+    <img src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  	<span style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+  {% endif %}
+
+{% endif %}
+
+</div>
+
+{% else %}
+
+{% assign current_variant2 = product.variants.first.inventory_quantity %}
+<div class="row iconforprod {% if item.variant.inventory_quantity >= 1 %} gt_show{% else %} lt_show{% endif %}">
+
+{% if item.product.tags contains 'Avail-InStock-DS' or item.product.tags contains 'Avail-InStock-Preorder' or item.product.tags contains 'Avail-InStock-OOS' or item.product.tags contains 'Avail-InStock-MTO1-2D' or item.product.tags contains 'Avail-InStock-MTO2-5D' or item.product.tags contains 'Avail-InStock-MTO1-2W' or item.product.tags contains 'Avail-InStock-MTO2-4W' or item.product.tags contains 'Avail-InStock-MTO4W' or item.product.tags contains 'Avail-InStock-MTO-AWE' or item.product.tags contains 'Avail-Backorder' or item.product.tags contains 'Avail-DS' or item.product.tags contains 'Avail-MTO' or item.product.tags contains 'Avail-MTO1-2D' or item.product.tags contains 'Avail-MTO1-2W' or item.product.tags contains 'Avail-MTO2-4W' or item.product.tags contains 'Avail-MTO2-5D' or item.product.tags contains 'Avail-MTO4W' or item.product.tags contains 'Avail-MTO-AWE' or item.product.tags contains 'Avail-NLA' or item.product.tags contains 'Avail-Pre-Order' or item.product.tags contains 'Avail-InStock' or item.product.tags contains 'Avail-InStock-MTO' or item.product.tags contains 'Avail-InStock-ETA' or item.product.tags contains 'Avail-InStock-Klii' or item.product.tags contains 'Avail-InStock-Germany' %}
+
+  {% if item.product.tags contains 'Avail-InStock-DS' %}
+    <img class="greaterthan" src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  	<span class="greaterthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+  <img class="lessthan" src="https://www.urotuned.com/availability-images-new/Avail-DS.jpg">
+  	<span class="lessthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Direct Ship</span>
+  <span class="lessthan">
+    {% include 'tooltip_box',tooltip_message:'This product will ship direct from our supplier. Availability is subject to suppliers stock.' %}
+  </span>
+  {% elsif item.product.tags contains 'Avail-InStock-Preorder' %}
+    <img class="greaterthan" src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  	<span class="greaterthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+    <img class="lessthan" src="https://www.urotuned.com/availability-images-new/Avail-Pre-Order.jpg">
+  	<span class="lessthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Pre-Order ETA {{ item.product.metafields["global"]["ETA"]}}</span>
+  <span class="lessthan">
+    {% include 'tooltip_box',tooltip_message:'This product is available for Pre Order Only. ETA for shipment is the current estimated date listed.' %}
+  </span>
+  {% elsif item.product.tags contains 'Avail-InStock-OOS' %}
+    <img class="greaterthan" src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  	<span class="greaterthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+    <img class="lessthan" src="https://www.urotuned.com/availability-images-new/Avail-Backorder.jpg">
+  	<span class="lessthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">On Backorder</span>
+    <span class="lessthan">
+    {% include 'tooltip_box',tooltip_message:'This product is currently on Backorder.' %}
+  </span>
+  {% elsif item.product.tags contains 'Avail-InStock-ETA' %}
+    <img class="greaterthan" src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  	<span class="greaterthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+    <img class="lessthan" src="https://www.urotuned.com/availability-images-new/Avail-ETA.jpg">
+  	<span class="lessthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Ships on 2/25</span>
+    <span class="lessthan">
+    {% include 'tooltip_box',tooltip_message:'This product is on order and should ship within the time frame shown.' %}
+  </span>
+  {% elsif item.product.tags contains 'Avail-InStock-Klii' %}
+    <img class="greaterthan" src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  	<span class="greaterthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+    <img class="lessthan" src="https://www.urotuned.com/availability-images-new/Avail-ETA.jpg">
+  	<span class="lessthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Ships on 7/8</span>
+    <span class="lessthan">
+    {% include 'tooltip_box',tooltip_message:'This product is on order and should ship within the time frame shown.' %}
+  </span>
+  {% elsif item.product.tags contains 'Avail-InStock-MTO1-2D' %}
+    <img class="greaterthan" src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  	<span class="greaterthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+    <img class="lessthan" src="https://www.urotuned.com/availability-images-new/Avail-MTO1-2D.jpg">
+  	<span class="lessthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Ships in 0-2 Days</span>
+    <span class="lessthan">
+    {% include 'tooltip_box',tooltip_message:'This product usually ships within 2 business days.' %}
+  </span>
+  {% elsif item.product.tags contains 'Avail-InStock-MTO2-5D' %}
+    <img class="greaterthan" src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  	<span class="greaterthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+    <img class="lessthan" src="https://www.urotuned.com/availability-images-new/Avail-MTO1-2D.jpg">
+  	<span class="lessthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Ships in 2-5 Days</span>
+    <span class="lessthan">
+    {% include 'tooltip_box',tooltip_message:'This product usually ships within 2-5 business days.' %}
+  </span>
+  {% elsif item.product.tags contains 'Avail-InStock-MTO1-2W' %}
+    <img class="greaterthan" src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  	<span class="greaterthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+    <img class="lessthan" src="https://www.urotuned.com/availability-images-new/Avail-MTO1-2D.jpg">
+  	<span class="lessthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Ships in 1-2 Weeks</span>
+    <span class="lessthan">
+    {% include 'tooltip_box',tooltip_message:'This product usually ships within 1-2 weeks.' %}
+  </span>
+  {% elsif item.product.tags contains 'Avail-InStock-MTO2-4W' %}
+    <img class="greaterthan" src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  	<span class="greaterthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+    <img class="lessthan" src="https://www.urotuned.com/availability-images-new/Avail-MTO1-2D.jpg">
+  	<span class="lessthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Ships in 1-4 Weeks</span>
+    <span class="lessthan">
+    {% include 'tooltip_box',tooltip_message:'This product usually ships within 1-4 weeks.' %}
+  </span>
+  {% elsif item.product.tags contains 'Avail-InStock-MTO4W' %}
+    <img class="greaterthan" src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  	<span class="greaterthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+    <img class="lessthan" src="https://www.urotuned.com/availability-images-new/Avail-MTO1-2D.jpg">
+  	<span class="lessthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Ships 4+ Weeks</span>
+    <span class="lessthan">
+    {% include 'tooltip_box',tooltip_message:'This product usually ships within 4+ weeks.' %}
+  </span>
+    {% elsif item.product.tags contains 'Avail-InStock-Germany' %}
+    <img class="greaterthan" src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  	<span class="greaterthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+    <img class="lessthan" src="https://www.urotuned.com/availability-images-new/Avail-Germany.jpg">
+  	<span class="lessthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Ships from Germany</span>
+    <span class="lessthan">
+    {% include 'tooltip_box',tooltip_message:'This product ships from Germany and is subject to extended lead times.' %}
+  </span>
+  {% elsif item.product.tags contains 'Avail-InStock-MTO-AWE' %}
+  	<div style="text-align: left;">
+  		<img class="greaterthan" src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  		<span class="greaterthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+  	</div>
+  	<div style="text-align: left;">
+      <img class="lessthan" src="https://www.urotuned.com/availability-images-new/Avail-MTO.jpg">
+      <span class="lessthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">
+        Made to Order
+      </span>
+      <br>
+      <span class="lessthan" style="font-size:x-small; color: #666;">
+        Ships Direct from AWE
+      </span>
+        <span class="lessthan">
+    {% include 'tooltip_box',tooltip_message:'This product is made to order. ETA will be provided once order is submitted to AWE.' %}
+  </span>
+  	</div>
+  {% elsif item.product.tags contains 'Avail-InStock-MTO' %}
+    <img class="greaterthan" src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  	<span class="greaterthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+    <img class="lessthan" src="https://www.urotuned.com/availability-images-new/Avail-MTO.jpg">
+  	<span class="lessthan" style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em;">Made to Order</span>
+    <span class="lessthan">
+    {% include 'tooltip_box',tooltip_message:'This product is made to order. ETA will be provided once order is submitted to supplier.' %}
+  </span>
+    {% elsif item.product.tags contains 'Avail-Backorder' %}
+    <img src="https://www.urotuned.com/availability-images-new/Avail-Backorder.jpg">
+  	<span style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">On Backorder</span>
+  {% elsif item.product.tags contains 'Avail-DS' %}
+    <img src="https://www.urotuned.com/availability-images-new/Avail-DS.jpg">
+  	<span style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Direct Ship</span>
+  {% elsif item.product.tags contains 'Avail-MTO' %}
+    <img src="https://www.urotuned.com/availability-images-new/Avail-MTO.jpg">
+  	<span style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Made to Order</span>
+  {% elsif item.product.tags contains 'Avail-MTO1-2D' %}
+    <img src="https://www.urotuned.com/availability-images-new/Avail-MTO1-2D.jpg">
+  	<span style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Ships in 1-2 Days</span>
+  {% elsif item.product.tags contains 'Avail-MTO1-2W' %}
+    <img src="https://www.urotuned.com/availability-images-new/Avail-MTO1-2D.jpg">
+  	<span style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Ships in 1-2 Weeks</span>
+  {% elsif item.product.tags contains 'Avail-MTO2-4W' %}
+    <img src="https://www.urotuned.com/availability-images-new/Avail-MTO1-2D.jpg">
+  	<span style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Ships in 2-4 Weeks</span>
+  {% elsif item.product.tags contains 'Avail-MTO2-5D' %}
+    <img src="https://www.urotuned.com/availability-images-new/Avail-MTO1-2D.jpg">
+  	<span style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Ships in 2-5 Days</span>
+  {% elsif item.product.tags contains 'Avail-MTO4W' %}
+    <img src="https://www.urotuned.com/availability-images-new/Avail-MTO1-2D.jpg">
+  	<span style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Ships in 4+ Weeks</span>
+  {% elsif item.product.tags contains 'Avail-MTO-AWE' %}
+    <img src="https://www.urotuned.com/availability-images-new/Avail-MTO.jpg">
+  	<span style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Made to Order</span>
+  {% elsif item.product.tags contains 'Avail-NLA' %}
+    <img src="https://www.urotuned.com/availability-images-new/Avail-NLA.jpg">
+  	<span style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Discontinued</span>
+  {% elsif item.product.tags contains 'Avail-Pre-Order' %}
+    <img src="https://www.urotuned.com/availability-images-new/Avail-Pre-Order.jpg">
+  	<span style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">Pre-Order</span>
+  {% elsif item.product.tags contains 'Avail-InStock' %}
+    <img src="https://www.urotuned.com/availability-images-new/Avail-InStock.jpg">
+  	<span style="font-size:small; font-weight: 600; color: #666; letter-spacing: -0.05em; margin-right: 0px;">In Stock</span>  <span class="greaterthan">{% include 'tooltip_box',tooltip_message:'This product is currently IN Stock.' %}</span>
+  {% endif %}
+  
+{% endif %}
+
+</div>
+
+{% endif %}
+
+<style>
+  .iconforprod .lessthan,
+  .iconforprod .greaterthan {
+    display: none;
+  }
+  .iconforprod.lt_show .lessthan,
+  .iconforprod.gt_show .greaterthan {
+    display: inline-block;
+  }
+</style>
+
+

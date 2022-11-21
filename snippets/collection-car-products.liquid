@@ -1,0 +1,68 @@
+
+  <section class="widget-trending-product">
+    <div style="border-top: 1px solid #eee">
+      <fieldset class="box-title" style="text-transform: uppercase; font-weight: 700; padding-top: 10px; margin-top: 20px;">
+        <legend align="center">Featured Products</legend>
+      </fieldset>
+    </div>
+    <div class="widget-product">
+      <div class="products-grid row owl-carousel">
+        {% for product in collection.products %}
+{%- if product.metafields.inventory.ShappifyHidden == 'true' -%}{%- continue -%}{%- endif -%}
+{%- include 'bold-product' with product, hide_action: 'skip' -%}
+          <div class="{% if settings.product_image_border %}grid-item-border{% endif %}{% if settings.product_image_crop %} crop_image{% else %} no_crop_image{% endif %} grid-item product-item col-xs-6 col-sm-4 {% if product_grid == 3 %}col-md-3{% endif %} {% if columns %}col-lg-{{product_grid}}{% else %}col{% endif %}">
+          {% include 'product-grid-item-collection' %}
+          </div>
+        {% endfor %}
+       </div>
+    </div>
+  </section>
+
+  <section class="widget-trending-product">
+    <div style="border-top: 1px solid #eee">
+      <fieldset class="box-title" style="text-transform: uppercase; font-weight: 700; padding-top: 10px; margin-top: 20px;">
+        <legend align="center">New Products</legend>
+      </fieldset>
+    </div>
+    <div class="widget-product">
+      <div class="products-grid row owl-carousel">
+        {% for product in collection.products %}
+{%- if product.metafields.inventory.ShappifyHidden == 'true' -%}{%- continue -%}{%- endif -%}
+{%- include 'bold-product' with product, hide_action: 'skip' -%}
+          <div class="{% if settings.product_image_border %}grid-item-border{% endif %}{% if settings.product_image_crop %} crop_image{% else %} no_crop_image{% endif %} grid-item product-item col-xs-6 col-sm-4 {% if product_grid == 3 %}col-md-3{% endif %} {% if columns %}col-lg-{{product_grid}}{% else %}col{% endif %}">
+          {% include 'product-grid-item-collection' %}
+          </div>
+        {% endfor %}
+       </div>
+    </div>
+  </section>
+
+  <section class="widget-trending-product" style="border-bottom: 1px solid #eee;">
+    <div style="border-top: 1px solid #eee;">
+      <fieldset class="box-title" style="text-transform: uppercase; font-weight: 700; padding-top: 10px; margin-top: 20px;">
+        <legend align="center">On Sale</legend>
+      </fieldset>
+    </div>
+    <div class="widget-product">
+      <div class="products-grid row owl-carousel">
+        {% for product in collection.products %}
+{%- if product.metafields.inventory.ShappifyHidden == 'true' -%}{%- continue -%}{%- endif -%}
+{%- include 'bold-product' with product, hide_action: 'skip' -%}
+          <div class="{% if settings.product_image_border %}grid-item-border{% endif %}{% if settings.product_image_crop %} crop_image{% else %} no_crop_image{% endif %} grid-item product-item col-xs-6 col-sm-4 {% if product_grid == 3 %}col-md-3{% endif %} {% if columns %}col-lg-{{product_grid}}{% else %}col{% endif %}">
+          {% include 'product-grid-item-collection' %}
+          </div>
+        {% endfor %}
+       </div>
+    </div>
+  </section>
+
+  <script>
+  jQuery(document).ready(function() {
+    jQuery(".widget-trending-product .products-grid").owlCarousel({
+      navigation : true,
+      items : 2,
+      itemsTablet: [767,2],
+      itemsTabletSmall: [721,2]
+    });
+  });
+  </script>

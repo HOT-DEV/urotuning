@@ -1,0 +1,31 @@
+<script>
+var shop_url = '{{shop.url}}';
+/* carDetails customer info */
+var customerID = "{{ customer.id }}";
+function getSelectedCars() {
+  var customerCars = '{{ customer.metafields.carsSync.cars }}';
+  var cars = customerCars.length > 0 && customerCars !== '""'
+    ? customerCars
+    : getCookie('Vehicles');
+  
+  return cars.split(',').filter(function(car) {
+    return car.length > 0;
+  });
+}
+
+{% if template.name == 'product' %}
+  jQuery(document).ready(function(){
+    if (jQuery(".product-infor .product-inventory > span").html() == 'Many in stock'){
+      jQuery(".product-infor").addClass("ManyStock");
+    }
+
+    var $selectedCar = getSelectedCar(getSelectedCars());
+
+    if ($selectedCar) {
+      showFitmentStatus($selectedCar.attr('href').slice($selectedCar.attr('href').lastIndexOf('/')).slice(1));
+    } else {
+      $('.car-selector-container').show();
+    }
+  });
+{% endif %}
+</script>

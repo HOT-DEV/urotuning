@@ -1,0 +1,39 @@
+{
+  "shopify": {
+    "checkout": {
+      "order_summary": {
+        "free_total_label": "-",
+        "shipping_label": "Shipping"
+      },
+      "payment_summary": {
+        "free_label": "-"
+      },
+      "review": {
+        "blocks": {
+          "shipping_method_title": "Method"
+        }
+      },
+      "shipping": {
+        "no_rates_for_cart_or_destination_notice": "There are no shipping methods available for your cart or address. If using a PO Box or an APO you may need to use a physical address. For more help please contact us.",
+        "no_rates_for_country_notice": "Please contact us to calculate shipping for your order. "
+      },
+      "thank_you": {
+        "contact_us_html": "Need Help? <a href=\"https:\/\/www.urotuning.com\/support\">Contact Us.<\/a>",
+        "thank_you_title": "Your order is in!",
+        "confirmed_title": "Shipment Details",
+        "confirmed_description": "The items listed above have shipped! Click the tracking info below for more details on the shipment. ",
+        "order_status_confirmed_order_with_email": "You’ll receive an email when your order ships.",
+        "unfulfilled_items_description": "The item(s) listed above are awaiting shipment. Please note some items are special order or are being shipped directly from our supplier. We will notify you when item(s) have been shipped. ",
+        "unfulfilled_items_title": "Awaiting Shipment",
+        "fulfillment": {
+          "unfulfilled_table_title": "Items Awaiting Shipment"
+        }
+      },
+      "shipping_errors": {
+        "shipping_method_not_available_updated": {
+          "other": "One or more items you added does not ship to your location. Remove them to check out, or contact the store."
+        }
+      }
+    }
+  }
+}

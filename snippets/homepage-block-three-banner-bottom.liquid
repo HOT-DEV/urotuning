@@ -1,0 +1,246 @@
+{% if settings.display_three_banner_bottom %}
+<div style="background:#fff; padding: 0px 0 0">
+<section class="banner-home-bottom container">
+  <div class="widget-title wow fadeIn">
+	<fieldset class="box-title">
+      <legend align="center"><a href="/pages/deals"><img class="lazyload" data-src="{{ 'urotuning_17.png' | asset_url }}"> DEALS</a>
+      </legend>
+    </fieldset>
+  </div>
+  
+    <div class="visible-xs"><center><a HREF="https://www.urotuning.com/pages/UROTUNING-subscribe-page"><img class="lazyload" data-src="{{ 'vip-banner-home-mobile.jpg' | asset_url }}"></a></center></div>
+    <div class="hidden-xs"><center><a HREF="https://www.urotuning.com/pages/UROTUNING-subscribe-page"><img class="lazyload" data-src="{{ 'vip-banner-home.jpg' | asset_url }}"></a></center></div>
+  <br>
+
+  <ul class="row">
+    <li class="col-xs-12 col-sm-4 wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load }}ms">
+      <a href="{{ settings.three_banner_bottom_link_1 }}" title="{{ settings.three_banner_bottom_title_1 }}"> <img class="lazyload" data-src="{{ 'banner-home-bottom-1.jpg' | asset_img_url: '480x' }}" /> </a>
+
+       <div class="des visible-xs" style="padding: 25px 10px 0px !important;">
+        {% if settings.display_banner_title_1  %}
+        {% if settings.three_banner_bottom_title_1 != blank %}
+        <h4 style="{% if settings.three_banner_bottom_title_color_1 != blank %}
+                   color: {{ settings.three_banner_bottom_title_color_1 }};
+                   {% elsif settings.three_banner_bottom_title_color != blank %}
+                   color: {{ settings.three_banner_bottom_title_color }};
+                   {% endif %}
+                   {% if settings.three_banner_bottom_title_size_1 != blank %}
+                   font-size: {{ settings.three_banner_bottom_title_size_1 }}px;
+                   {% elsif settings.three_banner_bottom_title_size != blank %}
+                   font-size: {{ settings.three_banner_bottom_title_size }}px;
+                   {% endif %} "
+            >
+          <span>{{ settings.three_banner_bottom_title_1 }}</span>
+        </h4>
+        {% endif %}
+        {% endif %}
+      </div>
+      
+      <div class="des hidden-xs">
+        {% if settings.display_banner_title_1  %}
+        {% if settings.three_banner_bottom_title_1 != blank %}
+        <h4 style="{% if settings.three_banner_bottom_title_color_1 != blank %}
+                   color: {{ settings.three_banner_bottom_title_color_1 }};
+                   {% elsif settings.three_banner_bottom_title_color != blank %}
+                   color: {{ settings.three_banner_bottom_title_color }};
+                   {% endif %}
+                   {% if settings.three_banner_bottom_title_size_1 != blank %}
+                   font-size: {{ settings.three_banner_bottom_title_size_1 }}px;
+                   {% elsif settings.three_banner_bottom_title_size != blank %}
+                   font-size: {{ settings.three_banner_bottom_title_size }}px;
+                   {% endif %} "
+            >
+          <span>{{ settings.three_banner_bottom_title_1 }}</span>
+        </h4>
+        {% endif %}
+        {% endif %}
+        {% if settings.display_banner_description_1 %}
+        {% if settings.three_banner_bottom_description_1 != blank %}
+        <p style="{% if settings.three_banner_bottom_description_color_1 != blank %}
+                  color: {{ settings.three_banner_bottom_description_color_1 }};
+                  {% elsif settings.three_banner_bottom_description_color != blank %}
+                  color: {{ settings.three_banner_bottom_description_color }};
+                  {% endif %}
+                  {% if settings.three_banner_bottom_description_size_1 != blank %}
+                  font-size: {{ settings.three_banner_bottom_description_size_1 }}px;
+                  {% elsif settings.three_banner_bottom_description_size != blank %}
+                  font-size: {{ settings.three_banner_bottom_description_size }}px;
+                  {% endif %} "
+           >
+          {{ settings.three_banner_bottom_description_1 }}
+        </p>
+        {% endif %}
+        {% endif %}
+        {% if settings.display_banner_button_1 %}
+        {% if settings.three_banner_bottom_button_text_1 != blank %}
+        <a href="{{ settings.three_banner_bottom_link_1 }}" title="{{ settings.three_banner_bottom_button_text_1 }}" class="btn">
+          {{ settings.three_banner_bottom_button_text_1 }}
+          <span class="arrow">arrow</span>
+        </a>
+        {% endif %}
+        {% endif %}
+      </div>
+    </li>
+    <li class="col-xs-12 col-sm-4 wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load | times: 2 }}ms">
+      <a href="{{ settings.three_banner_bottom_link_2 }}" title="{{ settings.three_banner_bottom_title_2 }}"><img class="lazyload" data-src="{{ 'banner-home-bottom-2.jpg' | asset_img_url: '480x' }}" /></a>
+      
+       <div class="des visible-xs" style="padding: 25px 10px 0px !important;">
+        {% if settings.display_banner_title_2 %}
+        {% if settings.three_banner_bottom_title_2 != blank %}
+        <h4 style="{% if settings.three_banner_bottom_title_color_2 != blank %}
+                   color: {{ settings.three_banner_bottom_title_color_2 }};
+                   {% elsif settings.three_banner_bottom_title_color != blank %}
+                   color: {{ settings.three_banner_bottom_title_color }};
+                   {% endif %}
+                   {% if settings.three_banner_bottom_title_size_2 != blank %}
+                   font-size: {{ settings.three_banner_bottom_title_size_2 }}px;
+                   {% elsif settings.three_banner_bottom_title_size != blank %}
+                   font-size: {{ settings.three_banner_bottom_title_size }}px;
+                   {% endif %} "
+            >
+          <span>{{ settings.three_banner_bottom_title_2  }}</span>
+        </h4>
+        {% endif %}
+        {% endif %}      
+      </div>
+      
+      <div class="des hidden-xs">
+        {% if settings.display_banner_title_2 %}
+        {% if settings.three_banner_bottom_title_2 != blank %}
+        <h4 style="{% if settings.three_banner_bottom_title_color_2 != blank %}
+                   color: {{ settings.three_banner_bottom_title_color_2 }};
+                   {% elsif settings.three_banner_bottom_title_color != blank %}
+                   color: {{ settings.three_banner_bottom_title_color }};
+                   {% endif %}
+                   {% if settings.three_banner_bottom_title_size_2 != blank %}
+                   font-size: {{ settings.three_banner_bottom_title_size_2 }}px;
+                   {% elsif settings.three_banner_bottom_title_size != blank %}
+                   font-size: {{ settings.three_banner_bottom_title_size }}px;
+                   {% endif %} "
+            >
+          <span>{{ settings.three_banner_bottom_title_2  }}</span>
+        </h4>
+        {% endif %}
+        {% endif %}
+        {% if settings.display_banner_description_2 %}
+        {% if settings.three_banner_bottom_description_2 != blank %}
+        <p style="{% if settings.three_banner_bottom_description_color_2 != blank %}
+                  color: {{ settings.three_banner_bottom_description_color_2 }};
+                  {% elsif settings.three_banner_bottom_description_color != blank %}
+                  color: {{ settings.three_banner_bottom_description_color }};
+                  {% endif %}
+                  {% if settings.three_banner_bottom_description_size_2 != blank %}
+                  font-size: {{ settings.three_banner_bottom_description_size_2 }}px;
+                  {% elsif settings.three_banner_bottom_description_size != blank %}
+                  font-size: {{ settings.three_banner_bottom_description_size }}px;
+                  {% endif %} "
+           >
+          {{ settings.three_banner_bottom_description_2 }}
+        </p>
+        {% endif %}
+        {% endif %}
+        {% if settings.display_banner_button_2 %}
+        {% if settings.three_banner_bottom_button_text_2 != blank %}
+        <a href="{{ settings.three_banner_bottom_link_2 }}" title="{{ settings.three_banner_bottom_button_text_2 }}" class="btn">
+          {{ settings.three_banner_bottom_button_text_2 }}
+          <span class="arrow">arrow</span>
+        </a>
+        {% endif %}
+        {% endif %}
+      </div>
+	</li>
+    <li class="col-xs-12 col-sm-4 wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load | times: 3 }}ms">
+      <a href="{{ settings.three_banner_bottom_link_3 }}" title="{{ settings.three_banner_bottom_title_3 }}"><img class="lazyload" data-src="{{ 'banner-home-bottom-3.jpg' | asset_img_url: '480x' }}" /></a>
+
+       <div class="des visible-xs" style="padding: 25px 10px 0px !important;">
+        {% if settings.display_banner_title_3 %}
+        {% if settings.three_banner_bottom_title_3 != blank %}
+        <h4 style="{% if settings.three_banner_bottom_title_color_3 != blank %}
+                   color: {{ settings.three_banner_bottom_title_color_3 }};
+                   {% elsif settings.three_banner_bottom_title_color != blank %}
+                   color: {{ settings.three_banner_bottom_title_color }};
+                   {% endif %}
+                   {% if settings.three_banner_bottom_title_size_3 != blank %}
+                   font-size: {{ settings.three_banner_bottom_title_size_3 }}px;
+                   {% elsif settings.three_banner_bottom_title_size != blank %}
+                   font-size: {{ settings.three_banner_bottom_title_size }}px;
+                   {% endif %} "
+            >
+          <span>
+            {{ settings.three_banner_bottom_title_3 }}
+          </span>
+        </h4>
+        {% endif %}
+        {% endif %}
+      </div>
+      
+      <div class="des hidden-xs">
+        {% if settings.display_banner_title_3 %}
+        {% if settings.three_banner_bottom_title_3 != blank %}
+        <h4 style="{% if settings.three_banner_bottom_title_color_3 != blank %}
+                   color: {{ settings.three_banner_bottom_title_color_3 }};
+                   {% elsif settings.three_banner_bottom_title_color != blank %}
+                   color: {{ settings.three_banner_bottom_title_color }};
+                   {% endif %}
+                   {% if settings.three_banner_bottom_title_size_3 != blank %}
+                   font-size: {{ settings.three_banner_bottom_title_size_3 }}px;
+                   {% elsif settings.three_banner_bottom_title_size != blank %}
+                   font-size: {{ settings.three_banner_bottom_title_size }}px;
+                   {% endif %} "
+            >
+          <span>
+            {{ settings.three_banner_bottom_title_3 }}
+          </span>
+        </h4>
+        {% endif %}
+        {% endif %}
+        {% if settings.display_banner_description_3 %}
+        {% if settings.three_banner_bottom_description_3 != blank %}
+        <p style="{% if settings.three_banner_bottom_description_color_3 != blank %}
+                  color: {{ settings.three_banner_bottom_description_color_3 }};
+                  {% elsif settings.three_banner_bottom_description_color != blank %}
+                  color: {{ settings.three_banner_bottom_description_color }};
+                  {% endif %}
+                  {% if settings.three_banner_bottom_description_size_3 != blank %}
+                  font-size: {{ settings.three_banner_bottom_description_size_3 }}px;
+                  {% elsif settings.three_banner_bottom_description_size != blank %}
+                  font-size: {{ settings.three_banner_bottom_description_size }}px;
+                  {% endif %} "
+           >
+          {{ settings.three_banner_bottom_description_3 }}
+        </p>
+        {% endif %}
+        {% endif %}
+        {% if settings.display_banner_button_3 %}
+        {% if settings.three_banner_bottom_button_text_3 != blank %}
+        <a href="{{ settings.three_banner_bottom_link_3 }}" title="{{ settings.three_banner_bottom_button_text_3 }}" class="btn">
+          {{ settings.three_banner_bottom_button_text_3 }}
+          <span class="arrow">arrow</span>
+        </a>
+        {% endif %}
+        {% endif %}
+      </div>
+	</li>
+  </ul>  
+    <div class="widget-title wow fadeIn">
+	<fieldset class="box-title">
+      <legend align="center"><a class="deals-banner" href="/pages/deals">CLICK HERE FOR MORE DEALS!</a>
+      </legend>
+    </fieldset>      
+  </div>
+</section>
+</div>
+{% endif %}
+  <div><center><a class="affirm-site-modal" data-page-type="banner"><img class="lazyload" data-src="{{ 'AFFIRM.jpg' | asset_url }}"></a></center></div>
+  <br>
+<script src="https://widget.reviews.io/rich-snippet-reviews-widgets/dist.js" type="text/javascript"></script>
+<div id="text-banner-widget"></div>
+<script>
+        richSnippetReviewsWidgets("text-banner-widget", {
+            store: "urotuning-com",
+            starsClr: "#f47e27",
+            textClr: "#313131",
+            logoClr: "#12cf6c",
+            widgetName: "text-banner",
+            });
+</script>

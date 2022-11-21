@@ -1,0 +1,31 @@
+{% comment %}
+
+  A snippet to include a search bar anywhere in your theme.
+  Note we are using 'input-group' for the layout. Look under Forms > Input Groups for some demos.
+
+  More information:
+   - http://docs.shopify.com/themes/liquid-variables/search
+
+  Return only products or pages in results:
+    - http://docs.shopify.com/manual/configuration/store-customization/return-only-product-in-storefront-search-results
+    - Or manually add type=product or type=page to the search URL as a parameter
+
+{% endcomment %}
+
+<!--<a class="icon-search hidden-xs" href="javascript:void(0)" {% if settings.enable_multilang %}data-translate="general.search.submit"{% endif %}>{{ 'general.search.submit' | t }}</a>
+<form action="/search" method="get" class="search-bar input-group" role="search" style="margin-top: 10px; margin-bottom: 0px; padding: 0 15px 0;">
+  {% comment %}
+    Uncomment the following hidden input to only show products in your search results
+  {% endcomment %}
+  <input type="hidden" name="type" value="product">
+  <input style="width:345px!important; text-align: center; border-radius: 5px; margin-bottom: 10px;" type="text" name="q" value="{{ search.terms | escape }}" placeholder="search our store!" class="input-group-field" aria-label="Search Site" autocomplete="off">
+
+</form>
+<a href="javascript:void(0)" class="selectCar-mobile sm-item visible-xs"><span class="nav-car sm-item"></span> <span class="selectCar-mobile-text sm-item"></span> <span class="right-arrow sm-item"></span></a>
+-->
+
+<a class="icon-search hidden-xs" href="javascript:void(0)" {% if settings.enable_multilang %}data-translate="general.search.submit"{% endif %}>{{ 'general.search.submit' | t }}</a>
+  <div class='mobile-search-bar-container'>
+    <input type="text" name="q" value="{{ search.terms | escape }}" placeholder="search our store!" class="input-group-field" aria-label="Search Site" autocomplete="off">
+  </div>
+<a href="javascript:void(0)" class="selectCar-mobile sm-item visible-xs"><span class="nav-car sm-item"></span> <span class="selectCar-mobile-text sm-item"></span> <span class="right-arrow sm-item"></span></a>

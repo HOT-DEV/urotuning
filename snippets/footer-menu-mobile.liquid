@@ -1,0 +1,157 @@
+{% for link in linklists.footer.links %}
+  <button class="accordion">{{ link.title | remove: 'Footer' }}</button>
+  <div class="panel">
+    {% capture mm_vend %}{{ link.title | handleize }}{% endcapture %}
+    {% for link in linklists.[mm_vend].links %}
+      <a href="{{ link.url }}">{{ link.title }}</a><br>
+    {% endfor %}
+  </div>
+
+{% endfor %}
+<div style="background-color: #000;
+color: #fff;
+cursor: pointer;
+padding: 18px;
+width: 100%;
+border: none;
+text-align: center;
+outline: none;
+transition: 0.4s;
+width: 100%;
+text-transform: uppercase;
+font-weight: 700;
+font-size: 14px;
+display: inline-block;"><a href=#smile-referral-program-details>Reward Points</a></div>
+<hr>
+<div style="background-color: #000;
+color: #fff;
+cursor: pointer;
+padding: 18px;
+width: 100%;
+border: none;
+text-align: center;
+outline: none;
+transition: 0.4s;
+width: 100%;
+text-transform: uppercase;
+font-weight: 700;
+font-size: 14px;
+display: inline-block;">Let's Stay Connected</div>
+
+
+<style>
+  @media (min-width: 767px) {
+  button.accordion {
+      background-color: #000;
+      color: #fff;
+      cursor: pointer;
+      padding: 18px;
+      width: 100%;
+      border: none;
+      text-align: center;
+      outline: none;
+      transition: 0.4s;
+      width: 100%;
+      font-size: 14px;
+      display: inline-block;
+  }
+
+  .fot {
+    width: 33%;
+    display: inline-block;
+    text-align: center;
+    float: center;
+  }
+
+  button.accordion.active, button.accordion:hover {
+      background-color: #fff;
+  }
+
+
+  button.accordion.active::after {
+    content: " -";
+  }
+
+  button.accordion::after {
+    content: " +";
+  }
+
+  div.panel {
+      padding: 0 18px;
+      display: none;
+      background-color: white;
+      text-align: center;
+      float:center!important;
+      font-size: 14px;
+  }
+
+  div.panel.show {
+      display: block;
+  }
+}
+
+@media (max-width: 766px) {
+button.accordion {
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: center;
+    outline: none;
+    transition: 0.4s;
+    width: 100%;
+    font-size: 14px;
+    display: inline-block;
+}
+
+.fot {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  float: center;
+}
+
+button.accordion.active, button.accordion:hover {
+    background-color: #000;
+}
+
+
+  button.accordion.active::after {
+    content: " -";
+  }
+
+  button.accordion::after {
+    content: " +";
+  }
+
+div.panel {
+    padding: 0 18px;
+    display: none;
+    background-color: #000;
+    text-align: center;
+
+    float:center!important;
+    font-size: 14px;
+}
+
+div.panel.show {
+    display: block;
+}
+}
+  </style>
+
+  <script>
+  var acc = document.getElementsByClassName("accordion");
+  var i;
+
+  for (i = 0; i < acc.length; i++) {
+      acc[i].onclick = function(){
+          this.classList.toggle("active");
+          this.nextElementSibling.classList.toggle("show");
+    }
+  }
+  </script>
+
+</div>

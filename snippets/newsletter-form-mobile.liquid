@@ -1,0 +1,15 @@
+<center><form action="{{ settings.mailing_list_form_action }}" method="post" name="mc-embedded-subscribe-form" target="_blank" class="input-group" style="float:none!important;">
+  <div class="row">
+  <div>
+  <input style="display: inline; background: ##00000000; color:#fff; border-radius: 2px 0px 0px 2px; width: 180px!important;" type="email" value="" {% if settings.enable_multilang %}data-translate="general.newsletter_form.newsletter_text" translate-item="placeholder"{%endif%}  placeholder="enter your email" name="EMAIL" class="input-group-field" aria-label="Email Address">
+  </div>
+<div >
+  <span class="input-group-btn">
+      <input style="display: inline; background: #fff; color:#252525; border-radius: 0 2px 2px 0; margin-left: -10px;" type="submit" class="btn" value="Submit" name="subscribe" style="background: #000; border-radius: 3px;">
+    </span>
+</div>
+
+
+  </div>
+</form>
+</center>

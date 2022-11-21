@@ -1,0 +1,1080 @@
+<div class="caption-content-2" style="background: #d20102; padding: 30px 0 10px; margin-top: -30px; margin-bottom: 20px;">
+  <div class="container">
+  <div class="row">
+  <div class="refined-widgets">
+    <div class="col-xs-12 col-sm-3">
+    <h3 style="text-align: center; color: #fff; text-transform: uppercase; font-weight: 700; font-size: 14px; padding: 10px 0 0"> Find Your Vehicle <i class="fa fa-caret-right fa-lg" aria-hidden="true"></i></h3>
+  </div>
+  <div class="col-xs-12 col-sm-6">
+    <center>
+    <div id="dropdown_container">
+    <select id="first" style="-webkit-appearance: none;">
+    <option selected="" value="">Make</option>
+    <option value="volkswagen">Volkswagen</option>
+    <option value="audi">Audi</option>
+    <option value="bmw">BMW</option>
+    <option value="mini">MINI</option>
+    <option value="porsche">Porsche</option>
+    <option value="benz">Mercedes Benz</option>
+    </select>
+    <select id="second" style="-webkit-appearance: none;">
+    <option selected="" value="model">Model</option>
+    </select>
+    <select id="third" style="-webkit-appearance: none;">
+    <option selected="" value="generation">Year</option>
+    </select>
+    <select id="fourth" style="-webkit-appearance: none;">
+    <option selected="" value="engine">Engine</option>
+    </select>
+    <input value="Go!" id="search_btn" class="btn" type="submit">
+    </div>
+  </center>
+  </div>
+  </div>
+  </div>
+  </div>
+</div>
+
+<style>
+.caption-content { background: #d20102 }
+</style>
+
+<script>
+// JSON LIST
+theCars = [
+
+
+    {make:"Volkswagen",
+        model:[
+		{value:".:R Models",
+        	generation:[
+				{value:"Mk4 Golf R32 (2004)",
+        			engine:[
+        				{name: "3.2L VR6", url: "https://www.urotuning.com/Mk4-Golf-R32-Performance-and-OEM-Parts-s/83.htm"}]},
+ 				{value:"Mk5 Golf R32 (2008)",
+        			engine:[
+        				{name: "3.2L VR6", url: "https://www.urotuning.com/Mk5-Golf-R32-Performance-and-OEM-Parts-s/87.htm"}]},
+				{value:"Mk6 Golf R (2012-2013)",
+        			engine:[
+        				{name: "2.0T", url: "https://www.urotuning.com/VW-Mk6-Golf-R-Performance-and-OEM-Parts-s/2991.htm"}]},
+				{value:"Mk7 Golf R (2015+)",
+					engine:[
+       					{name: "2.0T", url: "https://www.urotuning.com/VW-Mk7-Golf-R-Performance-and-OEM-Parts-s/4258.htm"}]}]},
+		{value:"Beetle",
+       		generation:[
+				{value:"New Beetle (1998-2010)",
+       		 		engine:[
+						{name: "1.8T", url: "https://www.urotuning.com/VW-New-Beetle-Performance-and-OEM-Parts-s/7318.htm"},
+						{name: "2.0L", url: "https://www.urotuning.com/VW-New-Beetle-Performance-and-OEM-Parts-s/7318.htm"},
+						{name: "2.5L", url: "https://www.urotuning.com/VW-New-Beetle-Performance-and-OEM-Parts-s/7318.htm"},
+        				{name: "TDi", url: "https://www.urotuning.com/VW-New-Beetle-Performance-and-OEM-Parts-s/7318.htm"}]},
+        		{value:"Beetle (2012+)",
+					engine:[
+						{name: "1.8T", url: "https://www.urotuning.com/VW-Beetle-2012-Performance-OEM-Parts-s/7331.htm"},
+						{name: "2.0T", url: "https://www.urotuning.com/VW-Beetle-2012-Performance-OEM-Parts-s/7331.htm"},
+						{name: "2.5L", url: "https://www.urotuning.com/VW-Beetle-2012-Performance-OEM-Parts-s/7331.htm"},
+						{name: "TDi", url: "https://www.urotuning.com/VW-Beetle-2012-Performance-OEM-Parts-s/7331.htm"}]}]},
+
+		{value:"CC",
+       		generation:[
+				{value:"B6 CC (2009+)",
+					engine:[
+        				{name: "2.0T", url: "https://www.urotuning.com/VW-CC-Performance-and-OEM-Parts-s/772.htm"},
+        				{name: "3.6L V6", url: "https://www.urotuning.com/VW-CC-Performance-and-OEM-Parts-s/772.htm"}]}]},
+       	{value:"Corrado",
+       		generation:[
+				{value:"(1990-1995)",
+       		 		engine:[
+						{name: "G60", url: "https://www.urotuning.com/G60-s/452.htm"},
+        				{name: "VR6", url: "https://www.urotuning.com/VR6-s/453.htm"}]}]},
+		{value:"EOS",
+       		generation:[
+				{value:"(2007-2015)",
+					engine:[
+						{name: "2.0T", url: "https://www.urotuning.com/VW-EOS-Performance-and-OEM-Parts-s/716.htm"},
+        				{name: "3.2L VR6", url: "https://www.urotuning.com/VW-EOS-Performance-and-OEM-Parts-s/716.htm"}]}]},
+
+		{value:"Eurovan",
+       		generation:[
+				{value:"(1990-2003)",
+					engine:[
+					    {name: "12v VR6", url: "https://www.urotuning.com/VW-Eurovan-Performance-and-OEM-Parts-s/717.htm"},
+        				{name: "24v VR6", url: "https://www.urotuning.com/VW-Eurovan-Performance-and-OEM-Parts-s/717.htm"}]}]},
+
+		{value:"Golf/GTi/Rabbit",
+       		generation:[
+				{value:"Mk1 (1975-1984)",
+       		 		engine:[
+						{name: "8v", url: "https://www.urotuning.com/VW-Mk1Golf-Jetta-Performance-and-OEM-Parts-s/86.htm"},
+						{name: "Diesel", url: "https://www.urotuning.com/VW-Mk1Golf-Jetta-Performance-and-OEM-Parts-s/86.htm"}]},
+        		{value:"Mk2 (1985-1992)",
+       		 		engine:[
+						{name: "8v", url: "https://www.urotuning.com/VW-Mk2-Golf-Jetta-Performance-and-OEM-Parts-s/85.htm"},
+						{name: "16v", url: "https://www.urotuning.com/VW-Mk2-Golf-Jetta-Performance-and-OEM-Parts-s/85.htm"}]},
+        		{value:"Mk3 (1994-1999)",
+       		 		engine:[
+						{name: "2.0L", url: "https://www.urotuning.com/Mk3-VW-Golf-Jetta-2-0L-OEM-and-Performance-Parts-s/374.htm"},
+        				{name: "TDi", url: "https://www.urotuning.com/Volkswagen-Mk3-Golf-Jetta-TDi-s/3770.htm"},
+						{name: "VR6", url: "https://www.urotuning.com/Mk3-VW-Golf-Jetta-VR6-OEM-and-Performance-Parts-s/375.htm"}]},
+				{value:"Mk4 (1999.5-2005)",
+       		 		engine:[
+						{name: "1.8T", url: "https://www.urotuning.com/VW-Mk4-Golf-GTi-Jetta-1-8T-Performance-and-OEM-Parts-s/458.htm"},
+						{name: "2.0L", url: "https://www.urotuning.com/VW-Mk4-Golf-Jetta-2-0L-Performance-and-OEM-Parts-s/459.htm"},
+        				{name: "TDi", url: "https://www.urotuning.com/VW-Mk4-Golf-Jetta-TDi-Performance-and-OEM-Parts-s/707.htm"},
+						{name: "12v VR6", url: "https://www.urotuning.com/VW-Mk4-GTi-Jetta-VR6-Performance-and-OEM-Parts-s/460.htm"},
+						{name: "24v VR6 (2002+)", url: "https://www.urotuning.com/VW-Mk4-GTi-Jetta-VR6-Performance-and-OEM-Parts-s/460.htm"}]},
+        		{value:"Mk5 GTi (2006-2009)",
+       		 		engine:[
+						{name: "2.0T", url: "https://www.urotuning.com/2-0T-s/393.htm"}]},
+        		{value:"Mk5 Rabbit (2006-2009)",
+       		 		engine:[
+						{name: "2.5L", url: "https://www.urotuning.com/2-5L-s/394.htm"}]},
+        		{value:"Mk6 GTi (2010-2014)",
+       		 		engine:[
+						{name: "2.0T", url: "https://www.urotuning.com/VW-Mk6-GTi-Performance-and-OEM-Parts-s/2456.htm"}]},
+        		{value:"Mk6 Golf (2010-2014)",
+       		 		engine:[
+						{name: "2.5L", url: "https://www.urotuning.com/2-5L-s/2457.htm"},
+						{name: "TDi", url: "https://www.urotuning.com/TDi-s/2458.htm"}]},
+        		{value:"Mk7 GTi (2015+)",
+       		 		engine:[
+						{name: "2.0T", url: "https://www.urotuning.com/VW-Mk7-GTi-Performance-and-OEM-Parts-s/4259.htm"}]},
+        		{value:"Mk7 Golf (2015+)",
+       		 		engine:[
+						{name: "1.8T", url: "https://www.urotuning.com/Mk7-Golf-1-8T-Parts-s/4260.htm"},
+						{name: "TDi", url: "https://www.urotuning.com/Mk7-Golf-TDi-Parts-s/4395.htm"}]},
+				{value:"Mk7 Golf Alltrack (2017+)",
+       		 		engine:[
+						{name: "1.8T", url: "https://www.urotuning.com/VW-Mk7-Golf-Alltrack-Performance-OEM-Parts-s/9839.htm"}]},
+				{value:"Mk7 Golf Sportwagen (2015+)",
+					engine:[
+						{name: "1.8T", url: "https://www.urotuning.com/Mk7-Golf-Sportwagen-1-8T-Parts-s/6059.htm"},
+						{name: "TDi", url: "https://www.urotuning.com/Mk7-Golf-Sportwagen-TDi-Parts-s/6060.htm"}]}]},
+
+		{value:"Jetta",
+       		generation:[
+				{value:"Mk1 (1980-1984)",
+       		 		engine:[
+						{name: "8v", url: "https://www.urotuning.com/VW-Mk1Golf-Jetta-Performance-and-OEM-Parts-s/86.htm"},
+						{name: "Diesel", url: "https://www.urotuning.com/VW-Mk1Golf-Jetta-Performance-and-OEM-Parts-s/86.htm"}]},
+        		{value:"Mk2 (1985-1992)",
+       		 		engine:[
+						{name: "8v", url: "https://www.urotuning.com/VW-Mk2-Golf-Jetta-Performance-and-OEM-Parts-s/85.htm"},
+						{name: "16v", url: "https://www.urotuning.com/VW-Mk2-Golf-Jetta-Performance-and-OEM-Parts-s/85.htm"}]},
+        		{value:"Mk3 (1994-1999)",
+       		 		engine:[
+						{name: "2.0L", url: "https://www.urotuning.com/Mk3-VW-Golf-Jetta-2-0L-OEM-and-Performance-Parts-s/374.htm"},
+        				{name: "TDi", url: "https://www.urotuning.com/Volkswagen-Mk3-Golf-Jetta-TDi-s/3770.htm"},
+						{name: "VR6", url: "https://www.urotuning.com/Mk3-VW-Golf-Jetta-VR6-OEM-and-Performance-Parts-s/375.htm"}]},
+				{value:"Mk4 (1999.5-2005)",
+       		 		engine:[
+						{name: "1.8T", url: "https://www.urotuning.com/VW-Mk4-Golf-GTi-Jetta-1-8T-Performance-and-OEM-Parts-s/458.htm"},
+						{name: "2.0L", url: "https://www.urotuning.com/VW-Mk4-Golf-Jetta-2-0L-Performance-and-OEM-Parts-s/459.htm"},
+        				{name: "TDi", url: "https://www.urotuning.com/VW-Mk4-Golf-Jetta-TDi-Performance-and-OEM-Parts-s/707.htm"},
+						{name: "12v VR6", url: "https://www.urotuning.com/VW-Mk4-GTi-Jetta-VR6-Performance-and-OEM-Parts-s/460.htm"},
+						{name: "24v VR6 (2002+)", url: "https://www.urotuning.com/VW-Mk4-GTi-Jetta-VR6-Performance-and-OEM-Parts-s/460.htm"}]},
+        		{value:"Mk5 Jetta GLi (2006-2010)",
+       		 		engine:[
+						{name: "2.0T", url: "https://www.urotuning.com/2-0T-s/393.htm"}]},
+        		{value:"Mk5 Jetta (2005.5-2010)",
+       		 		engine:[
+						{name: "2.0T", url: "https://www.urotuning.com/2-0T-s/393.htm"},
+						{name: "2.5L", url: "https://www.urotuning.com/2-5L-s/394.htm"},
+						{name: "TDi", url: "https://www.urotuning.com/TDi-s/395.htm"}]},
+        		{value:"Mk6 Jetta GLi (2012+)",
+       		 		engine:[
+						{name: "2.0T", url: "https://www.urotuning.com/VW-Mk6-Jetta-GLi-Performance-and-OEM-Parts-s/6043.htm"}]},
+        		{value:"Mk6 Jetta (2011+)",
+       		 		engine:[
+						{name: "1.8T Gen3", url: "https://www.urotuning.com/Volkswagen-Mk6-Jetta-1-8T-s/4041.htm"},
+						{name: "2.0L 8v", url: "https://www.urotuning.com/2-0L-8v-s/2895.htm"},
+						{name: "2.5L", url: "https://www.urotuning.com/2-5L-s/2894.htm"},
+						{name: "TDi", url: "https://www.urotuning.com/TDi-s/2906.htm"}]},
+        		{value:"Mk6 Jetta Sportwagen (2009-2014)",
+       		 		engine:[
+						{name: "2.5L", url: "https://www.urotuning.com/Mk6-Jetta-Sportwagen-2-5L-s/5672.htm"},
+						{name: "TDi", url: "https://www.urotuning.com/Mk6-Jetta-Sportwagen-TDi-s/5673.htm"}]}]},
+
+
+		{value:"Passat",
+       		generation:[
+				{value:"B3 (1990-1994)",
+       		 		engine:[
+						{name: "16v", url: "https://www.urotuning.com/B3-B4-Passat-s/212.htm"},
+						{name: "VR6", url: "https://www.urotuning.com/B3-B4-Passat-s/212.htm"}]},
+				{value:"B4 (1995-1997)",
+       		 		engine:[
+						{name: "2.0L", url: "https://www.urotuning.com/B3-B4-Passat-s/212.htm"},
+						{name: "TDi", url: "https://www.urotuning.com/B3-B4-Passat-s/212.htm"},
+						{name: "VR6", url: "https://www.urotuning.com/B3-B4-Passat-s/212.htm"}]},
+				{value:"B5 (1998-2005)",
+       		 		engine:[
+						{name: "1.8T", url: "https://www.urotuning.com/B5-VW-Passat-Performance-and-OEM-Parts-s/209.htm"},
+						{name: "TDi", url: "https://www.urotuning.com/B5-VW-Passat-Performance-and-OEM-Parts-s/209.htm"},
+						{name: "V6 30v", url: "https://www.urotuning.com/B5-VW-Passat-Performance-and-OEM-Parts-s/209.htm"},
+						{name: "W8", url: "https://www.urotuning.com/B5-VW-Passat-Performance-and-OEM-Parts-s/209.htm"}]},
+				{value:"B6 (2006-2010)",
+       		 		engine:[
+						{name: "2.0T", url: "https://www.urotuning.com/B6-Passat-s/163.htm"},
+						{name: "3.6L VR6", url: "https://www.urotuning.com/B6-Passat-s/163.htm"}]},
+
+				{value:"B7 (2012-2015)",
+					engine:[
+						{name: "1.8T", url: "https://www.urotuning.com/B7-Passat-s/3021.htm"},
+						{name: "2.5L", url: "https://www.urotuning.com/B7-Passat-s/3021.htm"},
+						{name: "3.6L VR6", url: "https://www.urotuning.com/B7-Passat-s/3021.htm"},
+						{name: "TDi", url: "https://www.urotuning.com/B7-Passat-s/3021.htm"}]}]},
+
+		{value:"Scirocco",
+       		generation:[
+				{value:"Mk1 (1975-1981)",
+       		 		engine:[
+						{name: "8v", url: "https://www.urotuning.com/VW-Scirocco-Performance-and-OEM-Parts-s/91.htm"}]},
+				{value:"Mk2 (1982-1988)",
+					engine:[
+						{name: "8v", url: "https://www.urotuning.com/VW-Scirocco-Performance-and-OEM-Parts-s/91.htm"},
+						{name: "16v", url: "https://www.urotuning.com/VW-Scirocco-Performance-and-OEM-Parts-s/91.htm"}]}]},
+
+		{value:"Tiguan",
+       		generation:[
+				{value:"Tguan 1 (2009-2011)",
+       		 		engine:[
+						{name: "2.0T", url: "https://www.urotuning.com/VW-Tiguan-Performance-and-OEM-Parts-s/714.htm"}]},
+				{value:"Tiguan 2 (2012+)",
+					engine:[
+						{name: "2.0T", url: "https://www.urotuning.com/VW-Tiguan-Performance-and-OEM-Parts-s/714.htm"}]}]},
+		{value:"Touareg",
+       		generation:[
+				{value:"Touareg 1 (2004-2007)",
+       		 		engine:[
+						{name: "TDi", url: "https://www.urotuning.com/VW-Touareg-Performance-and-OEM-Parts-s/715.htm"},
+						{name: "V6", url: "https://www.urotuning.com/VW-Touareg-Performance-and-OEM-Parts-s/715.htm"},
+						{name: "V8", url: "https://www.urotuning.com/VW-Touareg-Performance-and-OEM-Parts-s/715.htm"}]},
+
+				{value:"Touareg 2 (2008-2010)",
+       		 		engine:[
+						{name: "TDi", url: "https://www.urotuning.com/VW-Touareg-Performance-and-OEM-Parts-s/715.htm"},
+						{name: "V6", url: "https://www.urotuning.com/VW-Touareg-Performance-and-OEM-Parts-s/715.htm"},
+						{name: "V8", url: "https://www.urotuning.com/VW-Touareg-Performance-and-OEM-Parts-s/715.htm"}]},
+
+				{value:"Touareg 3 (2011+)",
+					engine:[
+						{name: "TDi", url: "https://www.urotuning.com/VW-Touareg-Performance-and-OEM-Parts-s/715.htm"},
+						{name: "V6", url: "https://www.urotuning.com/VW-Touareg-Performance-and-OEM-Parts-s/715.htm"},
+						{name: "V8", url: "https://www.urotuning.com/VW-Touareg-Performance-and-OEM-Parts-s/715.htm"},
+						{name: "Hybrid", url: "https://www.urotuning.com/VW-Touareg-Performance-and-OEM-Parts-s/715.htm"}]}]},
+
+	]},
+
+
+
+    {make:"Audi",
+        model:[
+		{value:"A3",
+        	generation:[
+				{value:"8P (2005-2013)",
+        			engine:[
+						{name: "2.0T",url: "https://www.urotuning.com/A3-8P-s/731.htm"},
+        				{name: "3.2L VR6", url: "https://www.urotuning.com/A3-8P-s/731.htm"},
+        				{name: "TDi", url: "https://www.urotuning.com/A3-8P-s/731.htm"}]},
+        		{value:"8V Sedan (2014+)",
+					engine:[
+        				{name: "1.8T", url: "https://www.urotuning.com/A3-Sedan-1-8T-s/4205.htm"},
+       					 {name: "2.0T", url: "https://www.urotuning.com/A3-Sedan-2-0T-s/4207.htm"},
+       					 {name: "TDi", url: "https://www.urotuning.com/A3-Sedan-TDi-s/5217.htm"}]}]},
+		{value:"A4",
+       		generation:[
+				{value:"B5 (1996-2001)",
+       		 		engine:[
+						{name: "1.8T", url: "https://www.urotuning.com/B5-A4-s/724.htm"},
+        				{name: "12v V6", url: "https://www.urotuning.com/B5-A4-s/724.htm"},
+				        {name: "30v V6", url: "https://www.urotuning.com/B5-A4-s/724.htm"}]},
+        		{value:"B6 (2002-2005)",
+					engine:[
+        				{name: "1.8T", url: "https://www.urotuning.com/B6-A4-s/726.htm"},
+        				{name: "30v V6", url: "https://www.urotuning.com/B6-A4-s/726.htm"}]},
+        		{value:"B7 (2005-2008)",
+					engine:[
+        				{name: "2.0T", url: "https://www.urotuning.com/B7-A4-s/748.htm"},
+        				{name: "3.2L V6", url: "https://www.urotuning.com/B7-A4-s/748.htm"}]},
+        		{value:"B8 (2009-2016)",
+					engine:[
+        				{name: "2.0T", url: "https://www.urotuning.com/B8-A4-s/834.htm"},
+        				{name: "3.2L V6", url: "https://www.urotuning.com/B8-A4-s/834.htm"}]},
+				{value:"B9 (2017+)",
+					engine:[
+        				{name: "2.0T", url: "https://www.urotuning.com/Audi-B9-A4-s/6092.htm"},
+        				{name: "3.2L V6", url: "https://www.urotuning.com/Audi-B9-A4-s/6092.htm"}]}]},
+       	{value:"A5",
+       		generation:[
+				{value:"B8 (2008-2016)",
+       		 		engine:[
+						{name: "2.0T", url: "https://www.urotuning.com/B8-A5-s/835.htm"},
+        				{name: "3.2L V6", url: "https://www.urotuning.com/B8-A5-s/835.htm"}]},
+        		{value:"B9 (2017+)",
+					engine:[
+        				{name: "2.0T", url: " "},
+        				{name: "TDi", url: " "}]}]},
+		{value:"A6",
+       		generation:[
+				{value:"C5 (1998-2004)",
+       		 		engine:[
+						{name: "2.7T", url: "https://www.urotuning.com/C5-A6-s/751.htm"},
+        				{name: "2.8L V6", url: "https://www.urotuning.com/C5-A6-s/751.htm"},
+						{name: "3.0L V6", url: "https://www.urotuning.com/C5-A6-s/751.htm"},
+						{name: "4.2L V8", url: "https://www.urotuning.com/C5-A6-s/751.htm"}]},
+        		{value:"C6 (2005-2011)",
+       		 		engine:[
+						{name: "3.0T V6", url: "https://www.urotuning.com/C6-A6-s/753.htm"},
+        				{name: "3.2L V6", url: "https://www.urotuning.com/C6-A6-s/753.htm"},
+						{name: "4.2L V8", url: "https://www.urotuning.com/C6-A6-s/753.htm"}]},
+				{value:"C7 (2012+)",
+					engine:[
+						{name: "2.0T", url: "https://www.urotuning.com/C7-A6-s/4251.htm"},
+					       {name: "3.0T V6", url: "https://www.urotuning.com/C7-A6-s/4251.htm"},
+        				{name: "TDi", url: "https://shopurotuning.myshopify.com/collections/audi-a6-c7-2012-tdi"}]}]},
+
+		{value:"A7",
+       		generation:[
+				{value:"C7 (2011+)",
+					engine:[
+					    {name: "3.0T V6", url: "https://www.urotuning.com/Audi-A7-Parts-s/4255.htm"},
+        				{name: "TDi", url: "https://www.urotuning.com/Audi-A7-Parts-s/4255.htm"}]}]},
+
+		{value:"A8",
+       		generation:[
+				{value:"D2 (1997-2002)",
+       		 		engine:[
+						{name: "3.7L V8", url: "https://www.urotuning.com/D2-Audi-A8-Performance-OEM-Parts-s/7305.htm"},
+						{name: "4.2L V8", url: "https://www.urotuning.com/D2-Audi-A8-Performance-OEM-Parts-s/7305.htm"}]},
+        		{value:"D3 (2003-2010)",
+       		 		engine:[
+						{name: "4.2L V8", url: "https://www.urotuning.com/D3-Audi-A8-Performance-OEM-Parts-s/7306.htm"},
+						{name: "W12", url: "https://www.urotuning.com/D3-Audi-A8-Performance-OEM-Parts-s/7306.htm"}]},
+        		{value:"D4 (2011-2017)",
+       		 		engine:[
+						{name: "3.0L TDi", url: "https://www.urotuning.com/D4-Audi-A8-Performance-OEM-Parts-s/7307.htm"},
+        				{name: "3.0T V6", url: "https://www.urotuning.com/D4-Audi-A8-Performance-OEM-Parts-s/7307.htm"},
+						{name: "4.0T V8", url: "https://www.urotuning.com/D4-Audi-A8-Performance-OEM-Parts-s/7307.htm"},
+        				{name: "4.2L V8", url: "https://www.urotuning.com/D4-Audi-A8-Performance-OEM-Parts-s/7307.htm"},
+						{name: "W12", url: "https://www.urotuning.com/D4-Audi-A8-Performance-OEM-Parts-s/7307.htm"}]},
+				{value:"D5 (2018+)",
+					engine:[
+        				{name: "3.0T V6", url: "https://www.urotuning.com/D5-Audi-A8-Performance-OEM-Parts-s/7308.htm"}]}]},
+		{value:"Allroad",
+       		generation:[
+				{value:"C5 (2001-2005)",
+       		 		engine:[
+						{name: "2.7T", url: "https://www.urotuning.com/Allroad-2-7T-s/5667.htm"},
+						{name: "4.2L V8", url: "https://www.urotuning.com/Allroad-4-2L-V8-s/5668.htm"}]},
+        		{value:"B8 (2012-2015)",
+					engine:[
+        				{name: "2.0T", url: "https://www.urotuning.com/Allroad-2-0T-s/5669.htm"}]}]},
+		{value:"Q3",
+       		generation:[
+				{value:"8U Q3 (2015+)",
+					engine:[
+						{name: "2.0T", url: "https://www.urotuning.com/Audi-Q3-2-0T-s/5850.htm"}]}]},
+		{value:"Q5",
+       		generation:[
+				{value:"B8 Q5 (2009-2017)",
+					engine:[
+						{name: "2.0T", url: "https://www.urotuning.com/Audi-Q5-2-0T-s/4305.htm"},
+						{name: "3.0T V6", url: "https://www.urotuning.com/Audi-Q5-3-0T-s/5453.htm"},
+						{name: "3.2L V6", url: "https://www.urotuning.com/Audi-Q5-3-2L-V6-s/5454.htm"},
+						{name: "TDi", url: "https://www.urotuning.com/Audi-Q5-TDi-s/5452.htm"}]}]},
+		{value:"Q7",
+       		generation:[
+				{value:"4L Q5 (2007-2015)",
+					engine:[
+						{name: "3.0T", url: "https://www.urotuning.com/Audi-Q7-Performance-and-OEM-Parts-s/778.htm"},
+						{name: "3.6L V6", url: "https://www.urotuning.com/Audi-Q7-Performance-and-OEM-Parts-s/778.htm"},
+						{name: "TDi", url: "https://www.urotuning.com/Audi-Q7-Performance-and-OEM-Parts-s/778.htm"},
+						{name: "V8", url: "https://www.urotuning.com/Audi-Q7-Performance-and-OEM-Parts-s/778.htm"}]}]},
+
+
+
+
+		{value:"R8",
+       		generation:[
+				{value:"R8 1st Gen (2007-2015)",
+					engine:[
+						{name: "4.2L V8", url: "https://www.urotuning.com/Audi-R8-Performance-and-OEM-Parts-s/777.htm"},
+						{name: "5.2L V10", url: "https://www.urotuning.com/Audi-R8-Performance-and-OEM-Parts-s/777.htm"}]}]},
+		{value:"RS3",
+       		generation:[
+				{value:"8V RS3 Sedan (2017+)",
+					engine:[
+						{name: "2.5T", url: "https://www.urotuning.com/RS3-Sedan-Oem-and-Performance-Parts-s/7314.htm"}]}]},
+		{value:"RS4",
+       		generation:[
+				{value:"B7 Audi RS4 (2007-2008)",
+					engine:[
+						{name: "4.2L V8", url: "https://www.urotuning.com/B7-Audi-RS4-OEM-and-Performance-Parts-s/7316.htm"}]}]},
+		{value:"RS5",
+       		generation:[
+				{value:"B8 Audi RS5 (2013-2015)",
+					engine:[
+						{name: "4.2L V8", url: "https://www.urotuning.com/B8-RS5-s/4252.htm"}]}]},
+
+		{value:"RS7",
+       		generation:[
+				{value:"C7 Audi RS7 (2013+)",
+					engine:[
+						{name: "4.0T V8", url: "https://www.urotuning.com/Audi-RS7-Parts-s/4257.htm"}]}]},
+
+		{value:"S3",
+       		generation:[
+				{value:"8V S3 Sedan (2015+)",
+					engine:[
+						{name: "2.0T", url: "https://www.urotuning.com/S3-Sedan-s/4206.htm"}]}]},
+
+		{value:"S4",
+       		generation:[
+				{value:"B5 S4 (1999-2002)",
+					engine:[
+						{name: "2.7T", url: "https://www.urotuning.com/B5-S4-s/729.htm"}]},
+       		 	{value:"B6 S4 (2003-2005)",
+					engine:[
+						{name: "4.2L V8", url: "https://www.urotuning.com/B6-S4-s/746.htm"}]},
+				{value:"B7 S4 (2005.5-2008)",
+					engine:[
+						{name: "4.2L V8", url: "https://www.urotuning.com/B7-S4-RS4-s/755.htm"}]},
+				{value:"B8 S4 (2009-2016)",
+					engine:[
+						{name: "3.0T", url: "https://www.urotuning.com/B8-S4-s/838.htm"}]},
+				{value:"B9 S4 (2017+)",
+					engine:[
+						{name: "3.0T", url: "https://www.urotuning.com/Audi-B9-S4-s/7229.htm"}]}]},
+		{value:"S5",
+       		generation:[
+				{value:"B8 S5 (2009-2016)",
+					engine:[
+						{name: "3.0T", url: "https://www.urotuning.com/B8-S5-s/836.htm"},
+						{name: "4.2L V8", url: "https://www.urotuning.com/B8-S5-s/836.htm"}]},
+       		 	{value:"B9 S5 (2017+)",
+					engine:[
+						{name: "3.0T", url: "https://www.urotuning.com/B9-Audi-S5-s/7230.htm"}]}]},
+
+		{value:"S6",
+       		generation:[
+				{value:"C6 S6 (2006-2011)",
+					engine:[
+						{name: "5.2L V10", url: "https://www.urotuning.com/C6-Audi-S6-OEM-and-Performance-Parts-s/7313.htm"}]},
+       		 	{value:"C7 S6 (2012+)",
+					engine:[
+						{name: "4.0T V8", url: "https://www.urotuning.com/Audi-C7-S6-Parts-s/4254.htm"}]}]},
+
+		{value:"S7",
+       		generation:[
+       		 	{value:"C7 S7 (2012+)",
+					engine:[
+						{name: "4.0T V8", url: "https://www.urotuning.com/Audi-S7-Parts-s/4256.htm"}]}]},
+
+		{value:"S8",
+       		generation:[
+				{value:"D2 (2001-2003)",
+       		 		engine:[
+						{name: "4.2L V8", url: "https://www.urotuning.com/D2-Audi-S8-Performance-OEM-Parts-s/7309.htm"}]},
+        		{value:"D3 (2006-2009)",
+       		 		engine:[
+						{name: "5.2L V10", url: "https://www.urotuning.com/D3-Audi-S8-Performance-OEM-Parts-s/7310.htm"}]},
+        		{value:"D4 (2012-2017)",
+       		 		engine:[
+						{name: "4.0T V8", url: "https://www.urotuning.com/D4-Audi-S8-Performance-OEM-Parts-s/7311.htm"}]},
+				{value:"D5 (2018+)",
+					engine:[
+        				{name: "4.0T V8", url: "https://www.urotuning.com/D5-Audi-S8-Performance-OEM-Parts-s/7312.htm"}]}]},
+		{value:"SQ5",
+       		generation:[
+				{value:"B8 SQ5 (2014-2017)",
+					engine:[
+						{name: "3.0T", url: "https://www.urotuning.com/Audi-SQ5-3-0T-s/5455.htm"}]}]},
+		{value:"TT",
+       		generation:[
+				{value:"Mk1 (1998-2007)",
+					engine:[
+						{name: "1.8T", url: "https://www.urotuning.com/TT-mk1-1999-2006-s/761.htm"},
+        				{name: "3.2L V6", url: "https://www.urotuning.com/TT-mk1-1999-2006-s/761.htm"}]},
+        		{value:"Mk2 (2008-2015)",
+					engine:[
+        				{name: "2.0T", url: "https://www.urotuning.com/TT-mk2-2007-present-s/737.htm"},
+						{name: "2.0T TT-S", url: "https://www.urotuning.com/TT-S-mk2-2009-present-s/4231.htm"},
+						{name: "2.5T TT-RS", url: "https://www.urotuning.com/TT-RS-mk2-2012-present-s/4232.htm"},
+						{name: "3.2L V6", url: "https://www.urotuning.com/TT-mk2-2007-present-s/737.htm"}]},
+        		{value:"Mk3 (2016+)",
+					engine:[
+        				{name: "2.0T", url: "https://www.urotuning.com/TT-mk3-2016-s/6093.htm"},
+        				{name: "2.0T TT-S", url: "https://www.urotuning.com/TT-S-mk3-2016-s/6094.htm"}]}]},
+		{value:"TT-S",
+       		generation:[
+        		{value:"Mk2 (2009-2015)",
+					engine:[
+						{name: "2.0T", url: "https://www.urotuning.com/TT-S-mk2-2009-present-s/4231.htm"}]},
+        		{value:"Mk3 (2016+)",
+					engine:[
+        				{name: "2.0T", url: "https://www.urotuning.com/TT-S-mk3-2016-s/6094.htm"}]}]},
+		{value:"TT-RS",
+       		generation:[
+        		{value:"Mk2 (2012-2013)",
+					engine:[
+						{name: "2.5T", url: "https://www.urotuning.com/TT-RS-mk2-2012-present-s/4232.htm"}]}]},
+
+	]},
+
+
+    {make:"BMW",
+	    model:[
+		{value:"///M Series",
+       		generation:[
+				{value:"1M",
+       		 		engine:[
+						{name: "E82 (2011) N54 3.0L", url: "https://www.urotuning.com/E82-BMW-1M-Coupe-Performance-OEM-Parts-s/6981.htm"}]},
+        		{value:"M2",
+       		 		engine:[
+						{name: "F87 (2016+) N55 3.0L", url: "https://www.urotuning.com/BMW-F87-M2-Performance-Parts-s/6990.htm"}]},
+        		{value:"M3",
+       		 		engine:[
+						{name: "E30 (1988-1991) S14 2.3L", url: "https://www.urotuning.com/Porsche-996-Carrera-Parts-s/6153.htm"},
+						{name: "E36 (1995-1999) S50 3.0L/S52 3.2L", url: "https://www.urotuning.com/E36-M3-s/2208.htm"},
+						{name: "E46 (2001-2006) S54 3.2L", url: "https://www.urotuning.com/E46-M3-s/2163.htm"},
+						{name: "E9X (2008-2013) S65 4.0L", url: "https://www.urotuning.com/E90-92-93-M3-s/2162.htm"},
+						{name: "F8X (2014+) S55 3.0L", url: "https://www.urotuning.com/F80-M3-s/5191.htm"}]},
+				{value:"M4",
+       		 		engine:[
+						{name: "F8X (2015+) S55 3.0L", url: "https://www.urotuning.com/BMW-F82-M4-s/5192.htm"}]},
+				{value:"M5",
+       		 		engine:[
+						{name: "E39 (1997-2003) S62 5.0L", url: "https://www.urotuning.com/BMW-E39-M5-Performance-and-OEM-Parts-s/7389.htm"},
+						{name: "E60 (2006-2010) S85 5.0L", url: "https://www.urotuning.com/BMW-E60-M5-Performance-Parts-s/6991.htm"},
+						{name: "F10 (2013+) S63 4.4L", url: "https://www.urotuning.com/BMW-F10-M5-Performance-Parts-s/6046.htm"}]},
+				{value:"M6",
+       		 		engine:[
+						{name: "F1X (2012+) S63 4.4L", url: "https://www.urotuning.com/BMW-F13-M6-Performance-Parts-s/7353.htm"}]}]},
+
+		{value:"1 Series",
+       		generation:[
+        		{value:"E82/E88 (2008-2013)",
+       		 		engine:[
+						{name: "128i N52 3.0L", url: "https://www.urotuning.com/E82-E88-BMW-128i-Performance-OEM-Parts-s/6982.htm"},
+						{name: "135i N54/N55 3.0L", url: "https://www.urotuning.com/BMW-E82-E88-135i-Performance-OEM-Parts-s/2130.htm"}]},
+				{value:"1M E82 (2011)",
+       		 		engine:[
+						{name: "N54 3.0L", url: "https://www.urotuning.com/E82-BMW-1M-Coupe-Performance-OEM-Parts-s/6981.htm"}]}]},
+
+		{value:"2 Series",
+       		generation:[
+        		{value:"F2X (2014+)",
+       		 		engine:[
+						{name: "228i N20 2.0L", url: "https://www.urotuning.com/E82-E88-BMW-128i-Performance-OEM-Parts-s/6982.htm"},
+						{name: "M235i N55 3.0L", url: "https://www.urotuning.com/BMW-E82-E88-135i-Performance-OEM-Parts-s/2130.htm"},
+						{name: "M240i B58 3.0L", url: "https://www.urotuning.com/BMW-E82-E88-135i-Performance-OEM-Parts-s/2130.htm"}]},
+				{value:"F87 M2 (2016+)",
+       		 		engine:[
+						{name: "N55 3.0L", url: "https://www.urotuning.com/BMW-F87-M2-Performance-Parts-s/6990.htm"}]}]},
+
+		{value:"3 Series",
+       		generation:[
+        		{value:"E30 (1984-1991)",
+       		 		engine:[
+						{name: "All", url: "https://www.urotuning.com/E30-3-series-s/2145.htm"}]},
+        		{value:"E36 (1992-1999)",
+       		 		engine:[
+						{name: "All", url: "https://www.urotuning.com/E36-3-series-s/2144.htm"}]},
+        		{value:"E46 (1999-2005)",
+       		 		engine:[
+						{name: "All", url: "https://www.urotuning.com/E46-3-series-s/2143.htm"}]},
+        		{value:"E9X (2006-2012)",
+       		 		engine:[
+						{name: "325i N52 2.5L/N53 3.0L", url: "https://www.urotuning.com/BMW-E9X-325-328-330-Performance-and-OEM-Parts-s/2132.htm"},
+						{name: "328i N52 3.0L", url: "https://www.urotuning.com/BMW-E9X-325-328-330-Performance-and-OEM-Parts-s/2132.htm"},
+						{name: "330i N52/N53 3.0L", url: "https://www.urotuning.com/BMW-E9X-325-328-330-Performance-and-OEM-Parts-s/2132.htm"},
+						{name: "335i N54/N55 3.0L", url: "https://www.urotuning.com/BMW-E9X-335i-Performance-and-OEM-Parts-s/2131.htm"}]},
+				{value:"F3X (2017+)",
+       		 		engine:[
+						{name: "320i N20 2.0L", url: "https://www.urotuning.com/BMW-F30-320-328-Performance-and-OEM-Parts-s/6945.htm"},
+						{name: "328i N20 2.0L", url: "https://www.urotuning.com/BMW-F30-320-328-Performance-and-OEM-Parts-s/6945.htm"},
+						{name: "335i N55 3.0L", url: "https://www.urotuning.com/BMW-F30-335i-340i-Performance-and-OEM-Parts-s/5198.htm"},
+						{name: "340i B58 3.0L", url: "https://www.urotuning.com/BMW-F30-335i-340i-Performance-and-OEM-Parts-s/5198.htm"}]}]},
+
+		{value:"4 Series",
+       		generation:[
+        		{value:"F3X (2014+)",
+       		 		engine:[
+						{name: "428i N20 2.0L", url: "https://www.urotuning.com/BMW-F3X-428i-Performance-and-OEM-Parts-s/5199.htm"},
+						{name: "435i N55 3.0L", url: "https://www.urotuning.com/BMW-F3X-435i-Performance-and-OEM-Parts-s/7870.htm"}]},
+				{value:"F8X M4 (2015+)",
+       		 		engine:[
+						{name: "S55 3.0L", url: "https://www.urotuning.com/BMW-F82-M4-s/5192.htm"}]}]},
+
+		{value:"5 Series",
+       		generation:[
+        		{value:"E39 (1996-2003)",
+       		 		engine:[
+						{name: "All", url: "https://www.urotuning.com/E39-5-series-s/2147.htm"}]},
+        		{value:"E60 (2004-2010)",
+       		 		engine:[
+						{name: "525i N52 2.5L/N53 3.0L", url: "https://www.urotuning.com/BMW-E60-525i-528i-530i-Performance-and-OEM-Parts-s/8051.htm"},
+						{name: "528i N52 3.0L", url: "https://www.urotuning.com/BMW-E60-525i-528i-530i-Performance-and-OEM-Parts-s/8051.htm"},
+						{name: "530i N52/N53 3.0L", url: "https://www.urotuning.com/BMW-E60-525i-528i-530i-Performance-and-OEM-Parts-s/8051.htm"},
+						{name: "535i N54 3.0L", url: "https://www.urotuning.com/BMW-E60-535i-Performance-and-OEM-Parts-s/2146.htm"},
+						{name: "545i N62 4.4L", url: "https://www.urotuning.com/BMW-E60-545i-550i-Performance-and-OEM-Parts-s/8053.htm"},
+						{name: "550i N62 4.8L", url: "https://www.urotuning.com/BMW-E60-545i-550i-Performance-and-OEM-Parts-s/8053.htm"}]},
+				{value:"F10 (2011+)",
+       		 		engine:[
+						{name: "528i N20 2.0L", url: "https://www.urotuning.com/F10-BMW-528i-Performance-and-OEM-Parts-s/5273.htm"},
+						{name: "535i N55 3.0L", url: "https://www.urotuning.com/F10-BMW-535i-Performance-and-OEM-Parts-s/7938.htm"},
+						{name: "550i N63 4.4L", url: "https://www.urotuning.com/F10-BMW-550i-Performance-and-OEM-Parts-s/7939.htm"}]}]},
+
+		{value:"6 Series",
+       		generation:[
+        		{value:"E6X (2005-2010)",
+       		 		engine:[
+						{name: "All", url: "https://www.urotuning.com/E63-6-series-s/2148.htm"}]},
+				{value:"F1X (2011+)",
+       		 		engine:[
+						{name: "All", url: "https://www.urotuning.com/F12-6-series-s/5370.htm"}]}]},
+
+		{value:"7 Series",
+       		generation:[
+        		{value:"E38 (1995-2001)",
+       		 		engine:[
+						{name: "All", url: "https://www.urotuning.com/E38-7-series-s/2151.htm"}]},
+        		{value:"E65 (2002-2008)",
+       		 		engine:[
+						{name: "All", url: "https://www.urotuning.com/E65-7-series-s/2150.htm"}]},
+        		{value:"F01/F02 (2009-2015)",
+       		 		engine:[
+						{name: "All", url: "https://www.urotuning.com/F01-F02-7-series-OEM-and-Performance-Parts-s/8328.htm"}]},
+				{value:"G11/G12 (2016+)",
+       		 		engine:[
+						{name: "All", url: "https://www.urotuning.com/G11-G12-7-series-OEM-and-Performance-Parts-s/8329.htm"}]}]},
+
+		{value:"X Series",
+       		generation:[
+        		{value:"X1",
+       		 		engine:[
+						{name: "All", url: "https://www.urotuning.com/BMW-X-Series-Performance-and-OEM-Parts-s/2129.htm"}]},
+        		{value:"X3",
+       		 		engine:[
+						{name: "All", url: "https://www.urotuning.com/BMW-X-Series-Performance-and-OEM-Parts-s/2129.htm"}]},
+				{value:"X4",
+       		 		engine:[
+						{name: "All", url: "https://www.urotuning.com/BMW-X-Series-Performance-and-OEM-Parts-s/2129.htm"}]},
+        		{value:"X5",
+       		 		engine:[
+						{name: "All", url: "https://www.urotuning.com/BMW-X-Series-Performance-and-OEM-Parts-s/2129.htm"}]},
+				{value:"X6",
+       		 		engine:[
+						{name: "All", url: "https://www.urotuning.com/BMW-X-Series-Performance-and-OEM-Parts-s/2129.htm"}]}]},
+
+		{value:"Z Series",
+       		generation:[
+        		{value:"E36 Z3 (1997-2002)",
+       		 		engine:[
+						{name: "All", url: "https://www.urotuning.com/E36-Z3-s/2152.htm"}]},
+        		{value:"E85 Z4 (2003-2008)",
+       		 		engine:[
+						{name: "All", url: "https://www.urotuning.com/E85-Z4-s/2153.htm"}]},
+				{value:"E89 Z4 (2009+)",
+       		 		engine:[
+						{name: "All", url: "https://www.urotuning.com/BMW-E89-Z4-Performance-and-OEM-Parts-s/6635.htm"}]}]},
+
+	]},
+
+    {make:"MINI",
+	    model:[
+		{value:"Cooper Hatchback",
+       		generation:[
+				{value:"R50/R53 (2002-2006)",
+       		 		engine:[
+						{name: "Base 1.6L", url: "https://www.urotuning.com/R50-MINI-Cooper-Performance-OEM-Parts-s/6642.htm"},
+						{name: "S 1.6L Supercharged", url: "https://www.urotuning.com/R53-MINI-Cooper-S-Performance-OEM-Parts-s/6643.htm"}]},
+        		{value:"R56 (2007-2013)",
+       		 		engine:[
+						{name: "Base 1.6L", url: "https://www.urotuning.com/R56-MINI-Cooper-Performance-OEM-Parts-s/6646.htm"},
+						{name: "S 1.6L Turbo", url: "https://www.urotuning.com/R56-MINI-Cooper-S-Performance-OEM-Parts-s/6645.htm"},
+						{name: "JCW 1.6L Turbo", url: "https://www.urotuning.com/R56-MINI-John-Cooper-Works-Performance-OEM-Parts-s/8508.htm"}]},
+        		{value:"F55 4-Door (2015+)",
+       		 		engine:[
+						{name: "Base 1.5L Turbo", url: "https://www.urotuning.com/R50-MINI-Cooper-Performance-OEM-Parts-s/6642.htm"},
+						{name: "S 2.0L Turbo", url: "https://www.urotuning.com/R53-MINI-Cooper-S-Performance-OEM-Parts-s/6643.htm"}]},
+        		{value:"F56 2-Door (2014+)",
+       		 		engine:[
+						{name: "Base 1.5L Turbo", url: "https://www.urotuning.com/F56-MINI-Cooper-Performance-OEM-Parts-s/6652.htm"},
+						{name: "S 2.0L Turbo", url: "https://www.urotuning.com/F56-MINI-Cooper-S-Performance-OEM-Parts-s/6653.htm"},
+						{name: "JCW 2.0L Turbo", url: "https://www.urotuning.com/F56-MINI-John-Cooper-Works-Performance-OEM-Parts-s/8505.htm"}]}]},
+
+		{value:"Cooper Convertible",
+       		generation:[
+				{value:"R52 (2005-2008)",
+       		 		engine:[
+						{name: "Base 1.6L", url: "https://www.urotuning.com/R52-MINI-Cooper-Cabrio-Performance-OEM-Parts-s/6641.htm"},
+						{name: "S 1.6L Supercharged", url: "https://www.urotuning.com/R52-MINI-Cooper-S-Cabrio-Performance-OEM-Parts-s/8544.htm"}]},
+        		{value:"R57 (2009-2015)",
+       		 		engine:[
+						{name: "Base 1.6L", url: "https://www.urotuning.com/R57-MINI-Cooper-Convertible-Performance-OEM-Parts-s/6647.htm"},
+						{name: "S 1.6L Turbo", url: "https://www.urotuning.com/R57-MINI-Cooper-S-Convertible-Performance-OEM-Parts-s/8523.htm"},
+						{name: "JCW 1.6L Turbo", url: "https://www.urotuning.com/R57-MINI-JCW-Convertible-Performance-OEM-Parts-s/8524.htm"}]},
+        		{value:"F57 (2016+)",
+       		 		engine:[
+						{name: "Base 1.5L Turbo", url: "https://www.urotuning.com/F57-MINI-Cooper-Convertible-Performance-OEM-Parts-s/6654.htm"},
+						{name: "S 2.0L Turbo", url: "https://www.urotuning.com/F57-MINI-Cooper-S-Convertible-Performance-OEM-Parts-s/8509.htm"},
+						{name: "JCW 2.0L Turbo", url: "https://www.urotuning.com/F57-MINI-John-Cooper-WorConvertible-Performance-OEM-Parts-s/8510.htm"}]}]},
+
+		{value:"Cooper Clubman",
+       		generation:[
+        		{value:"R55 (2008-2014)",
+       		 		engine:[
+						{name: "Base 1.6L", url: "https://www.urotuning.com/R55-MINI-Clubman-Performance-OEM-Parts-s/6644.htm"},
+						{name: "S 1.6L Turbo", url: "https://www.urotuning.com/R55-MINI-Cooper-S-Clubman-Performance-OEM-Parts-s/8555.htm"},
+						{name: "JCW 1.6L Turbo", url: "https://www.urotuning.com/R55-MINI-John-Cooper-Work-Clubman-Performance-OEM-Parts-s/8556.htm"}]},
+				{value:"F54 (2016+)",
+       		 		engine:[
+						{name: "Base 1.5L Turbo", url: "https://www.urotuning.com/F54-MINI-Cooper-Clubman-Performance-OEM-Parts-s/8597.htm"},
+						{name: "S 2.0L Turbo", url: "https://www.urotuning.com/F54-MINI-Cooper-S-Clubman-Performance-OEM-Parts-s/8598.htm"},
+						{name: "JCW 2.0L Turbo", url: "https://www.urotuning.com/F54-MINI-John-Cooper-Work-Clubman-Performance-OEM-Parts-s/8599.htm"}]}]},
+
+		{value:"Cooper Coupe'",
+       		generation:[
+				{value:"R58 (2012-2015)",
+       		 		engine:[
+						{name: "Base 1.6L", url: "https://www.urotuning.com/R58-MINI-Cooper-Coupe-Performance-OEM-Parts-s/6648.htm"},
+						{name: "S 1.6L Turbo", url: "https://www.urotuning.com/R58-MINI-Cooper-S-Coupe-Performance-OEM-Parts-s/8576.htm"},
+						{name: "JCW 1.6L Turbo", url: "https://www.urotuning.com/R58-MINI-John-Cooper-Work-Coupe-Performance-OEM-Parts-s/8577.htm"}]}]},
+
+		{value:"Cooper Roadster",
+       		generation:[
+				{value:"R58 (2012-2015)",
+       		 		engine:[
+						{name: "Base 1.6L", url: "https://www.urotuning.com/R59-MINI-Cooper-Roadster-Performance-OEM-Parts-s/6649.htm"},
+						{name: "S 1.6L Turbo", url: "https://www.urotuning.com/R59-MINI-Cooper-S-Roadster-Performance-OEM-Parts-s/8628.htm"},
+						{name: "JCW 1.6L Turbo", url: "https://www.urotuning.com/R59-MINI-John-Cooper-Work-Roadster-Performance-OEM-Parts-s/8629.htm"}]}]},
+		{value:"Cooper Countryman",
+       		generation:[
+				{value:"R60 (2010+)",
+       		 		engine:[
+						{name: "Base 1.6L", url: "https://www.urotuning.com/R60-MINI-Countryman-Performance-OEM-Parts-s/6650.htm"},
+						{name: "S 1.6L Turbo", url: "https://www.urotuning.com/R60-MINI-Countryman-S-Performance-OEM-Parts-s/8649.htm"},
+						{name: "JCW 1.6L Turbo", url: "https://www.urotuning.com/R60-MINI-JCW-Countryman-Performance-OEM-Parts-s/8650.htm"}]}]},
+		{value:"Cooper Paceman",
+       		generation:[
+				{value:"R61 (2013+)",
+       		 		engine:[
+						{name: "Base 1.6L", url: "https://www.urotuning.com/R61-MINI-Paceman-Performance-OEM-Parts-s/6651.htm"},
+						{name: "S 1.6L Turbo", url: "https://www.urotuning.com/R61-MINI-Paceman-S-Performance-OEM-Parts-s/8670.htm"},
+						{name: "JCW 1.6L Turbo", url: "https://www.urotuning.com/R61-MINI-JCW-Paceman-Performance-OEM-Parts-s/8671.htm"}]}]},
+
+	]},
+
+
+    {make:"Porsche",
+	    model:[
+		{value:"911",
+       		generation:[
+				{value:"964 (1989-1994)",
+       		 		engine:[
+						{name: "Carrera", url: "https://www.urotuning.com/Porsche-964-Parts-s/6436.htm"},
+						{name: "Turbo", url: "https://www.urotuning.com/Porsche-964-Parts-s/6436.htm"}]},
+        		{value:"993 (1995-1998)",
+       		 		engine:[
+						{name: "Carrera", url: "https://www.urotuning.com/Porsche-993-Parts-s/6435.htm"},
+						{name: "Turbo", url: "https://www.urotuning.com/Porsche-993-Parts-s/6435.htm"}]},
+        		{value:"996 (1998-2004)",
+       		 		engine:[
+						{name: "Carrera", url: "https://www.urotuning.com/Porsche-996-Carrera-Parts-s/6153.htm"},
+						{name: "GT3", url: "https://www.urotuning.com/Porsche-996-GT3-Parts-s/6158.htm"},
+						{name: "Turbo", url: "https://www.urotuning.com/Porsche-996-Turbo-Parts-s/6157.htm"}]},
+				{value:"997.1 (2005-2008)",
+       		 		engine:[
+						{name: "Carrera", url: "https://www.urotuning.com/Porsche-997-1-Carrera-Parts-s/6152.htm"},
+						{name: "GT3", url: "https://www.urotuning.com/Porsche-997-1-GT3-Parts-s/6161.htm"},
+						{name: "Turbo", url: "https://www.urotuning.com/Porsche-997-1-Turbo-Parts-s/6156.htm"}]},
+				{value:"997.2 (2009-2011)",
+       		 		engine:[
+						{name: "Carrera", url: "https://www.urotuning.com/Porsche-997-2-Carrera-Parts-s/6151.htm"},
+						{name: "GT3", url: "https://www.urotuning.com/Porsche-997-2-GT3-Parts-s/6160.htm"},
+						{name: "Turbo", url: "https://www.urotuning.com/Porsche-997-2-Turbo-Parts-s/6155.htm"}]},
+				{value:"991 (2012-2016)",
+       		 		engine:[
+						{name: "Carrera", url: "https://www.urotuning.com/Porsche-991-Carrera-Parts-s/6150.htm"},
+						{name: "GT3", url: "https://www.urotuning.com/Porsche-991-GT3-Parts-s/6159.htm"},
+						{name: "Turbo", url: "https://www.urotuning.com/Porsche-991-Turbo-Parts-s/6154.htm"}]},
+
+				{value:"991.2 (2017+)",
+       		 		engine:[
+						{name: "Carrera", url: "https://www.urotuning.com/Porsche-991-2-Carrera-Performance-Parts-s/7391.htm"},
+						{name: "GT3", url: "https://www.urotuning.com/Porsche-991-2-GT3-Performance-Parts-s/7392.htm"},
+						{name: "Turbo", url: "https://www.urotuning.com/Porsche-991-2-Turbo-Performance-Parts-s/7393.htm"}]}]},
+		{value:"Boxster",
+       		generation:[
+				{value:"986 (1996-2003)",
+       		 		engine:[
+						{name: "2.7L", url: "https://www.urotuning.com/Porsche-Boxster-986-Parts-s/6354.htm"},
+						{name: "3.2L S", url: "https://www.urotuning.com/Porsche-Boxster-986-Parts-s/6354.htm"}]},
+        		{value:"987 (2004-2011)",
+       		 		engine:[
+						{name: "2.7L", url: "https://www.urotuning.com/Porsche-Boxster-987-Parts-s/6355.htm"},
+						{name: "3.4L S", url: "https://www.urotuning.com/Porsche-Boxster-987-Parts-s/6355.htm"}]},
+        		{value:"981 (2012-2016)",
+       		 		engine:[
+						{name: "2.7L", url: "https://www.urotuning.com/Porsche-Boxster-981-Parts-s/6356.htm"},
+						{name: "3.4L S", url: "https://www.urotuning.com/Porsche-Boxster-981-Parts-s/6356.htm"}]},
+				{value:"982 718 (2017+)",
+       		 		engine:[
+						{name: "2.0L", url: "https://www.urotuning.com/Porsche-718-Boxster-Parts-s/7395.htm"},
+						{name: "2.5L S", url: "https://www.urotuning.com/Porsche-718-Boxster-Parts-s/7395.htm"}]}]},
+
+		{value:"Cayenne",
+       		generation:[
+				{value:"955 (2002-2006)",
+       		 		engine:[
+						{name: "All", url: "https://www.urotuning.com/Porsche-Boxster-986-Parts-s/6354.htm"}]},
+				{value:"957 (2007-2009)",
+       		 		engine:[
+						{name: "All", url: "https://www.urotuning.com/Porsche-Cayenne-957-Parts-s/6360.htm"}]},
+				{value:"958 (2010+)",
+       		 		engine:[
+						{name: "All", url: "https://www.urotuning.com/Porsche-Cayenne-958-Parts-s/6361.htm"}]}]},
+
+		{value:"Cayman",
+       		generation:[
+        		{value:"987 (2006-2012)",
+       		 		engine:[
+						{name: "2.7L", url: "https://www.urotuning.com/Porsche-Cayman-987-Parts-s/6357.htm"},
+						{name: "3.4L S", url: "https://www.urotuning.com/Porsche-Cayman-987-Parts-s/6357.htm"}]},
+        		{value:"981 (2013-2016)",
+       		 		engine:[
+						{name: "2.7L", url: "https://www.urotuning.com/Porsche-Cayman-981-Parts-s/6358.htm"},
+						{name: "3.4L S", url: "https://www.urotuning.com/Porsche-Cayman-981-Parts-s/6358.htm"}]},
+				{value:"982 718 (2017+)",
+       		 		engine:[
+						{name: "2.0L", url: "https://www.urotuning.com/Porsche-718-Cayman-OEM-Performance-Parts-s/7394.htm"},
+						{name: "2.5L S", url: "https://www.urotuning.com/Porsche-718-Cayman-OEM-Performance-Parts-s/7394.htm"}]}]},
+
+		{value:"Macan",
+       		generation:[
+				{value:"95B (2015+)",
+       		 		engine:[
+						{name: "2.0T", url: "https://www.urotuning.com/Porsche-Macan-Performance-Parts-s/8324.htm"},
+						{name: "3.0T S", url: "https://www.urotuning.com/Porsche-Macan-S-Performance-Parts-s/8325.htm"},
+						{name: "3.0T GTS", url: "https://www.urotuning.com/Porsche-Macan-GTS-Performance-Parts-s/8326.htm"},
+						{name: "3.6T Turbo", url: "https://www.urotuning.com/Porsche-Macan-Turbo-Performance-Parts-s/8327.htm"}]}]},
+
+		{value:"Panamera",
+       		generation:[
+        		{value:"970 (2010-2016)",
+       		 		engine:[
+						{name: "All", url: "https://www.urotuning.com/Porsche-Panamera-970-Parts-s/6362.htm"}]},
+				{value:"971 (2017+)",
+       		 		engine:[
+						{name: "All", url: "https://www.urotuning.com/Porsche-Panamera-971-Parts-s/7396.htm"}]}]},
+
+	]},
+
+    {make:"Mercedes Benz",
+	    model:[
+		{value:"C Class",
+       		generation:[
+				{value:"W204 (2008-2014)",
+       		 		engine:[
+						{name: "ALL", url: "https://www.urotuning.com/Mercedes-Benz-W204-C-Class-Performance-Parts-s/8332.htm"}]},
+        		{value:"W205 (2015+)",
+       		 		engine:[
+						{name: "C300 2.0L Turbo", url: "https://www.urotuning.com/Mercedes-Benz-W205-C300-Performance-Parts-s/8366.htm"},
+						{name: "C400/C450 3.0L Turbo", url: "https://www.urotuning.com/Mercedes-Benz-W205-C400-C450-AMG-Performance-Parts-s/8364.htm"},
+						{name: "C63/S AMG 4.0L Turbo", url: "https://www.urotuning.com/Mercedes-Benz-W205-C63-AMG-Performance-Parts-s/8365.htm"}]}]},
+
+		{value:"CLA Coupe",
+       		generation:[
+				{value:"W117 (2014+)",
+       		 		engine:[
+						{name: "CLA250 2.0L Turbo", url: "https://www.urotuning.com/Mercedes-Benz-W117-CLA250-Performance-Parts-s/8369.htm"},
+						{name: "CLA45 AMG 2.0L Turbo", url: "https://www.urotuning.com/Mercedes-Benz-W117-CLA45-AMG-Performance-Parts-s/8368.htm"}]}]},
+
+		{value:"E Class",
+       		generation:[
+				{value:"W212 (2010-2016)",
+       		 		engine:[
+						{name: "ALL", url: "https://www.urotuning.com/Mercedes-Benz-W212-E-Class-Performance-Parts-s/8370.htm"}]},
+				{value:"W213 (2017+)",
+       		 		engine:[
+						{name: "ALL", url: "https://www.urotuning.com/Mercedes-Benz-W213-E-Class-Performance-Parts-s/8371.htm"}]}]},
+
+	]},
+
+	];
+
+
+$(document).ready(function(){
+
+
+
+	var values = document.cookie;
+	values = values.split("#");
+	var location = values[1];
+	values = values[0];
+	if(values !== "")
+	{
+		values = values.split("=")[1];
+		values = values.split("/");
+		putValues(values);
+	}
+	var c_index;
+	var d_index;
+	var e_index;
+	var f_index;
+
+	$("#first")[0].selectedIndex = 0;
+
+$('select#first > option:first-child').text('Make');
+
+$("select#first option:first").attr('selected','selected');
+$('select#second > option:first-child').text('Model');
+
+$("select#second option:first").attr('selected','selected');
+$('select#third > option:first-child').text('Year');
+
+$("select#third option:first").attr('selected','selected');
+$('select#fourth > option:first-child').text('Engine');
+
+$("select#fourth option:first").attr('selected','selected');
+	$("#first").change(function() {
+		removeValues();
+
+		$(this).siblings().addClass("hidden");
+		c_index = $(this)[0].selectedIndex;
+
+		addModels();
+	});
+	$("#second").change(function() {
+		d_index = $(this)[0].selectedIndex;
+		if(d_index!=0)
+		addGenerations();
+	});
+	$("#third").change(function() {
+		e_index = $(this)[0].selectedIndex;
+		if(e_index!=0)
+		addEngines();
+		f_index=0;
+	});
+	$("#fourth").change(function() {
+		f_index = $(this)[0].selectedIndex;
+	});
+
+	$("#dropdown_container select").change(function() {
+		if($(this)[0].selectedIndex != 0)
+		{
+			$(this).next().removeClass("hidden");
+			$(this).next().nextAll().addClass("hidden");
+		}
+		else
+		{
+			$(this).nextAll().addClass("hidden");
+			$(this).nextAll().empty();
+		}
+	});
+
+	function addModels() {
+		var models = theCars[c_index-1]["model"];
+		$("#second").empty();
+		$("#third").empty();
+		$("#fourth").empty();
+		$("#third").addClass("hidden");
+		$("#fourth").addClass("hidden");
+		$("#second").append("<option value='models'>Model</option>");
+		for(var i=0, n=models.length; i<n; i++)
+		{
+			$("#second").append("<option value='"+models[i].value+"'>"+models[i].value+"</option>");
+		}
+	}
+	function addGenerations() {
+		//ADDING THE DATA
+		var generations = theCars[c_index-1]["model"][d_index-1]["generation"];
+		$("#third").empty();
+		$("#fourth").empty();
+		$("#fourth").addClass("hidden");
+		$("#third").append("<option value='generations'>Generation</option>");
+		for(var i=0, n=generations.length; i<n; i++)
+		{
+			$("#third").append("<option value='"+generations[i].value+"'>"+generations[i].value+"</option>");
+		}
+		}
+	function addEngines() {
+		$("#fourth").empty();
+		var engines = theCars[c_index-1]["model"][d_index-1]["generation"][e_index-1]["engine"];
+		$("#fourth").append("<option value='engines'>Engine</option>");
+		for(var i=0, n=engines.length; i<n; i++)
+		{
+			$("#fourth").append("<option value='"+engines[i].name+"'>"+engines[i].name+"</option>");
+		}
+		}
+	function removeValues() {
+		$("#first").nextAll().empty();
+	}
+	function putValues(values) {
+	    var optionSelected = $('#first').find("option:selected");
+	    optionSelected.val(values[0]);
+
+		values[0] = capitalizeFirstLetter(values[0]);
+	    if(values[0] == "Bmw")
+	    	values[0] = "BMW";
+	    if(values[0] == "Mini")
+	    	values[0] = "MINI";
+	    optionSelected.text(values[0]);
+	    optionSelected = $('#second').find("option:selected");
+	    optionSelected.val(values[1]);
+	    optionSelected.text(values[1]);
+	    optionSelected = $('#third').find("option:selected");
+	    optionSelected.val(values[2]);
+	    optionSelected.text(values[2]);
+	    optionSelected = $('#fourth').find("option:selected");
+	    optionSelected.val(values[3]);
+	    optionSelected.text(values[3]);
+	}
+
+	function capitalizeFirstLetter(string) {
+	    return string.charAt(0).toUpperCase() + string.slice(1);
+	}
+
+	function createCookie(name, value, days) {
+	    var date, expires;
+	    if (days) {
+	        date = new Date();
+	        date.setTime(date.getTime()+(days*24*60*60*1000));
+	        expires = "; expires="+date.toGMTString();
+	    } else {
+	        expires = "";
+	    }
+	    document.cookie = name+"="+value+expires+"; path=/";
+	}
+
+	$("#search_btn").click(function () {
+			var val = $("#first").val();
+			val+= "/";
+			val+= $("#second").val();
+			val+= "/";
+			val+= $("#third").val();
+			val+= "/";
+			val+= $("#fourth").val();
+			val+= "#";
+			val+= theCars[c_index-1]["model"][d_index-1]["generation"][e_index-1]["engine"][f_index-1]["url"];
+
+			createCookie("save", val, 30);
+			//alert(theCars[c_index-1]["model"][d_index-1]["generation"][e_index-1]["engine"][f_index-1]["url"]);
+			window.location=theCars[c_index-1]["model"][d_index-1]["generation"][e_index-1]["engine"][f_index-1]["url"];
+	});
+	//console.log($("#article_dropdown").length);
+	if($("#article_dropdown").length > 0)
+	{
+		if($( window ).width() > 767)
+		{
+			$(".dropdown-div").appendTo("#article_dropdown");
+
+		}
+		$(".open-dropdown").click(function() {
+			$(".dropdown-div").toggle();
+		});
+	}
+});
+</script>

@@ -1,0 +1,78 @@
+{% if settings.display_brands_slider %}
+<section class="slider-brand-wrapper container wow fadeIn">
+  <div class="widget-title wow fadeIn">
+  <fieldset class="box-title">
+      <legend align="center">FEATURED BRANDS
+      </legend>
+    </fieldset>
+  </div>
+  <div id="slide_brand" class="owl-carousel slide_brand col-xs-12"><!-- BEGIN of brand BRAND -->
+
+    <div class="item">
+      <a title="AWE Tuning" href="/collections/awe-tuning"><img class="lazyload" data-src="{{ 'brand2.png' | asset_url }}" /> </a>
+    </div>
+
+    <div class="item">
+      <a title="Rotiform Wheels" href="/collections/rotiform-wheels"><img class="lazyload" data-src="{{ 'brand10.png' | asset_url }}" /> </a>
+    </div>
+    
+    <div class="item">
+      <a title="Unitronic" href="/collections/unitronic"><img class="lazyload" data-src="{{ 'unitronic.png' | asset_url }}" /> </a>
+    </div>
+    
+    <div class="item">
+      <a title="Integrated Engineering" href="/collections/integrated-engineering"><img class="lazyload" data-src="{{ 'brand7.png' | asset_url }}" /> </a>
+    </div>
+    
+    <div class="item">
+      <a title="Velt Sport" href="/collections/velt-sport-performance-parts-accessories-for-your-vw-audi"><img class="lazyload" data-src="{{ 'velt-sport.png' | asset_url }}" /> </a>
+    </div>
+    
+    <div class="item">
+      <a title="Air Lift Performace" href="/collections/airlift-air-suspension"><img class="lazyload" data-src="{{ 'brand1.png' | asset_url }}" /> </a>
+    </div>
+
+    <div class="item">
+      <a title="CTS Turbo" href="/collections/cts-turbo"><img class="lazyload" data-src="{{ 'brand5.png' | asset_url }}" /> </a>
+    </div>
+
+    <div class="item">
+      <a title="Forge Motorsport" href="/collections/forge-motorsport-performance-parts-for-vw-audi-bmw-porsche"><img class="lazyload" data-src="{{ 'brand6.png' | asset_url }}" /> </a>
+    </div>
+        
+    <div class="item">
+      <a title="Solo Werks Coilovers" href="/collections/solo-werks-coilovers-suspension-for-your-vw-audi-bmw"><img class="lazyload" data-src="{{ 'solowerks.png' | asset_url }}" /> </a>
+    </div>
+
+    <div class="item">
+      <a title="034 Motorport" href="/collections/034-motorsport-performance-tuning-parts-for-audi-vw"><img class="lazyload" data-src="{{ 'brand3.png' | asset_url }}" /> </a>
+    </div>
+
+    <div class="item">
+      <a title="Neuspeed" href="/collections/neuspeed-performance-parts-for-vw-audi"><img class="lazyload" data-src="{{ 'neuspeed.png' | asset_url }}" /> </a>
+    </div>
+
+    <div class="item">
+      <a title="fifteen52 Wheels" href="/collections/fifteen52-wheels"><img class="lazyload" data-src="{{ 'brand8.png' | asset_url }}" /> </a>
+    </div>
+
+    <div class="item">
+      <a title="ARM Motorsports" href="/pages/search-results?q=arm%20motorsports"><img class="lazyload" data-src="{{ 'arm-logo.jpg' | asset_url }}" /> </a>
+    </div>
+      
+       <div class="item">
+      <a title="Racingline" href="/collections/racingline"><img class="lazyload" data-src="{{ 'racingline.png' | asset_url }}" /> </a>
+    </div>
+  </div><!-- END of brand BRAND -->
+</section>
+
+<script>
+jQuery(document).ready(function() {
+  jQuery("#slide_brand").owlCarousel({
+    navigation : true,
+    itemsTablet: [768,3],
+    itemsTabletSmall: [650,2]
+  });
+});
+</script>
+{% endif %}

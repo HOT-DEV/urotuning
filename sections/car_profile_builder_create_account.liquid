@@ -1,0 +1,137 @@
+<div class="CarProfile">
+  <h1>{{ settings.profile_builder_title }}</h1>
+  <form class="CarProfile__form">
+    <div class="CarProfile__signUp">
+      <div class="CarProfile__signUp--form">
+        <div class="inputBox">
+          <label for="first_name">First Name</label>
+          <input type="text" id="first_name" value="">
+        </div>
+        <div class="inputBox">
+          <label for="last_name">Last Name</label>
+          <input type="text" id="last_name" value="">
+        </div>
+        <div class="inputBox">
+          <label for="email">Email</label>
+          <input type="email" id="email" value="">
+        </div>
+        <div class="errorMessage">
+          <p>Account already created with email <span class="errorMessageEmail"></span></p>
+          <p><a href="/account/login">Click Here</a> to log in</p>
+        </div>
+        <div class="haveAccount">
+          Already have a UroTuning account?
+          <div id="loginPopupOpen">Login Here</div>
+        </div>
+      </div>
+      <div class="CarProfile__signUp--creditGraphic">
+        <img src="{{ settings.profile_builder_image | img_url: 'master' }}" alt="{{ section.settings.image.alt }}">
+      </div>
+    </div>
+    <div class="CarProfile__carDetails">
+      <h3>Car Details</h3>
+      
+      <div class="detailDrop active" data-select="make">
+        <label>Make</label>
+        <div class="detailDrop__content">
+          <button class="detailDropSelect">
+            <p>Select Make</p>
+            <span class="down-icon"></span>
+          </button>
+          <div class="detailDropOptions"></div>
+        </div>
+      </div>
+
+      <div class="detailDrop" data-select="series">
+        <label>Series</label>
+        <div class="detailDrop__content">
+          <button class="detailDropSelect">
+            <p>Select Series</p>
+            <span class="down-icon"></span>
+          </button>
+          <div class="detailDropOptions"></div>
+        </div>
+      </div>
+
+      <div class="detailDrop" data-select="chassis">
+        <label>Chassis</label>
+        <div class="detailDrop__content">
+          <button class="detailDropSelect">
+            <p>Select Chassis</p>
+            <span class="down-icon"></span>
+          </button>
+          <div class="detailDropOptions"></div>
+        </div>
+      </div>
+
+      <div class="detailDrop" data-select="model">
+        <label>Model</label>
+        <div class="detailDrop__content">
+          <button class="detailDropSelect">
+            <p>Select Model</p>
+            <span class="down-icon"></span>
+          </button>
+          <div class="detailDropOptions"></div>
+        </div>
+      </div>
+
+      <div class="detailDrop" data-select="engine">
+        <label>Engine</label>
+        <div class="detailDrop__content">
+          <button class="detailDropSelect">
+            <p>Select Engine</p>
+            <span class="down-icon"></span>
+          </button>
+          <div class="detailDropOptions"></div>
+        </div>
+      </div>
+
+      <div class="detailDrop" data-select="drivetrain">
+        <label>Drivetrain</label>
+        <div class="detailDrop__content">
+          <button class="detailDropSelect">
+            <p>Select Drivetrain</p>
+            <span class="down-icon"></span>
+          </button>
+          <div class="detailDropOptions"></div>
+        </div>
+      </div>
+
+      <div class="detailDrop" data-select="year">
+        <label>Year</label>
+        <div class="detailDrop__content">
+          <button class="detailDropSelect">
+            <p>Select Year</p>
+            <span class="down-icon"></span>
+          </button>
+          <div class="detailDropOptions"></div>
+        </div>
+      </div>
+    </div>
+    <div class="CarProfile__igName">
+      <h3>Instagram Name</h3>
+      <div class="igInput">
+        <div class="igInput__container">
+          <div class="igAt">@</div>
+          <input type="text" id="igName">
+        </div>
+        <p>* Optional (Will add link to your IG page)</p>
+      </div>
+    </div>
+    <div class="CarProfile__btns">
+      <button class="next" type="submit">Next step ></button>
+    </div>
+  </form>
+</div>
+
+<script>
+
+</script>
+
+<script>
+// If there is an account logged in while on 
+// templates/car-profile-builder-create-an-account.liquid ,
+// redirect to appropriate new profile screen
+
+
+</script>

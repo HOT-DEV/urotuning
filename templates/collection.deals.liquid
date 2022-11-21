@@ -1,0 +1,75 @@
+{% render 'shogun-products', content: collection %}
+
+
+{% include 'shogun-products', content: collection %}
+{{collection.metafields.shogun.above}}
+
+
+    {% comment %}
+
+{% if settings.collection_results_per_page != blank %}
+  {% assign product_per_page = settings.collection_results_per_page %}
+{% else %}
+  {% assign product_per_page = 8 %}
+{% endif %}
+<style>.findify-component-spinner,.findify-component-spinner:after{border-radius:50%;width:60px;height:60px}.findify-component-spinner{margin:60px auto 0!important;position:relative;-webkit-transform:translateZ(0);-ms-transform:translateZ(0);transform:translateZ(0);-webkit-animation:findify-component-spinner-animation .7s infinite cubic-bezier(.67,.35,.7,.8);animation:findify-component-spinner-animation .7s infinite cubic-bezier(.67,.35,.7,.8);-ms-transform-origin:50% 50%;-webkit-transform-origin:50% 50%;transform-origin:50% 50%;border-top:3px solid #eaeaea;border-right:3px solid #eaeaea;border-bottom:3px solid #eaeaea;border-left:3px solid #c6c6c6}@-webkit-keyframes findify-component-spinner-animation{0%{-webkit-transform:rotate(90deg);transform:rotate(90deg)}100%{-webkit-transform:rotate(450deg);transform:rotate(450deg)}}@keyframes findify-component-spinner-animation{0%{-webkit-transform:rotate(90deg);transform:rotate(90deg)}100%{-webkit-transform:rotate(450deg);transform:rotate(450deg)}}</style>
+  <div id="collection-contianer" class="full-width" style="min-height: 400px;">
+    <div class="findify-component-spinner"></div>
+    <div class='findify-fallback' style="display:none;">
+<div class="row">
+  {% include 'collection-sidebar' %}
+  <div class="block-row col-xs-9 col-main">
+
+    {% paginate collection.products by product_per_page %}
+
+    {% comment %}
+      Use .grid--rev so that the collection tags appear below the products on mobile
+    {% endcomment %}
+
+    {% include 'toolbar' %}
+
+    {% comment %}
+      Use class grid-uniform to have evenly sized columns clear
+      each other properly at each breakpoint.
+    {% endcomment %}
+
+    <div class="products-grid row">
+      {% if collection.products.size > 0 %}
+        {% if settings.collection_results_per_row != blank and settings.collection_results_per_row != '5' %}
+          {% assign product_grid = 12 | divided_by: settings.collection_results_per_row %}
+          {% assign columns = true %}
+        {% endif %}
+
+        {% for product in collection.products %}
+{%- if product.metafields.inventory.ShappifyHidden == 'true' -%}{%- continue -%}{%- endif -%}
+{%- include 'bold-product' with product, hide_action: 'skip' -%}
+          <div class="{% if settings.product_image_border%}grid-item-border{% endif %}{% if settings.product_image_crop%} crop_image{% else %} no_crop_image{% endif %} grid-item product-item col-xs-6 col-sm-4 {% if settings.display_sidebar_cat_page %}col-md-4{% else %}{% if product_grid == 3 %} col-md-3{% endif %}{% endif %} {% if columns %}col-lg-{{product_grid}}{% else %}col{% endif %}">
+            {% include 'product-grid-item' %}
+          </div>
+        {% endfor %}
+      {% else %}
+      <p class="text-center">There are no products in this collection.</p>
+      {% endif %}
+    </div>
+
+    {% if paginate.pages > 1 %}
+    <div class="padding">
+      {% include 'pagination-page' %}
+    </div>
+    {% endif %}
+
+    {% endpaginate %}
+  </div>
+</div>
+    </div>
+</div>
+{% include "findify_collection_initializer" %}
+{% if settings.display_recently_viewed_products %}
+{% include 'recently-viewed-products' %}
+{% endif %}
+
+    {% endcomment %}
+
+{{collection.metafields.shogun.below}}
+
+

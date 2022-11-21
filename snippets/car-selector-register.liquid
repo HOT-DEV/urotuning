@@ -1,0 +1,11 @@
+<div id="register_form_car_details">
+  <label for="car_details">Car details<em>*</em></label>
+  <div id="already_selected_car">
+  	<div class="s-dropdown clearfix">
+      <a href="javascript:void(0)" class="dropSelect"><p></p><span class="down-icon"></span></a>
+      <div class="dropdown-content"></div>
+    </div>
+  </div>
+  {% include 'car-selector', action: 'register' %}
+  <input name="customer[tags]" id="car_year_tag" type="text" value="">
+</div>

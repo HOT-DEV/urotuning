@@ -1,0 +1,5 @@
+{%comment%} Added by Findify for a ranking A/B test on 2020-09-07 {%endcomment%}
+{% layout none %}
+{% paginate search.results by 96 %}
+{{ search.results | map: 'id' | json }}
+{% endpaginate %}

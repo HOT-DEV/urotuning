@@ -1,0 +1,72 @@
+<div class="CarProfile__loader active galleryLandingSpinner">
+  <div class="lds-ripple"><div></div><div></div></div>
+</div>
+<div class="GalleryLanding">
+  <div class="GalleryLanding__selections">
+    <div style="padding-bottom: 10px"> <center><img src="{{ 'das-GALLERY-200.jpg' | asset_url }}" /></center> </div>
+    <a href="/pages/gallery" class="GalleryLanding__button GalleryLanding__button--browse">Browse Gallery</a>
+    <div class="GalleryLanding__filterSelections">
+      <div class="GalleryLanding__dropsContainer">
+        <div class="GalleryLanding__drop active" data-select="make">
+          <button class="GalleryLanding__drop--button">
+            <p>Select Make</p>
+            <span class="down-icon"></span>
+          </button>
+          <div class="GalleryLanding__drop--options"></div>
+        </div>
+        <div class="GalleryLanding__drop" data-select="series">
+          <button class="GalleryLanding__drop--button">
+            <p>Select Model</p>
+            <span class="down-icon"></span>
+          </button>
+          <div class="GalleryLanding__drop--options"></div>
+        </div>
+        <div class="GalleryLanding__drop" data-select="chassis">
+          <button class="GalleryLanding__drop--button">
+            <p>Select Gen</p>
+            <span class="down-icon"></span>
+          </button>
+          <div class="GalleryLanding__drop--options"></div>
+        </div>
+      </div>
+      <button class="GalleryLanding__button GalleryLanding__button--filterGo">GO!</button>
+    </div>
+    <div class="GalleryLanding__content">{{ page.content }}</div>
+    <a href="/pages/car-profile-builder" class="GalleryLanding__button GalleryLanding__button--create">Submit Your Car</a>
+  </div>
+  <a class="GalleryLanding__featured" href="{{ section.settings.link }}">
+    <img src="{{ section.settings.img | img_url: 'master' }}" alt="{{ section.settings.img.alt }}">
+    <div class="GalleryLanding__featured--caption">
+      <p>{{ section.settings.caption }}</p>
+    </div>
+  </a>
+</div>
+
+{% schema %}
+  {
+    "name": "Gallery Landing Page",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Gallery"
+      },
+      {
+        "type": "image_picker",
+        "id": "img",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "caption",
+        "label": "Caption"
+      },
+      {
+        "type": "url",
+        "id": "link",
+        "label": "Link"
+      }
+    ]
+  }
+{% endschema %}

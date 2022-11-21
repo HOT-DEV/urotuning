@@ -1,0 +1,42 @@
+{% comment %}
+
+  A snippet to include a search bar anywhere in your theme.
+  Note we are using 'input-group' for the layout. Look under Forms > Input Groups for some demos.
+
+  More information:
+   - http://docs.shopify.com/themes/liquid-variables/search
+
+  Return only products or pages in results:
+    - http://docs.shopify.com/manual/configuration/store-customization/return-only-product-in-storefront-search-results
+    - Or manually add type=product or type=page to the search URL as a parameter
+
+{% endcomment %}
+
+{% if settings.show_header_search %}
+<a class="icon-search" href="javascript:void(0)">Search</a>
+<form action="/search" method="get" class="input-group search-bar visible-lg" role="search">
+  <input type="hidden" name="type" value="product">
+
+  <input style="color:#000;" type="text" name="q" value="{{ search.terms | escape }}" placeholder="{{ settings.search_placeholder }}" class="input-group-field" aria-label="Search Site" autocomplete="off">
+  <span class="input-group-btn" style="position: absolute; right: -20px; top: 0;">
+    <input type="submit" class="btn" value="Search">
+  </span>
+</form>
+
+<form action="/search" method="get" class="input-group search-bar visible-md" role="search" style="margin-top: -50px;">
+  <input type="hidden" name="type" value="product">
+
+  <input style="color:#000; width: 250px;" type="text" name="q" value="{{ search.terms | escape }}" placeholder="{{ settings.search_placeholder }}" class="input-group-field" aria-label="Search Site" autocomplete="off">
+  <span class="input-group-btn" style="position: absolute; right: -30px; top: 0;">
+    <input type="submit" class="btn" value="Search">
+  </span>
+</form>
+
+<form action="/search" method="get" class="input-group search-bar visible-sm" role="search">
+  <input type="hidden" name="type" value="product">
+  <input style="color:#000; width: 200px;" type="text" name="q" value="{{ search.terms | escape }}" placeholder="{{ settings.search_placeholder }}" class="input-group-field" aria-label="Search Site" autocomplete="off">
+  <span class="input-group-btn" style="position: absolute; right: 0px; top: 58px;">
+    <input type="submit" class="btn" value="Search">
+  </span>
+</form>
+{% endif %}

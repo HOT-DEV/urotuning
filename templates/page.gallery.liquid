@@ -1,0 +1,119 @@
+<div class="breadcrumb hidden-xs"></div>
+
+<div id="gallery-container" class="full-width">
+  <div class="CarProfile__loader active gallerySpinnerMain">
+    <div class="lds-ripple"><div></div><div></div></div>
+  </div>
+  <div class="gallery-container">
+    <div class="findify-components-search--mobile-actions">
+      <div class="visible-xs" style="padding-top: 10px; padding-bottom: 10px"> <center><img src="{{ 'das-GALLERY-200.jpg' | asset_url }}" /></center> </div>
+
+      <div class="findify-sticky-test">
+        <div class="findify-components-search--mobile-actions__bottom-row fixedMobileButton">
+          <button class="findify-components--button findify-components-search--mobile-actions__button findify-mobile-filter-button openMobileFilters">
+            <span class="findify-components--text findify-components--text__primary-uppercase findify-mobile-filter-button-text">
+              <svg width="17" height="16" class="findify-components--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 16"><path d="M9.5 2h7a.5.5 0 1 1 0 1h-7a.5.5 0 0 1 0-1zm0 4h5a.5.5 0 1 1 0 1h-5a.5.5 0 0 1 0-1zm0 4h3a.5.5 0 1 1 0 1h-3a.5.5 0 1 1 0-1zm0 4h1a.5.5 0 1 1 0 1h-1a.5.5 0 1 1 0-1zm-1.838-2.004L4.008 15.65.36 12.002a.5.5 0 0 1 .006-.714.517.517 0 0 1 .725.007l2.425 2.435-.015-12.274A.5.5 0 0 1 4 .956a.5.5 0 0 1 .5.5V13.73l2.453-2.442a.502.502 0 0 1 .709.708z" fill="currentColor" fill-rule="evenodd"></path></svg>
+              Car Filters
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="findify-layouts--search">
+      
+
+      <div class="findify-components-search--desktop-facets">
+        
+              <div style="padding-bottom: 10px"> <center><img src="{{ 'das-GALLERY-200.jpg' | asset_url }}" /></center> </div>
+        
+        <div class="findify-components-search--desktop-facets__facet findify-category-facet-container">
+          <button class="findify-components--button findify-components--facet__title">
+            <span class="findify-components--text findify-components--text__primary-uppercase findify-components--facet__text">Car Filters</span>
+          </button>
+
+
+          <div class="findify-components--facet__body carFilterFacets">
+            <button class="galleryFilterButton findify-components--button findify-components--category-facet__item selected" data-value="all" data-filter-type="all">
+              <span class="findify-components--text findify-components--text__primary-lowercase">All cars</span>
+              <span class="findify-components--text findify-components--text__secondary-uppercase allCarCount"></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="findify-components-search--desktop-facets__facet">
+          <div class="findify-components-search--desktop-facets__header">
+            <span>Filter By</span>
+          </div>
+          <button class="findify-components--button findify-components--facet__title modVendorFilterTitle open">
+            <span class="findify-components--text findify-components--text__primary-uppercase findify-components--facet__text">Mod Brands <span class="selectedFilterCount"></span></span>
+            <svg width="15" height="15" class="findify-components--icon findify-components--facet__icon closeIcon" xmlns="http://www.w3.org/2000/svg"><path d="M3 7h9v1H3z" fill="currentColor" fill-rule="evenodd"></path></svg>
+            <svg width="15" height="15" class="findify-components--icon findify-components--facet__icon openIcon" xmlns="http://www.w3.org/2000/svg"><path d="M8 7V3H7v4H3v1h4v4h1V8h4V7H8z" fill="currentColor" fill-rule="evenodd"></path></svg>
+          </button>
+          <div class="findify-components--facet__body modVendorFacets open"></div>
+        </div>
+
+
+
+
+      </div>
+
+
+
+      <div class="findify-layouts--search__content">
+        <div class="CarProfile__loader active gallerySpinnerContent">
+          <div class="lds-ripple"><div></div><div></div></div>
+        </div>
+        <div class="GalleryListings__container"></div>
+        
+        <div class="findify-components--pagination">
+          <span class="findify-component--pagination-meta PaginationMeta">Showing 1 - 25 of 300</span>
+          <div class="findify-components--pagination--wrapper PaginationContainer"></div>
+        </div>
+
+
+      </div>
+    
+    </div>
+  </div>
+
+  <div class="findify-container findify-components-common--drawer__backdrop carFiltersOverlay"></div>
+  <div class="findify-container findify-components-common--drawer__content carFiltersMobile">
+    <div class="findify-components-search--mobile-facets__modal mobile">
+      <div class="findify-components-search--mobile-facets__header">
+        <div class="findify-components-search--mobile-facets__title">
+          <span class="findify-components--text findify-components--text__primary-uppercase">Car Filters</span>
+        </div>
+        <button class="findify-components--button findify-components-search--mobile-facets__back-button closeMobileFilters">
+          <svg width="20" height="20" class="findify-components--icon" xmlns="http://www.w3.org/2000/svg"><path d="M16.68 9.18v1.64H6.52l4.66 4.68L10 16.68 3.32 10 10 3.32l1.18 1.18-4.66 4.68z" fill="currentColor" fill-rule="evenodd"></path></svg>
+        </button>
+      </div>
+      <div class="findify-components-search--mobile-facets__body">
+        <div class="findify-components-search--desktop-facets__facet findify-mobile findify-category-facet-container">
+          <div class="findify-components--facet__body carFilterFacets">
+            <button class="galleryFilterButton findify-components--button findify-components--category-facet__item selected" data-value="all" data-filter-type="all">
+              <span class="findify-components--text findify-components--text__primary-lowercase">All cars</span>
+              <span class="findify-components--text findify-components--text__secondary-uppercase allCarCount"></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="findify-components-search--desktop-facets__facet mobileFacetPadding">
+          <div class="findify-components-search--desktop-facets__header">
+            <span>Filter By</span>
+          </div>
+          <button class="findify-components--button findify-components--facet__title modVendorFilterTitle open">
+            <span class="findify-components--text findify-components--text__primary-uppercase findify-components--facet__text">Mod Brands <span class="selectedFilterCount"></span></span>
+            <svg width="15" height="15" class="findify-components--icon findify-components--facet__icon closeIcon" xmlns="http://www.w3.org/2000/svg"><path d="M3 7h9v1H3z" fill="currentColor" fill-rule="evenodd"></path></svg>
+            <svg width="15" height="15" class="findify-components--icon findify-components--facet__icon openIcon" xmlns="http://www.w3.org/2000/svg"><path d="M8 7V3H7v4H3v1h4v4h1V8h4V7H8z" fill="currentColor" fill-rule="evenodd"></path></svg>
+          </button>
+          <div class="findify-components--facet__body modVendorFacets open"></div>
+        </div>
+
+
+      </div>
+      <button class="findify-components--button findify-components-search--mobile-facets__footer closeMobileFilters">See results</button>
+    </div>
+  </div>
+</div>

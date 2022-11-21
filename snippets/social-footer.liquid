@@ -1,0 +1,26 @@
+{% if settings.display_social %}
+<ul class="social_footer visible-xs">
+  <center>
+  {% if settings.footer_social_link_4 != blank %}
+  <li class="" style="display: inline!important;">
+    <a href="{{ settings.footer_social_link_4 }}" title="{{ shop.name }} on Instagram" target="blank"  style="display: inline!important; padding: 0 2px 0!important; color: #fff!important;"><img alt="Follow UroTuning on Instagram" class="lazyload" width="61" align="absmiddle" data-src="{{ 'ig-136m.png' | asset_img_url: '61x36' }}"></a>
+  </li>
+  {% endif %}
+  {% if settings.footer_social_link_1 != blank %}
+  <li class="" style="display: inline!important;">
+    <a href="{{ settings.footer_social_link_1 }}" title="{{ shop.name }} on Facebook" target="blank"  style="display: inline!important; padding: 0 2px 0!important; color: #fff!important; "><span><i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i></span></a>
+  </li>
+  {% endif %}
+  {% if settings.footer_social_link_2 != blank %}
+  <li class="" style="display: inline!important;">
+    <a href="{{ settings.footer_social_link_2 }}" title="{{ shop.name }} on Twitter" target="blank"  style="display: inline!important; padding: 0 2px 0!important; color: #fff!important;"><span><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></span></a>
+  </li>
+  {% endif %}
+  {% if settings.footer_social_link_5 != blank %}
+  <li class="" style="display: inline!important;">
+    <a href="{{ settings.footer_social_link_5 }}" title="{{ shop.name }} on Rss" target="blank"  style="display: inline!important; padding: 0 2px 0!important; color: #fff!important;"><span><i class="fa fa-youtube-play fa-2x" aria-hidden="true"></i></span></a>
+  </li>
+  {% endif %}
+</center>
+</ul>
+{% endif %}

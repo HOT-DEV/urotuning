@@ -1,0 +1,61 @@
+{% comment %}
+  This snippet gives you a grid layout for each search result.
+
+  It is encouraged to only use this approach for product results,
+  as page results don't look great in a grid without a featured image.
+
+  To use this grid layout, change the grid_results variable
+  in search.liquid to true.
+{% endcomment %}
+
+<div class="grid-item search-result">
+  <div class="product-top">
+      <div class="product-image">
+        <a href="{{ item.url | within: collection }}" class="product-grid-image">
+          <img src="{{ item.featured_image.src | product_img_url: 'large' }}" alt="Mother Mantis: {{ item.title }} {{ item.vendor }}" style="height: 250px; overflow: hidden">
+          <div class="hover"></div>
+        </a>
+      </div>
+
+      {% if on_sale or sold_out %}
+      <div class="product-label">
+        {% if on_sale %}
+        <strong class="label">Sale</strong>
+        {% endif %}
+        {% if sold_out %}
+        <strong class="sold-out-label">Sold Out</strong>
+        {% endif %}
+      </div>
+      {% endif %}
+
+      <div class="product-des">
+
+        <div class="quickview-button">
+          <a href="javascript:void(0)" id="{{ item.handle }}" title="Quick View">Quick view</a>
+        </div>
+
+      </div>
+
+    </div>
+  
+  <h5>{{ item.title | link_to: item.url }}</h5>
+  
+  <h6>
+    {% if item.compare_at_price > item.price %}
+    <span class="on-sale" itemprop="price">
+      {{ item.price | money }}
+    </span>
+    <small>
+      Compare at:
+      {{ item.compare_at_price_max | money }}
+    </small>
+    {% else %}
+    <span itemprop="price">
+      {{ item.price | money }}
+    </span>
+    {% endif %}
+  </h6>
+  
+
+</div>
+

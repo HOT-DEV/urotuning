@@ -1,0 +1,51 @@
+
+{% layout settings.customer_layout %}
+
+{% include 'breadcrumb' %}
+<br><br>
+<div class="login-page">
+
+  <div class="row">
+   
+    <div>
+      <div style="max-width: 500px;margin: 0 auto !important;float: none !important; box-shadow: 0 5px 25px #777; padding: 20px 0 20px; border-radius: 5px;">
+        <header style="margin-bottom: 30px">
+          <center>
+          <h2 style="font-size: 16px; font-weight: 700;">CREATE UROTUNING ACCOUNT</h2>
+          </center>
+        </header>
+      <center>
+      {% comment %}
+    This form must use 'create_customer'
+  {% endcomment %}
+  {% form 'create_customer' %}
+  {% include 'form-errors-custom' %}
+  <div id="first_name">
+    <label for="first_name">First Name</label>
+    <input type="text" value="" name="customer[first_name]" id="first_name" {% if form.errors contains "first_name" %} class="error"{% endif %} >
+  </div>
+
+  <div id="last_name">
+    <label for="last_name">Last Name</label>
+    <input type="text" value="" name="customer[last_name]" id="last_name" {% if form.errors contains "last_name" %} class="error"{% endif %} >
+  </div>
+
+  <div id="email">
+    <label for="email">Your Email Address<em>*</em></label>
+    <input type="email" value="" name="customer[email]" id="email" {% if form.errors contains "email" %} class="error"{% endif %}  >
+  </div>
+
+  <div id="create_password">
+    <label for="password">Your Password<em>*</em></label>
+    <input type="password" value="" name="customer[password]" id="create_password" {% if form.errors contains "password" %} class="error"{% endif %}>
+  </div>
+
+  <div class="action-btn">
+    <p><input type="submit" value="Create UroTuning Account" class="btn" style="background: #f62f2f; border: 0;color: #fff; height: 45px;"></p>
+  </div>
+  {% endform %}
+      </center>
+    </div>
+    </div>
+  </div>
+</div>

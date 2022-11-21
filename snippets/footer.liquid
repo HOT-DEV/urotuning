@@ -1,0 +1,248 @@
+{% if template != 'index' %}
+<div><center><b>Can't find what you're looking for?</b><br>Odds are we can get it! <a href="https://www.urotuning.com/pages/contact-us"><u>Click Here Now</u></a></center><br></div>
+<script src="https://widget.reviews.io/rich-snippet-reviews-widgets/dist.js"></script>
+<div id="carousel-inline-widget-810" style="width:100%;max-width:1100px;margin:0 auto;"></div>
+<script>
+richSnippetReviewsWidgets('carousel-inline-widget-810', {
+    store: 'urotuning-com',
+    widgetName: 'carousel-inline',
+    primaryClr: '#f47e27',
+    neutralClr: '#f4f4f4',
+    reviewTextClr:'#2f2f2f',
+    ratingTextClr:'#2f2f2f',
+    layout:'fullWidth',
+    numReviews: 21
+});
+</script>
+{% endif %}
+<footer class="site-footer hidden-xs" role="contentinfo">
+  <div class="container">
+    <div class="footer-top">
+      <div class="row">
+        {% if settings.footer_column_1_title != blank %}
+        <div class="col-xs-6 col-sm-2 wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load }}ms">
+          <h3>{{ settings.footer_column_1_title }}</h3>
+          <ul>
+            {% assign footerCol1 = settings.footer_column_1_title | handleize %}
+            {% for link in linklists.[footerCol1].links %}
+            <li>{{ link.title | link_to: link.url }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+        {% if settings.footer_column_2_title != blank %}
+        <div class="col-xs-6 col-sm-2 wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load | times: 2 }}ms">
+          <h3>{{ settings.footer_column_2_title }}</h3>
+          <ul>
+            {% assign footerCol2 = settings.footer_column_2_title | handleize %}
+            {% for link in linklists.[footerCol2].links %}
+            <li>{{ link.title | link_to: link.url }}</li>
+            {% endfor %}
+            {% if shop.customer_accounts_enabled %}
+				{% if customer %}
+				  <li>
+ 				   <a href="/account/logout">Log Out</a>
+ 				 </li>
+				{% else %}
+				 <li>
+ 				   <a href="/account">Sign In</a>
+ 				 </li>				
+				{% endif %}
+            {% endif %}
+            <li><a href=#smile-referral-program-details>Reward Points</a></li>
+          </ul>
+        </div>
+        {% endif %}
+        {% if settings.footer_column_3_title != blank %}
+        <div class="col-xs-12 col-sm-2 wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load | times: 3 }}ms">
+          <h3>{{ settings.footer_column_3_title }}</h3>
+          <ul>
+            {% assign footerCol3 = settings.footer_column_3_title | handleize %}
+            {% for link in linklists.[footerCol3].links %}
+            <li>{{ link.title | link_to: link.url }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+        <div class="col-xs-12 col-sm-6 wow fadeInUp last" data-wow-delay="{{ settings.time_lazy_load | times: 4 }}ms">
+          <div class="row">
+            <div class="col-xs-12 col-sm-4">
+              <h3>Contact</h3>
+              <ul>              
+                {% for link in linklists.footer-contact.links %}
+                <li>{{ link.title | link_to: link.url }}</li>
+                {% endfor %}				
+              </ul>
+            </div>
+          <div class="col-xs-12 col-sm-8">
+          <h3>{{ settings.footer_column_4_title }}</h3>
+          {% include 'social' %}            
+          <div class="col-xs-12 col-sm-8"><a href="https://www.reviews.io/company-reviews/store/urotuning-com" target="_blank"><img alt="UroTuning Reviews are #1 Rated!" class="lazyload" width="200px" data-src="{{ 'reviews-io-400.png' | asset_img_url: '200x' }}"></a>
+            </div>          
+          {% include 'homepage-block-newsletter' %}
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom  wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load | times: 5 }}ms">    
+      <address>
+        {% if settings.footer_address_code %}
+        <img class="lazyload" style="padding:5px;" width="40" align="absmiddle" data-src="{{ 'UT-64.png' | asset_img_url: '40x' }}">{{ settings.footer_address_code }} <a href="../pages/customer-code"><span style="color:#bbbbbb">Customer Code</span></a>
+        {% endif%}<br>
+      </address>
+      {% include 'payment_methods' %}
+    </div>
+  </div>
+</footer>
+<footer class="site-footer visible-xs" role="contentinfo" style="background: #000;">
+  <div style="padding: 0 3% 0;">
+    <div class="footer-top">
+      <div class="row hidden-xs">
+        <div class="col-xs-12 col-sm-3">
+          <div class="row hidden-xs">
+            <div class="col-xs-12 col-sm-7 footer-logo">
+              <center>
+              <a href="/"><img src="{{ 'logo.png' | asset_url }}" width="150px"></a>
+            </center>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+            </div>
+          </div>
+          <!--<p style="font-size: 11px"> Born in New York, Made for the World </p>-->
+          <br>
+        <div class="visible-xs">{{ shop.email }}</div>
+           {% if settings.enable_multilang %}
+            <h3 class="lang1">{{ settings.footer_column_4_title | split: '|' | first }}</h3>
+            <h3 class="lang2">{{ settings.footer_column_4_title | split: '|' | last }}</h3>
+          {% else %}
+          	<!--<h3>{{ settings.footer_column_4_title | split: '|' | first }}</h3>-->
+          {% endif %}
+          <div class="row">
+            <div class="col-xs-12 col-sm-7" style="padding: 0 0px 0">
+              <center>
+                <h3 style="text-align: center;">Stay Connected</h3>
+          <div style="margin-left: 10px;">{% include 'social' %}</div>
+        </center>
+        </div>
+      </div>
+        </div>
+        {% if settings.footer_column_1_title != blank %}
+        <div class="col-xs-12 col-sm-2 wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load }}ms">
+          {% if settings.enable_multilang %}
+            <h3 class="lang1">{{ settings.footer_column_1_title | split: '|' | first }}</h3>
+            <h3 class="lang2">{{ settings.footer_column_1_title | split: '|' | last }}</h3>
+          {% else %}
+          	<h3>{{ settings.footer_column_1_title | split: '|' | first }}</h3>
+          {% endif %}
+          <ul>
+            {% assign footerCol1 = settings.footer_column_1_title | handleize %}
+            {% for link in linklists.[footerCol1].links %}
+              {% if settings.enable_multilang %}
+                <li class="lang1">{{ link.title | split: '|' | first | link_to: link.url }}</li>
+                <li class="lang2">{{ link.title | split: '|' | last | link_to: link.url }}</li>
+              {% else %}
+              	<li>{{ link.title | split: '|' | first | link_to: link.url }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+        {% if settings.footer_column_2_title != blank %}
+        <div class="col-xs-12 col-sm-2 wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load | times: 2 }}ms">
+          {% if settings.enable_multilang %}
+            <h3 class="lang1">{{ settings.footer_column_2_title | split: '|' | first }}</h3>
+            <h3 class="lang2">{{ settings.footer_column_2_title | split: '|' | last }}</h3>
+          {% else %}
+          	<h3>{{ settings.footer_column_2_title | split: '|' | first }}</h3>
+          {% endif %}
+          <ul>
+            {% assign footerCol2 = settings.footer_column_2_title | handleize %}
+            {% for link in linklists.[footerCol2].links %}
+              {% if settings.enable_multilang %}
+                <li class="lang1">{{ link.title | split: '|' | first | link_to: link.url }}</li>
+                <li class="lang2">{{ link.title | split: '|' | last | link_to: link.url }}</li>
+              {% else %}
+              	<li>{{ link.title | split: '|' | first | link_to: link.url }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+        {% if settings.footer_column_3_title != blank %}
+        <div class="col-xs-12 col-sm-2 wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load | times: 3 }}ms">
+          {% if settings.enable_multilang %}
+            <h3 class="lang1">{{ settings.footer_column_3_title | split: '|' | first }}</h3>
+            <h3 class="lang2">{{ settings.footer_column_3_title | split: '|' | last }}</h3>
+          {% else %}
+          	<h3>{{ settings.footer_column_3_title | split: '|' | first }}</h3>
+          {% endif %}
+          <ul>
+            {% assign footerCol3 = settings.footer_column_3_title | handleize %}
+            {% for link in linklists.[footerCol3].links %}
+              {% if settings.enable_multilang %}
+                <li class="lang1">{{ link.title | split: '|' | first | link_to: link.url }}</li>
+                <li class="lang2">{{ link.title | split: '|' | last | link_to: link.url }}</li>
+              {% else %}
+              	<li>{{ link.title | split: '|' | first | link_to: link.url }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+        <div class="col-xs-12 col-sm-3 wow fadeInUp last" data-wow-delay="{{ settings.time_lazy_load | times: 4 }}ms">
+          <h3>{{ settings.footer_newsletter_title | split: '|' | first }}</h3>
+          {% include 'homepage-block-newsletter' %}
+        </div>
+      </div>
+          <div class="visible-xs" style="margin-top: 0px">
+          <div style="padding: 0px 20px 0; margin-top: 10px;">
+          <h3 style="margin-bottom: 0px; text-align:center; font-size: 24px;"><B>GET ON THE LIST</B> & GET EXCLUSIVE DEALS</h3><br>
+          <h3 style="margin-bottom: -10px; text-align:center;">Enter your email address for special offers from UroTuning.</h3>
+          {% if settings.footer_display_newsletter %}
+          <section class="newsletter">
+            <div class="block-content">
+              <div style="">
+              {% include 'newsletter-form-mobile' %}
+            </div>
+            </div>
+          </section>
+          {% endif %}
+          </div>
+          <div style="height: 1px; background: #eee;"></div>
+          {% include 'footer-menu-mobile' %}
+          <div style="max-width: 200px;margin: 0 auto !important;float: none !important;">
+          {% include 'social-footer' %}
+          </div>
+           <div style="max-width: 200px;margin: 0 auto !important;float: none !important;"><a href="https://www.reviews.io/company-reviews/store/urotuning-com" target="_blank"><img alt="UroTuning Reviews are #1 Rated!" class="lazyload" width="200px" data-src="{{ 'reviews-io-400.png' | asset_img_url: '200x' }}"></a>
+            </div>            
+          <hr>
+          <center>
+          <li class="visible-xs"><a href="tel:813-444-7021" style="float: center; text-align: center; font-weight: 700; padding: 0 0 20px"> <i class="fa fa-mobile fa-lg" aria-hidden="true"></i> 813-444-7021</a></li>
+          <li class="visible-xs"><a href="sms:813-444-7021" style="float: center; text-align: center; font-weight: 700; padding: 0 0 20px"> <i class="fa fa-envelope-o fa-lg" aria-hidden="true"></i> Text (Sales Only)</a></li>
+            <li class="visible-xs"><a href="https://www.urotuning.com/pages/contact-us" style="float: center; text-align: center; font-weight: 700;"> <i class="fa fa-envelope-o fa-lg" aria-hidden="true"></i> Email</a></li>
+       
+            </center>
+        </div>
+      <div style="height: 50px" class="visible-xs"></div>
+    </div>
+    <div class="footer-bottom  wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load | times: 5 }}ms"><div style="max-width: 300px;margin: 0 auto !important;float: none !important;">
+      <center>
+        <img class="lazyload" style="padding:5px;" width="64" align="absmiddle" data-src="{{ 'UT-64.png' | asset_img_url: '64x' }}">     
+      {% if settings.display_footer_address and settings.footer_address_code != blank %}
+        {% if settings.enable_multilang %}
+          <address class="lang1">{{ settings.footer_address_code | split: '|' | first }}</address>
+          <address class="lang2">{{ settings.footer_address_code | split: '|' | last }}</address> 
+        {% else %}
+      	  <address>{{ settings.footer_address_code | split: '|' | first }} </address> 
+        {% endif %}
+      {% endif %}
+        <a href="https://www.urotuning.com/pages/customer-code"><span style="color:#bbbbbb">Customer Code</span></a>
+    </center> </div>
+    </div>
+          <div style="height: 10px" class="visible-xs"></div>
+
+    <center>{% include 'payment_methods' %}</center>
+  </div>
+</footer>
+{% include 'message-modal' %}

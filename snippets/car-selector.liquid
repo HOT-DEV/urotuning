@@ -1,0 +1,56 @@
+<ul class="selection" data-action="{{ action }}">
+  <li class="sc-make sc-car">
+      <div class="s1-dropdown s-dropdown clearfix">
+        <a href="javascript:void(0)" class="dropSelect"><p>Make</p><span class="down-icon"></span></a>
+        <div class="dropdown-content">
+        </div>
+      </div>
+  </li>
+    <li class="sc-series sc-car c-detail">
+      <div class="s2-dropdown s-dropdown">
+        <a href="javascript:void(0)" class="dropSelect"><p>Series</p><span class="down-icon"></span></a>
+        <div class="dropdown-content">
+        </div>
+      </div>
+  </li>
+  <li class="sc-chassis sc-car c-detail">
+      <div class="s3-dropdown s-dropdown">
+        <a href="javascript:void(0)" class="dropSelect"><p>Chassis</p><span class="down-icon"></span></a>
+        <div class="dropdown-content">
+        </div>
+      </div>
+  </li>
+  <li class="sc-model sc-car c-detail">
+      <div class="s4-dropdown s-dropdown">
+        <a href="javascript:void(0)" class="dropSelect"><p>Model</p><span class="down-icon"></span></a>
+        <div class="dropdown-content">
+        </div>
+      </div>
+  </li>
+    <li class="sc-engine sc-car c-detail">
+      <div class="s5-dropdown s-dropdown">
+        <a href="javascript:void(0)" class="dropSelect"><p>Engine</p><span class="down-icon"></span></a>
+        <div class="dropdown-content">
+        </div>
+      </div>
+  </li>
+    <li class="sc-drive sc-car c-detail">
+      <div class="s6-dropdown s-dropdown">
+        <a href="javascript:void(0)" class="dropSelect"><p>DriveTrain</p><span class="down-icon"></span></a>
+        <div class="dropdown-content">
+        </div>
+      </div>
+  </li>
+  {% if action == 'register' %}
+    <li class="sc-year sc-car c-detail">
+      <div class="s7-dropdown s-dropdown">
+        <a href="javascript:void(0)" class="dropSelect"><p>Year</p><span class="down-icon"></span></a>
+        <div class="dropdown-content"></div>
+      </div>
+    </li>
+  {% else %}
+    <li class="sc-go c-detail">
+      <a class="sc-link" href="javascript:void(0)">GO!</a>
+    </li>
+  {% endif %}
+</ul>

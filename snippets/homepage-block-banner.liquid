@@ -1,0 +1,52 @@
+{% if settings.display_banner %}
+<section class="banner wow fadeInUp" style="margin-bottom: 0px">
+  
+    <div class="content hidden-xs" style="background-color: #000; width=100%;">
+  <center><img class="lazyload" data-src="{{ 'more-than-just-car-parts_black.jpg' | asset_url }}"></center>
+</div>
+    <div class="content visible-xs" style="background-color: #000; width=100%;">
+  <center><img class="lazyload" data-src="{{ 'more-than-just-car-parts_black_mobile.jpg' | asset_url }}"></center>
+</div>
+  
+  <img class="lazyload"
+    data-sizes="auto"
+    data-src="{{ 'banner.jpg' | asset_img_url: '300x' }}"
+    data-srcset="
+      {{ 'banner.jpg' | asset_img_url: '400x' }} 400w,
+      {{ 'banner.jpg' | asset_img_url: '600x' }} 600w,
+      {{ 'banner.jpg' | asset_img_url: '800x' }} 800w,
+      {{ 'banner.jpg' | asset_img_url: '1000x' }} 1000w,
+      {{ 'banner.jpg' | asset_img_url: '1200x' }} 1200w,
+      {{ 'banner.jpg' | asset_img_url: '1400x' }} 1400w,
+      {{ 'banner.jpg' | asset_img_url: '1600x' }} 1600w,
+      {{ 'banner.jpg' | asset_img_url: '1800x' }} 1800w,
+      {{ 'banner.jpg' | asset_img_url: '2048x' }} 2000w
+    "    
+  />
+  <div class="container">
+    <div class="inner">
+      <div class="content hidden-xs">
+        <div>
+       
+        <h2>VW, AUDI, BMW, MINI & PORSCHE PARTS</h2>
+        <p class="line">&nbsp;</p>
+      
+          <p>UroTuning is owned and operated BY Enthusiasts FOR Enthusiasts! We have a passion for European/German cars and have a personal connection to providing our customers with the best service and parts available. UroTuning carries everything from OEM and aftermarket Performance engine parts to wheels, air suspension and accessories for your <a style="color:#ffffff;" href="/collections/volkswagen-performance-parts">Volkswagen, </a><a style="color:#ffffff;" href="/collections/audi-performance-parts">Audi, </a><a style="color:#ffffff;" href="/collections/bmw-performance-parts">BMW</a>, <a style="color:#ffffff;" href="/collections/mini-performance-parts">MINI</a>, <a style="color:#ffffff;" href="/collections/porsche-performance-parts">Porsche</a>, <a style="color:#ffffff;" href="/collections/mercedes-benz-performance-parts">Mercedes-Benz</a> and more. Everything from Performance Intakes, Exhausts and Wheels to replacement filters, timing belts, brakes, spark plugs and much more can be found in our online store with the best prices and free shipping on orders over $49*. It's our goal to provide you with the best German car parts at the lowest prices. So start upgrading your car today with the best Euro performance parts available anywhere online!
+       </p>
+
+      </div>
+      </div>
+      <div class="content visible-xs">
+        <div>
+               <h2 style="color: #242424;">VW, AUDI, BMW, MINI & PORSCHE PARTS</h2>
+        <p class="line">&nbsp;</p>
+      
+          <p style="color: #242424;">UroTuning is owned and operated BY Enthusiasts FOR Enthusiasts! We have a passion for European/German cars and have a personal connection to providing our customers with the best service and parts available. UroTuning carries everything from OEM and aftermarket Performance engine parts to wheels, air suspension and accessories for your <a href="/collections/volkswagen-performance-parts">Volkswagen</a>, <a href="/collections/audi-performance-parts">Audi</a>, <a href="/collections/bmw-performance-parts">BMW</a>, <a href="/collections/mini-performance-parts">MINI</a>, <a href="/collections/porsche-performance-parts">Porsche</a>, <a href="/collections/mercedes-benz-performance-parts">Mercedes-Benz</a> and more. Everything from Performance Intakes, Exhausts and Wheels to replacement filters, timing belts, brakes, spark plugs and much more can be found in our online store with the best prices and free shipping on orders over $49*. It's our goal to provide you with the best German car parts at the lowest prices. So start upgrading your car today with the best Euro performance parts available anywhere online!
+       </p>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+<br><br><br>

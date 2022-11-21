@@ -1,0 +1,25 @@
+{% if shop.customer_accounts_enabled %}
+{% if customer %}
+<ul class="customer-links ">
+  {% if settings.enable_wishlist %}
+  <li class="wishlist hidden-md">
+    <a href="/pages/wish-list" title="My Wishlist">Wishlist</a>
+  </li>
+  {% endif %}
+  <li>
+    <a href="/account"><i class="fa fa-user-circle fa-lg" aria-hidden="true"></i> Hi, {{ customer.first_name }}!</a>
+  </li>
+</ul>
+{% else %}
+<ul class="customer-links ">
+  {% if settings.enable_wishlist %}
+  <li class="wishlist hidden-md">
+    <a href="/pages/wish-list" title="My Wishlist">Wishlist</a>
+  </li>
+  {% endif %}
+  <li>
+    <a href="/account"><i class="fa fa-user-circle fa-lg" aria-hidden="true"></i> Account</a>
+  </li>
+</ul>
+{% endif %}
+{% endif %}

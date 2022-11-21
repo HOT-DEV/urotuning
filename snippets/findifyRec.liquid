@@ -1,0 +1,15 @@
+{% if template contains 'product' %}
+  {% for tag in product.tags %}
+    {% if tag contains 'rel_' %}
+      <script>
+        const productBlock = document.querySelector('.product')
+        const rec = document.createElement('div')
+        rec.id  = 'product-findify-rec-5'
+        rec.className = 'findify-element tag-based-findify-rec'
+        rec.setAttribute('data-findify-filter', 'tags')
+        rec.setAttribute('data-findify-filter-value', '{{tag}}')
+        productBlock.appendChild(rec)
+      </script>
+    {% endif %}
+  {% endfor %}
+{% endif %}

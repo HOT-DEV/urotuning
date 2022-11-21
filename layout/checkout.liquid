@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="{{ locale }}" dir="{{ direction }}" class="{{ checkout_html_classes }}">
+  <head>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TD6WKNQ');</script>
+<!-- End Google Tag Manager -->
+    
+<!-- Start WKND tag. Deploy at the beginning of document head. -->
+<script>
+	(function(d) {
+		var e = d.createElement('script');
+		e.src = d.location.protocol + '//tag.wknd.ai/5226/i.js';
+		e.async = true;
+		d.getElementsByTagName("head")[0].appendChild(e);
+	}(document));
+</script>
+<!-- End WKND tag -->
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
+    <meta name="referrer" content="origin">
+
+    <title>{{ page_title }}</title>
+
+    {{ content_for_header }}
+
+    {{ checkout_stylesheets }}
+    {{ checkout_scripts }}
+    
+    <!-- ADDRESS VALIDATOR -->
+<script async src="https://d3ox8tdk614ykk.cloudfront.net/pobox_checker.js"></script>
+  
+    <!-- POSTSCRIPT SMS CONSENT -->
+<script type="application/javascript" async src="https://sdk.postscript.io/integrations/sdk-min.js"></script>  
+
+  {% render 'shogun-head' %}
+    
+    <!-- Route Code Edited 09/08/2021 -->
+    <script type="text/javascript" src="https://cdn.routeapp.io/route-widget-shopify/v2/route-widget-shopify-stable-v2.min.js"></script>
+    <style>
+      .pw-route-protection {
+		justify-content: start !important;
+		margin-top: -3pc;
+    	margin-bottom: -1pc;
+      }
+      .pw-container {
+		max-width: 60pc !important;
+      }
+      .pw-route-protection .pw-toggle-wrapper .pw-price {
+      	font-size: 15px !important;
+        font-weight: 900 !important;
+        color: red !important;
+      }
+    </style>
+    <!-- Route Code End -->
+
+  
+</head>
+  <body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TD6WKNQ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    
+    {{ skip_to_content_link }}
+    
+    <div class="banner" data-header>
+      <div class="wrap">
+        {{ content_for_logo }}       
+      </div>      
+    </div>
+    
+
+    {{ order_summary_toggle }}
+
+    <div class="content" data-content>
+      <div class="wrap">
+        <div class="main" role="main">
+          <div class="main__header">
+            {{ content_for_logo }}
+            {{ breadcrumb }}
+            {{ alternative_payment_methods }}
+          </div>
+          
+          <div class="main__content">
+           
+            {{ content_for_layout }}
+            
+            <br><center><span style="color:#f62f2f;font-weight:bold">Expedited orders cannot be shipped or delivered on weekends/holidays.</span>
+            <BR><span style="color:#999999">Please call us at 813-444-7021 for Saturday delivery.</span></center> 
+                        <br><br><center><span style="color:#f62f2f;font-weight:bold">**For international orders please contact us via Phone or Email.</span>
+            
+            <div class="wrap"></div> 
+            
+          </div>
+              
+          <div class="main__footer">
+            {{ content_for_footer }}
+           
+            
+          </div>
+        </div>
+        <div class="sidebar" role="complementary">
+          <div class="sidebar__header">
+            {{ content_for_logo }}
+          </div>
+          
+
+          <div class="sidebar__content">
+            {{ content_for_order_summary }}
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{ tracking_code }}
+            
+     <script>
+  window.intercomSettings = {
+    app_id: "ynvwelh8"
+  };
+	</script>
+	<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/ynvwelh8';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();</script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+      .order-notes-container {
+        margin-top: 25px;
+      }
+      .order-notes-container span.alert {
+        color: red;
+        text-align: center;
+        font-size: 12px;
+        display: block;
+        margin-bottom: 5px;
+      }
+      .order-notes-container span.alert.hide {
+        display:none;
+      }
+      .order-notes-container label {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      #order-notes {
+        padding: 0.615384615em;
+        background: #fff;
+        border-radius: 5px;
+        border: 1px solid #cfcfcf;
+        width: 100%;
+        height: 100px;
+        box-sizing: border-box;
+      }
+      
+      .order-notes-container label {
+        text-align: center;
+      }
+      
+      .badges {
+        display: flex;
+        justify-content: center;
+        margin-top: 25px;
+      }
+      
+      .badges img {
+        width: calc(50% - 8px); 
+      }
+      
+      .badges img:last-child {
+        margin-left: 15px;
+      }
+      button.btn.update_note {
+        margin: 10px auto 0;
+        display: block;
+        padding: 1em 2em;
+        background: #666666;
+      }
+      @media (max-width: 999px) {
+        .order-notes-container {
+          margin-top: 0;
+          margin-bottom: 25px;
+        }
+      }
+    </style>
+    <script>
+      $(document).ready(function(){
+        var interval = setInterval (function(){
+          //console.log($('.order-notes-container').length);
+          if ($('.order-notes-container').length === 0) {
+            //console.log('added Elements To Checkout');
+            var dayimage = "{{ '60-day.jpg' | asset_url }}";
+            var topQuality = "{{ 'top-quality.jpg' | asset_url }}";
+            if (window.innerWidth > 999) {
+              $('.order-summary__sections').append('<div class="order-notes-container" style="display:none;"><label for="order-notes">Order Notes</label><span class="alert hide">Please click on "Save Notes" button to proceed.</span><textarea id="order-notes" placeholder="Need more stuff!"></textarea><button class="btn update_note">Save Notes</button></div><div class="badges"><img src="'+dayimage+'"><img src="'+topQuality+'"></div>');
+            }else{
+              $('.order-summary__sections').append('<div class="order-notes-container" style="display:none;"><label for="order-notes">Order Notes</label><span class="alert hide">Please click on "Save Notes" button to proceed.</span><textarea id="order-notes" placeholder="Need more stuff!"></textarea><button class="btn update_note">Save Notes</button></div>');
+              if ($('.badges').length === 0) {
+                $('.step__footer').after('<div class="badges"><img src="'+dayimage+'"><img src="'+topQuality+'"></div>');
+              }
+            }
+            $.ajax({
+              type: 'GET',
+              url: '/cart.js',
+              dataType: 'json',
+              success: function(cart) {
+                $('#order-notes').val(cart.note);
+                $('.order-notes-container').show();
+              }
+            });
+            setTimeout(function(){
+              //console.log('clear interval');
+              clearInterval(interval);
+            },1000);
+          } else {
+            //console.log('Elements Already in Checkout');
+          }
+        },1000);
+        $(document).on('click','.update_note',function() {
+          $(this).text('Updating...');
+           $(document).find('span.alert').addClass('hide');
+          var noteValue = $('#order-notes').val();
+          $.ajax({
+            type: 'POST',
+            url: '/cart/update.js',
+            dataType: 'json',
+            data: {
+              note: noteValue
+            },
+            success: function(c) {
+              $('.update_note').text('Saved');
+              location.reload();
+            }
+          });
+        });
+        $(document).on('keyup','#order-notes',function() {
+          if($(this).val().length > 0){
+            $(document).find('span.alert').removeClass('hide');
+          }else{
+            $(document).find('span.alert').addClass('hide');
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

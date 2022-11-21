@@ -1,0 +1,29 @@
+<div class="checkbox__wrapper">
+  <div class="ced-checkbox">
+    <label><input type="checkbox" class="enable_agreement" name="properties[Agree to Off Road Use Only]" value="Yes" required> I Agree to Sign Off Road Use Only Agreement*</label>
+  </div>
+</div>
+<script>
+  window.onload = function(){
+    setTimeout(function(){document.querySelector('#addToCartCopy').setAttribute('disabled', 'disabled');}, 500);
+  }
+  function addCheckbox(){
+    let checkbox = document.querySelector('.enable_agreement');
+    document.querySelector('#addToCartCopy').setAttribute('disabled', 'disabled');
+    document.querySelector('#msg-error-wrapper').style.display = "block";
+    checkbox.addEventListener('click', () => {
+      if(checkbox.checked == true){
+        document.querySelector('#msg-error-wrapper').style.display = "none";
+        setTimeout(function(){document.querySelector('#addToCartCopy').removeAttribute('disabled');}, 500);
+      }
+      else{
+        document.querySelector('#msg-error-wrapper').style.display = "block";
+        setTimeout(function(){document.querySelector('#addToCartCopy').setAttribute('disabled', 'disabled');}, 500);
+      }
+
+    });
+  }
+  
+  setTimeout(function(){addCheckbox();}, 5000);
+  
+</script>

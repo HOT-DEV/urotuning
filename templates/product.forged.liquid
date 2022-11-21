@@ -1,0 +1,22 @@
+<style>
+  .swym-button-bar.swym-wishlist-button-bar.swym-inject {
+    display: none !important;
+  }
+</style>
+<main class="main-content container" role="main">
+<!--<div style="max-width: 800px;margin: 0 auto !important;float: none !important;">-->
+  {% include 'breadcrumb' %}
+<header class="page-header">
+    <h2>{{ product.title }}</h2>
+</header>
+
+{% comment %}
+  Regular page content goes here.
+{% endcomment %}
+
+<div class="rte">
+  {{ product.description }}
+</div>
+<!--</div>-->
+</main>
+

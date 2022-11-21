@@ -1,0 +1,445 @@
+
+
+<style>
+  .img-wrapper {
+    overflow: hidden;
+    max-height: 400px;
+  }
+
+  .img-container {
+    max-height: inherit;
+    transform: translateY(50%);
+  }
+
+  .img-wrapper img {
+    display: block;
+    transform: translateY(-50%);
+    width: 100%;
+  }
+</style>
+<div class="img-wrapper">
+  <div class="img-container">
+    <img src="{{ product.metafields["global"]["Featured-Image"] }}">
+  </div>
+</div>
+{% comment %}{% include 'product-banner' %}{% endcomment %}
+<div class="container">
+  <div>{% include 'breadcrumb' %}</div>
+
+  <div class="row">
+    {% include 'product-sidebar' %}
+    <div class="col-xs-9 col-main">
+      <div itemscope itemtype="http://schema.org/Product" class="product">
+        <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+        <meta itemprop="image" content="{{ product.featured_image | img_url: '600x600' }}">
+        <meta itemprop="description" content="{{ product.description | strip_html  | replace: '"', "'" }}" />
+        <meta itemprop="brand" content="{{ product.vendor }}" />
+        <meta itemprop="mpn" content="{{ product.selected_or_first_available_variant.sku }}" />
+        <meta itemprop="sku" content="{{ product.selected_or_first_available_variant.sku }}" />
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-7 product-img-box {% if settings.product_image_border%} grid-item-border {% endif %}">
+            {% if product.images.size == 0 %}
+            <div class="product-photo-container">
+              <img src="{{ '' | img_url: '600x600' }}" alt="" width="100%">
+            </div>
+            {% else %}
+            <div class="product-photo-container">
+              {% assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image %}
+              <a href="{{ featured_image | img_url: 'grande' }}" >
+                <img id="product-featured-image" src="{{ featured_image | img_url: '600x600' }}" alt="{{ featured_image.alt | escape }}" data-zoom-image="{{ featured_image | img_url: 'master' }}" width="100%"/>
+              </a>
+            </div>
+            {% if product.images.size > 0 %}
+            <div class="more-view-wrapper more-view-wrapper-owlslider">
+              <ul id="more-view-carousel" class="product-photo-thumbs owl-carousel">
+                {% for image in product.images %}
+                <li class="grid-item"  {% if product.images.size < 2 %} style="display:none!important" {% endif %}>
+                  <a href="javascript:void(0)" data-image="{{ image | img_url: '600x600' }}" data-zoom-image="{{ image | img_url: 'master' }}">
+                    <img class="lazyload" data-src="{{ image | img_url: '150x150' }}" alt="{{ image.alt | escape }}">
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+            {% endif %}
+
+
+          </div>
+
+          <div class="col-xs-12 col-sm-5 product-shop">
+            <div style="max-width: 100%;margin: 0 auto !important;float: none !important; box-shadow: 0 5px 25px #777; padding: 20px 30px 20px; border-radius: 5px;">
+              <header class="product-title {% if collection.previous_product or collection.next_product and settings.display_prev_next_product and collection %}has-btn{% endif %}">
+                <h2 itemprop="name">{{ product.title }}</h2>
+              </header>
+              <div class="ruk_rating_snippet" data-sku="{{ product.handle }};{{ product.variants | map: 'sku' | join: ';' }};{{ product.variants | map: 'id' | join: ';' }}"></div>
+              <hr>
+
+              {% if product.description contains '[countdown]' %}
+              {% assign count_down_first = product.description | split:'[/countdown]' | first %}
+              {% assign count_down_final = count_down_first | split:'[countdown]' | last %}
+              <div class="countdown"><span>{{ settings.text_countdown }}</span><div id="clock"></div></div>
+              {{ 'jquery.countdown.min.js' | asset_url | script_tag }}
+              <script>
+                $(document ).ready(function() {
+                  $("#clock").countdown('{{ count_down_final }}', function(event) {
+                                        $(this).html(event.strftime('%Dd %H:%M:%S'));
+                });
+                })
+              </script>
+              {% endif %}
+
+              <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+                <meta itemprop="price" content="{{product.selected_or_first_available_variant.price|money_without_currency | remove: ','}}" />
+                <meta itemprop="availability" content="http://schema.org/{% if product.selected_or_first_available_variant.available %}InStock{% else %}OutOfStock{% endif %}"/>
+                <meta itemprop="itemCondition" itemtype="http://schema.org/OfferItemCondition" content="http://schema.org/NewCondition"/>
+                {% if product.description contains '[countdown]' %}
+                {% assign des = product.description | split:'[/countdown]' | last %}
+                {% if settings.show_desc == 'short' %}
+                <div class="short-description">{{ des | strip_html | truncatewords: 50 }}</div>
+                {% elsif settings.show_desc == 'full' %}
+                <div class="short-description">{{ des }}</div>
+                {% endif %}
+                {% else %}
+                {% if settings.show_desc == 'short' %}
+                <div class="short-description">{{ product.description | strip_html | truncatewords: 50 }}</div>
+                {% elsif settings.show_desc == 'full' %}
+                <div class="short-description">{{ product.description }}</div>
+                {% endif %}
+                {% endif %}
+                <form action="/cart/add" method="post" enctype="multipart/form-data" id="add-to-cart-form">
+                  <div class="bold_options" data-product-id="{{ product.id }}"></div>
+                  <div class="row">
+                    <div class="col-xs-7 col-sm-8">
+                      <div class="prices">
+                        {% if product.compare_at_price > product.price %}
+                        <div style="margin-bottom: 10px"><span style="color: #000!important; font-size: 16px; font-weight: 700">ON SALE</span>  <span class="compare-price"><i>{{ product.compare_at_price_max | money }}</i></span></div>
+                        <span class="bold_option_price_display price on-sale" >{{ product.price | money }}</span>
+                        {% else %}
+                        <span class="bold_option_price_display price" >{{ product.price | money }}</span>
+                        {% endif %}
+                      </div>
+                    </div>
+                    <div class="col-xs-5 col-sm-4" style="text-align: right;">
+
+                    </div>
+                  </div>
+                  {% if settings.display_availability or settings.display_product_type or settings.display_vendor %}
+                  <div class="product-infor">
+                    {% if settings.display_availability %}
+                    <p class="product-inventory"> <label>Availability</label><span>{% if product.selected_or_first_available_variant.inventory_management %}{% assign first_inventory = product.selected_or_first_available_variant.inventory_quantity %}{% if first_inventory > 0 %}{{first_inventory}} in stock{% else %}Out of stock{% endif %}{% else %}Many in stock{% endif %}
+                      </span></p>
+                    {% endif %}
+                    {% if settings.display_product_type %}
+                    <p class="product-type"> <label>Product Type</label><span>{{ product.type }}</span></p>
+                    {% endif %}
+                    {% if settings.display_vendor %}
+                    <p class="product-vendor"> <label>Vendor</label><span>{{ product.vendor }}</span></p>
+                    {% endif %}
+                  </div>
+                  {% endif %}
+                  <div id="product-variants">
+                    {% assign variantCount = product.variants | size %}
+                    {% if product.available %}
+                    {% if variantCount > 1 %}
+                    <select id="product-selectors" name="id" style="display:none">
+                      {% for variant in product.variants %}
+                      <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+                      {% endfor %}
+                    </select>
+                    {% if settings.use_color_swatch %}
+                    {% for option in product.options %}
+                    {% include 'swatch' with option %}
+                    {% endfor %}
+                    {% endif %}
+                    {% else %}
+                    <input type="hidden" name="id" value="{{ product.variants[0].id }}" />
+                    {% endif %}
+                    {% endif %}
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-2 col-sm-2">
+                      {% if product.available %}
+                      <label for="quantity">QTY: </label>
+                      <input type="text" id="quantity" name="quantity" value="1">
+                      <script>
+                        jQuery(".button").on("click", function() {
+                          var oldValue = jQuery("#quantity").val(),
+                              newVal = 1;
+
+                          if (jQuery(this).text() == "+") {
+                            newVal = parseInt(oldValue) + 1;
+                          } else if (oldValue > 1) {
+                            newVal = parseInt(oldValue) - 1;
+                          }
+
+                          jQuery("#quantity").val(newVal);
+                          {% if settings.display_subtotal and product.available %}
+                          updatePricing();
+                          {% endif %}
+                        });
+                      </script>
+                    </div>
+                    <div class="col-xs-7 col-sm-7" style="padding-top: 5px">
+
+                      <input style="width:90%!important; background: #43c8f2; border: #43c8f2; color: #fff!important; font-size:18px!important" type="submit" name="add" class="btn" id="product-add-to-cart" value="Add to Cart">
+                    </div>
+                    {% else %}
+                    <input style="width:600%!important;"  type="submit" name="add" class="btn" id="product-add-to-cart" disabled value="Out of Stock">
+                  </div>
+                  {% endif %}
+                  </div>
+                </form>
+            </div>
+      </div>
+    </div>
+    {{ 'option_selection.js' | shopify_asset_url | script_tag }}
+
+  </div>
+</div>
+    
+    
+            <P>
+                {{ product.description }}
+<script>
+  //Shopify.Image.preload({{ product.images | json }}, 'grande');
+
+  {% if settings.display_subtotal and product.available %}
+  //update price when changing quantity
+  function updatePricing() {
+    //try pattern one before pattern 2
+    var regex = /([0-9]+[.|,][0-9]+[.|,][0-9]+)/g;
+    var unitPriceTextMatch = jQuery('.product .price').text().match(regex);
+
+    if (!unitPriceTextMatch) {
+      regex = /([0-9]+[.|,][0-9]+)/g;
+      unitPriceTextMatch = jQuery('.product .price').text().match(regex);
+    }
+
+    if (unitPriceTextMatch) {
+      var unitPriceText = unitPriceTextMatch[0];
+      var unitPrice = unitPriceText.replace(/[.|,]/g,'');
+      var quantity = parseInt(jQuery('#quantity').val());
+      var totalPrice = unitPrice * quantity;
+
+      var totalPriceText = Shopify.formatMoney(totalPrice, window.money_format);
+
+      totalPriceText = totalPriceText.match(regex)[0];
+
+      var regInput = new RegExp(unitPriceText, "g");
+      var totalPriceHtml = jQuery('.product .price').html().replace(regInput ,totalPriceText);
+
+      jQuery('.product .total-price span').html(totalPriceHtml);
+    }
+  }
+  jQuery('#quantity').on('change', updatePricing);
+  {% endif %}
+
+  var selectCallback = function(variant, selector) {
+           if(variant == null)
+    {
+      //alert("Not available");
+      setTimeout(function(){ jQuery('#addToCartCopy').val('Unavailable').addClass('disabled').attr('disabled', 'disabled'); }, 0);
+      return false;
+    }
+
+    //   $('.affirm-as-low-as').attr('data-amount',variant.price);
+    //   affirm.ui.refresh();
+
+    if (variant) {
+      $('.variant-sku').text(variant.sku);
+      znDisplayCurrency && setTimeout(znDisplayCurrency, 1000);
+    }
+    else {
+      $('.variant-sku').empty();
+    }
+
+    {% assign dropship = true %}
+    {% for variant in product.variants %}
+    {% if variant.inventory_quantity > 0 %}
+    {% assign dropship = false %}
+    {% break %}
+    {% endif %}
+    {% endfor %}
+    {% unless dropship %}
+    var prodIcon = jQuery('.iconforprod');
+    if (variant.available) {
+      prodIcon.removeClass('lt_show').addClass('gt_show');
+    } else {
+      // Variant is sold out, disable the submit button
+      prodIcon.removeClass('gt_show').addClass('lt_show');
+    }
+    {% endunless %}
+
+
+    var addToCart = jQuery('#product-add-to-cart'),
+        productPrice = jQuery('.product .price'),
+        comparePrice = jQuery('.product .compare-price');
+
+
+
+    if (variant) {
+
+      if (variant.available) {
+        // We have a valid product variant, so enable the submit button
+        addToCart.removeClass('disabled').removeAttr('disabled').val('Add to Cart');
+
+
+      } else {
+        // Variant is sold out, disable the submit button
+        addToCart.val('Sold Out').addClass('disabled').attr('disabled', 'disabled');
+      }
+
+      // Regardless of stock, update the product price
+      productPrice.html(Shopify.formatMoney(variant.price, "{{ shop.money_format }}"));
+
+                                            // Also update and show the product's compare price if necessary
+                                            if ( variant.compare_at_price > variant.price ) {
+                        productPrice.addClass("on-sale")
+      comparePrice
+      .html(Shopify.formatMoney(variant.compare_at_price, "{{ shop.money_format }}"))
+                                .show();
+            } else {
+            comparePrice.hide();
+      productPrice.removeClass("on-sale");
+    }
+    {% if settings.use_color_swatch %}
+    // BEGIN SWATCHES
+    var form = jQuery('#' + selector.domIdPrefix).closest('form');
+    for (var i=0,length=variant.options.length; i<length; i++) {
+      var radioButton = form.find('.swatch[data-option-index="' + i + '"] :radio[value="' + variant.options[i] +'"]');
+      if (radioButton.size()) {
+        radioButton.get(0).checked = true;
+      }
+    }
+    // END SWATCHES
+    {% endif %}
+
+    {% if settings.display_subtotal and product.available %}
+    updatePricing();
+    {% endif %}
+
+
+    if(window.BOLD
+       && BOLD.common
+       && BOLD.common.eventEmitter
+       && typeof BOLD.common.eventEmitter.emit == 'function'){
+      BOLD.common.eventEmitter.emit("BOLD_COMMON_variants_changed", {variant: variant});
+    }
+
+  } else {
+    // The variant doesn't exist. Just a safeguard for errors, but disable the submit button anyway
+    addToCart.val('Unavailable').addClass('disabled').attr('disabled', 'disabled');
+  }
+
+  //update variant inventory
+  {% if settings.display_availability %}
+  if (variant.available) {
+    if (variant.inventory_management!=null) {
+      jQuery(".product-inventory span").text(variant.inventory_quantity + " in stock");
+    } else {
+      jQuery(".product-inventory span").text("Many in stock");
+    }
+  } else {
+    jQuery(".product-inventory span").text("Out of stock");
+  }
+  {% endif %}
+
+  /*begin variant image*/
+  if (variant && variant.featured_image) {
+    var originalImage = jQuery("#product-featured-image");
+    var newImage = variant.featured_image;
+    var element = originalImage[0];
+    Shopify.Image.switchImage(newImage, element, function (newImageSizedSrc, newImage, element) {
+      jQuery('#more-view-carousel img').each(function() {
+        var grandSize = jQuery(this).attr('src');
+        grandSize = grandSize.replace('compact','grande');
+        if (grandSize == newImageSizedSrc) {
+          jQuery(this).parent().trigger('click');
+          return false;
+        }
+      });
+    });
+  }
+  /*end of variant image*/
+  };
+
+  jQuery(function($) {
+    {% if product.available and product.variants.size > 1 %}
+    new Shopify.OptionSelectors('product-selectors', {
+      product: {{ product | json }},
+      onVariantSelected: selectCallback,
+      enableHistoryState: true
+      // Grab the variant currently selected with ?variant=ID in the URL, or the first in stock variant, on page load.
+
+    });
+
+    {% comment %}
+    Use color swatch and linked options (copyright by @carolineschnapp)
+    {% endcomment %}
+    {% if settings.use_color_swatch and product.available and product.options.size > 1 %}
+    Shopify.linkOptionSelectors({{ product | json }});
+    {% endif %}
+
+    {% if settings.use_color_swatch != true %}
+    jQuery('.single-option-selector').selectize();
+    jQuery('.selectize-input input').attr("disabled","disabled");
+    {% endif %}
+
+    {% endif %}
+
+    // Add label if only one product option and it isn't 'Title'. Could be 'Size'.
+    {% if product.options.size == 1 and product.options.first != 'Title' %}
+    $('.selector-wrapper:eq(0)').prepend('<label>{{ product.options.first }}</label>');
+                                         {% endif %}
+
+                                         // Hide selectors if we only have 1 variant and its title contains 'Default'.
+                                         {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
+                                         $('.selector-wrapper').hide();
+    {% endif %}
+
+    // Auto-select first available variant on page load. Otherwise the product looks sold out.
+    {% assign found_one_in_stock = false %}
+    {% for variant in product.variants %}
+    {% if variant.available and found_one_in_stock == false %}
+    {% assign found_one_in_stock = true %}
+    {% for option in product.options %}
+    $('.single-option-selector:eq({{ forloop.index0 }})').val({{ variant.options[forloop.index0] | json }}).trigger('change');
+    {% endfor %}
+    {% endif %}
+    {% endfor %}
+
+    {% if settings.display_product_reviews %}
+    var reviewsTimeout = setInterval(function() {
+      if (jQuery(".spr-badge-caption").length>0) {
+        jQuery(".spr-badge-caption").on('click', function() {
+          jQuery('html,body').animate({
+            scrollTop: jQuery(".panel:last").offset().top},
+                                      '400');
+          jQuery("#collapse-tab4").collapse('show');
+        });
+        clearInterval(reviewsTimeout);
+      }
+    },1000);
+    {% endif %}
+  });
+</script>
+<script>
+  jQuery(document).ready(function(){
+    if (jQuery(".product-infor .product-inventory > span").html() == 'Many in stock'){
+      jQuery(".product-infor").addClass("ManyStock");
+    }
+
+    var $selectedCar = getSelectedCar(getSelectedCars());
+
+    if ($selectedCar) {
+      showFitmentStatus($selectedCar.attr('href').slice($selectedCar.attr('href').lastIndexOf('/')).slice(1));
+    } else {
+      $('.car-selector-container').show();
+    }
+  });
+</script>
+</div>
+<link rel="stylesheet" href="https://d1azc1qln24ryf.cloudfront.net/40686/revsglobal-pr-mod/style-cf.css?-c0avz5">

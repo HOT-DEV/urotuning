@@ -1,0 +1,200 @@
+<script>
+  function strToLowercase(str) {
+  	return str[0].toUpperCase() + str.slice(1).toLowerCase();
+  }
+  
+  function formatCategory(category) {
+	var splitted = category.split('_');
+
+	var formatted = [];
+
+	for (var i = 0; i < splitted.length; i += 1) {
+		var str = splitted[i];
+		formatted.push(strToLowercase(str).replace('-', '/'));
+	}
+
+	return formatted.join(' ');
+}
+
+function getCategoriesFromUrlPath(url) {
+	var categories = [];
+	var handles = [];
+
+	if (!url) {
+		return { categories: categories, handles: handles };
+	}
+
+	var splitted = url.split('__');
+
+	for (var i = 0; i < splitted.length; i += 1) {
+		categories.push(formatCategory(splitted[i]));
+		if (i === 0) {
+			handles.push(splitted[i]);
+		} else {
+			handles.push(splitted[i - 1] + '__' + splitted[i]);
+		}
+	}
+
+	return { categories, handles };
+}
+
+function parseCollectionPath(colPath) {
+	var splittedPath = colPath.split('/');
+	var colSlot = [splittedPath[0], splittedPath[1]].join('/');
+	return Object.assign({ slot: colSlot }, getCategoriesFromUrlPath(splittedPath[2]));
+}
+
+function getRulesWithoutCategories(rules) {
+	var result = [];
+
+	for (var i = 0; i < rules.length; i += 1) {
+		var rule = rules[i];
+		var type = rule.get ? rule.get('type') : rule.type
+		if (type !== 'category') {
+			result.push(rule);
+		}
+	}
+
+	return result;
+}
+
+var updateBreadcrumbs = (function() {
+  var breadcrumbs = document.querySelector('.breadcrumb.hidden-xs');
+	var arrowSample = document.createElement('span');
+	arrowSample.innerHTML = '/';
+  arrowSample.setAttribute('class', 'arrow');
+	var anchorSample = document.createElement('a');
+
+	function cleanBreadcrumbs() {
+		var arrows = breadcrumbs.querySelectorAll('.arrow');
+		var anchors = breadcrumbs.querySelectorAll('a');
+		if (anchors.length > 2) {
+			for (let i = 2; i < anchors.length; i += 1) {
+				breadcrumbs.removeChild(arrows[i - 1]);
+				breadcrumbs.removeChild(anchors[i]);
+			}
+		}
+	}
+
+  return function(titles, handles, slot) {
+    if (window.innerWidth < 767) {
+      return; 
+		}
+
+		cleanBreadcrumbs();
+
+		for (var i = 0; i < titles.length; i += 1) {
+			var title = titles[i];
+			var handle = handles[i];
+			var colrURL = '/' + slot + '/' + handle;
+			var arrow = arrowSample.cloneNode(true);
+			var anchor = anchorSample.cloneNode(true);
+			anchor.setAttribute('href', colrURL);
+			anchor.innerHTML = title;
+			breadcrumbs.appendChild(arrow);
+			breadcrumbs.appendChild(anchor);
+		}
+  }
+})();
+
+var updateTitle = (function() {
+	var pageTitle = "{{ page_title }}";
+	var titleNode = document.querySelector('title');
+	var shopName = titleNode.innerText.slice(-15);
+
+	return function(categories) {
+		var newTitle = pageTitle;
+		for (var i = 0; i < categories.length; i += 1) {
+			newTitle += ' ' + categories[i];
+		}
+		if (newTitle.length > pageTitle.length) {
+			newTitle += ' Parts';
+		}
+		newTitle += shopName;
+		titleNode.innerText = newTitle;
+	}
+})();
+
+function updateAgent(agent) {
+	return function(params) {
+		var parsedCol = (params && params.slot && params) || parseCollectionPath(window.location.pathname.slice(1));
+		var existRules = (agent._defaults.get('rules') && agent._defaults.get('rules').toJS()) || [];
+		var rulesWithoutCategories = getRulesWithoutCategories(existRules);
+		agent.defaults({
+			slot: parsedCol.slot,
+			rules: rulesWithoutCategories.concat([
+				{
+					name: 'category1',
+					type: 'category',
+					values: [{ value: parsedCol.categories }]
+				}
+			])
+		});
+		updateBreadcrumbs(parsedCol.categories, parsedCol.handles, parsedCol.slot);
+		updateTitle(parsedCol.categories);
+	}
+}
+
+window.findifyCallbacks = window.findifyCallbacks || [];
+window.findifyCallbacks.push(function(findify) {
+  var root = document.querySelector('#collection-contianer');
+  var parsedCol = parseCollectionPath(findify.utils.collectionPath());
+  findify.widgets.attach(root, 'search', {
+      slot: parsedCol.slot,
+      disableAutoRequest: true,
+      widgetKey: 'findify-collection', 
+      initiallyExpanded: true
+  });
+  var colWidget = findify.widgets.get('findify-collection');
+
+  var agentUpdater = updateAgent(colWidget.agent);
+
+  agentUpdater(parsedCol)
+
+  colWidget.agent.applyState(findify.utils.getQuery());
+  
+  var set = true;
+  findify.listen(function(info){
+    if(!set){
+      setTimeout(function(){
+        var slug = parsedCol.slot.replace('collections/', '');
+        const carDetails = carModelsArray.find( car => car[6] === slug );
+        // let sidebarContainer = document.querySelector('.findify-components-search--desktop-facets');
+        const mobSidebarContainer = document.querySelector('.findify-components__tile-navigation-container');
+        // let galleryContainer = document.querySelector('.findify-components-search--desktop-facets .galleryContainer');
+        const mobGalleryContainer = document.querySelector('.findify-components-search--mobile-facets__body .galleryContainer');
+        let isDesktop = true;
+        if (window.innerWidth > 768) {
+          galleryContainer = document.querySelector('.findify-components-search--desktop-facets .galleryContainer');
+          sidebarContainer = document.querySelector('.findify-components-search--desktop-facets');        
+          isDesktop = true;
+        } else {
+          galleryContainer = document.querySelector('.findify-components-search--mobile-facets__body .galleryContainer');
+          sidebarContainer = document.querySelector('.findify-components__tile-navigation-container');
+          isDesktop = false;
+        }
+        // galleryContainer = isDesktop ? galleryContainer : mobGalleryContainer;
+        // sidebarContainer = isDesktop ? sidebarContainer : mobSidebarContainer;
+
+        console.log('sidebarContainer ', sidebarContainer, ' isDesktop', isDesktop);
+
+        if(!galleryContainer && sidebarContainer && carDetails){
+          var url = `/pages/gallery?make=${encodeURIComponent(carDetails[0])}&series=${encodeURIComponent(carDetails[1])}&chassis=${encodeURIComponent(carDetails[2])}`;
+          var html = `<div class="galleryContainer"><a href="${url}"><img src="https://cdn.shopify.com/s/files/1/0592/0240/4524/files/das_gallery_get_inspired.jpg?v=1634746376" /></a></div>`;
+          sidebarContainer.innerHTML += html;
+        }        
+      }, 5000);
+		set = true;
+  }
+  // console.log(info);
+
+
+
+    	  
+  })
+  window.onpopstate = agentUpdater;
+  
+  window.FINDIFY_CUSTOM_CATEGORIES_UPDATE = true;
+})
+  
+</script>

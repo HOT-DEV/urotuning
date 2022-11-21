@@ -1,0 +1,25 @@
+{%- assign delayTime = 200 | times : forloop.index -%}
+<div class="grid-item wow fadeIn col-xs-12 col-sm-4" data-wow-delay="{{delayTime}}ms">
+  {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
+  <div class="product-top">
+    <a href="{{ collection.url }}" title="{{ collection_title }}">
+      {% if collection.image %}
+      <img class="lazyload" data-src="{{ collection.image | img_url: '300x' }}" alt="{{ collection_title }}">
+      {% else %}
+      <img class="lazyload" data-src="{{ collection.products.first.featured_image | img_url: '300x'}}" alt="{{ collection_title }}">
+      {% endif %}
+      <div class="hover"></div>
+    </a>
+    <a href="{{ collection.url }}" class="view">&nbsp;</a>
+  </div>
+  <div class="collection-title-wrapper">
+    <div class="collection-title">
+      <h3 class="h5">
+        <a href="{{ collection.url }}" title="Browse our {{ collection_title }} collection">{{ collection.title }}</a>
+      </h3>
+      <p class="count-products">{{ collection.all_products_count }} {{ collection.all_products_count | pluralize: 'product', 'products' }}</p>
+      <p class="desc">{{ collection.description | strip_html | truncatewords: 14 }}</p>
+      <p><a href="{{ collection.url }}" title="Shop The Collection" class="btn">Shop The Collection</a></p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<script>  
+  function onPopularCarClicked(ev) {
+    ev.stopPropagation();
+    ev.preventDefault();
+    
+    var $self = $(this)
+    
+    var myCars = getSelectedCars();
+    var updMyCars = [];
+    if (isPopularCarAlreadySelected($self.attr('href'), myCars)) {
+      updMyCars = selectCar($self.attr('href'), myCars);
+    } else {
+      updMyCars = addCar(myCars, $self.attr('data-collection-id'));
+    }
+    
+    saveSelectedCars(customerID, updMyCars, function() {}, function() {
+      window.location.href = $self.attr('href');
+    });
+  }
+  
+  function isPopularCarAlreadySelected(carHref, cars) {
+    for (var i = 0; i < cars.length; i += 1) {
+      var $car = $(cars[i]);
+      if ($car.attr('href') === carHref) {
+        return true;
+      }
+  	}
+    return false;
+  }
+  
+  
+  jQuery(function() {
+    jQuery(document).on("click",".popular-car-link", onPopularCarClicked);
+  });
+  
+</script>

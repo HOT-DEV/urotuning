@@ -1,0 +1,142 @@
+<!-- Footer scripts -->
+<script src="{{ 'vendor-footer.js' | asset_url }}"></script>
+{%- if template.name == 'product' -%}
+<script src="{{ 'option_selection.js' | shopify_asset_url }}"></script>
+<script src="{{ 'recently-viewed-products.js' | asset_url }}"></script>
+{%- endif -%}
+<script src="{{ 'ella.js' | asset_url }}"></script>
+
+<script>
+  var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+  	  showLeftPush = document.getElementById( 'showLeftPush' ),
+      body = document.body;
+
+  showLeftPush.onclick = function() {
+      classie.toggle( this, 'active' );
+      classie.toggle( body, 'cbp-spmenu-push-toright' );
+      classie.toggle( menuLeft, 'cbp-spmenu-open' );
+      let dropdown = jQuery('.sc-dropdown');
+      if(dropdown && dropdown.css('display') === 'none' && !jQuery('[data-selected="true"]')[0]){
+    	  dropdown.toggle();	
+      }
+   		
+  };
+
+  function isMobileFunc() {
+      var userAgent = navigator.userAgent.toLowerCase();
+      var phone = (/iphone|android|ipod|blackberry|opera mini|opera mobi|skyfire|maemo|windows phone|palm|iemobile|symbian|symbianos|fennec/i.test(userAgent));
+      var tablet = (/ipad|sch-i800|playbook|tablet|kindle|gt-p1000|sgh-t849|shw-m180s|a510|a511|a100|dell streak|silk/i.test(userAgent));
+      return phone || tablet;
+  }
+  var isMobile = isMobileFunc();
+  if (isMobile) {
+    var currentEl;
+    jQuery('.site-nav .dropdown > a').bind('click', function(event) {
+        if (currentEl != this) {
+            event.preventDefault();
+            currentEl = this;
+        }
+    });
+  }
+</script>
+
+<script src="{{ 'carSelection.js' | asset_url }}"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    window.theme = {
+        shop: '{{ shop.permanent_domain }}',
+        watermark: '{{ settings.profile_builder_watermark | img_url: "master" }}',
+        host: 'https://urotuning.photos',
+        {% if customer %}
+            customerEmail: '{{ customer.email }}',
+            customerHashedID: '{{ customer.email | hmac_sha256: customer.id }}'
+        {% endif %}
+    }
+</script>
+{% if template.suffix == 'car_profile_builder_create_account' %}
+    <script src="{{ 'create_profile_account.js' | asset_url }}"></script>
+{% endif %}
+{% if template.suffix == 'car_profile_builder' %}
+    {% render 'wheel-tire-data' %}
+    <script src="{{ 'car_profile.js' | asset_url }}"></script>
+{% endif %}
+{% if template.suffix == 'car_profile_builder_edit' %}
+    {% render 'wheel-tire-data' %}
+    <script src="{{ 'car_profile_edit.js' | asset_url }}"></script>
+{% endif %}
+{% if template.name == 'account' %}
+    <script src="{{ 'account.js' | asset_url }}"></script>
+{% endif %}
+{% if template.suffix == 'gallery' %}
+    <script src="{{ 'gallery.js' | asset_url }}"></script>
+{% endif %}
+{% if template.suffix == 'gallery-listing' %}
+    <script src="{{ 'gallery_listing.js' | asset_url }}"></script>
+{% endif %}
+{% if template.suffix == 'gallery-landing' %}
+    <script src="{{ 'gallery_landing.js' | asset_url }}"></script>
+{% endif %}
+{% if template.suffix == 'car-profile-builder-create-an-account' %}
+  <script>  
+  </script>
+{% endif %}
+
+
+  
+
+  
+
+<script>
+  document.querySelectorAll('a[href="/pages/car-profile-builder"]').forEach(a => a.addEventListener('click', async e => {
+      e.preventDefault();
+      if (!window.theme.customerEmail) {
+          return window.location.href = '/pages/car-profile-builder-create-an-account';
+      }
+      try {
+          const CREATE_PROFILE = `
+              mutation createProfile {
+                  createProfile
+              }
+          `;
+          const response = await axios.post(`${window.theme.host}/customer_graphql`, {query: CREATE_PROFILE}, {
+              headers: {
+                  customeremail: window.theme.customerEmail,
+                  customerhashedid: window.theme.customerHashedID,
+                  shop: window.theme.shop
+              }
+          });
+          const profileId = response.data.data.createProfile;
+          window.location.href = `/pages/car-profile-builder?car_profile=${profileId}`;
+      } catch(e) {console.log('Error creating new profile', e);}
+  }));
+  if (themeHelpers.template.includes('car_profile_builder_create_account')) {
+    window.addEventListener('load', async e => {
+      console.log('page is fully loaded');
+      console.log('in create account page ');
+      if (window.theme.customerEmail) {
+        console.log('has logged in account');
+        try {
+          console.log('trying to create a profile');
+          const CREATE_PROFILE = `
+              mutation createProfile {
+                  createProfile
+              }
+          `;
+          const response = await axios.post(`${window.theme.host}/customer_graphql`, {query: CREATE_PROFILE}, {
+            headers: {
+                customeremail: window.theme.customerEmail,
+                customerhashedid: window.theme.customerHashedID,
+                shop: window.theme.shop
+            }
+          });
+          console.log('got id, redirecting now');
+          const profileId = response.data.data.createProfile;
+          window.location.href = `/pages/car-profile-builder?car_profile=${profileId}`;
+        } catch(e) {console.log('Error creating new profile', e);}
+      }
+      console.log('no logged in account');
+    });    
+  }
+</script>
+{% include 'carSelectionPopup' %}
+{% include 'most-popular-cars' %}

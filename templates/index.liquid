@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-12">
+   <section class="main-slideshow hidden-xs">
+  <div style="padding:0; margin: 0 0 30px; position: relative;">
+    <ul class="slides">  
+       <a href="{{ settings.image_1_link }}"><li class="slide lazyload" 
+          data-bgset="
+            {{ 'slideshow_1.jpg' | asset_img_url: '1000x400', crop: 'center' }} 1000w,
+            {{ 'slideshow_1.jpg' | asset_img_url: '1200x400', crop: 'center' }} 1200w,
+            {{ 'slideshow_1.jpg' | asset_img_url: '1400x400', crop: 'center' }} 1400w,
+            {{ 'slideshow_1.jpg' | asset_img_url: '1600x400', crop: 'center' }} 1600w,
+            {{ 'slideshow_1.jpg' | asset_img_url: '1800x400', crop: 'center' }} 1800w,
+            {{ 'slideshow_1.jpg' | asset_img_url: '2000x400', crop: 'center' }} 2000w " 
+          style="height: 400px; background-image: url({{ 'slideshow_1.jpg' | asset_img_url: '300x100' }}); background-position: center center; background-size: cover;">
+{% comment %}
+         <div class="slide-des">
+<h2 class="slide-heading" style="font-family: Rajdhani!important; font-size: 35px; color: #ffffff;"><i>Black Friday Deals</i></h2>
+         <p class="slide-text"><span style="font-size: 21px; color: #ffffff;">Happening Now!</span><br><span style="font-size: 11px; color: #ffffff;"><B>CLICK HERE</B></p>
+          </div>
+   {% endcomment %}      
+</li></a>
+ </ul>
+  </div>
+    </section>
+     
+<section class="main-slideshow visible-xs">
+  <div style="padding:0; margin: 0 0 5px; position: relative;">
+    <ul class="slides">
+      <a href="{{ settings.image_1_link }}"><li class="slide lazyload"
+          data-bgset="
+            {{ 'mobile-top.jpg' | asset_img_url: '400x300', crop: 'center' }} 400w,
+            {{ 'mobile-top.jpg' | asset_img_url: '600x300', crop: 'center' }} 600w,
+            {{ 'mobile-top.jpg' | asset_img_url: '767x300', crop: 'center' }} 767w" 
+          style="height: 250px; background: url({{ 'mobile-top.jpg' | asset_img_url: '300x200' }}); background-position: center center; background-size: cover;">
+
+   {% comment %}      <div class="">
+  <h2 class="slide-heading" style="font-family: Rajdhani!important; font-size: 35px; color: #ffffff;">European OEM &<br>Performance Parts</h2>
+       <p class="slide-text" style="font-size: 13px; color: #ffffff;"><b>Click Here for Deals!</b></p>
+</div>   {% endcomment %} 
+        </li></a>
+   </ul>
+ </div>
+</section>
+        
+    
+  </div>
+</div>
+
+{% include 'homepage-block-3-banner' %}
+
+<br class="content hidden-xs"><br class="content hidden-xs">
+
+<div class="container">
+{% comment %} Block Banner Bootom {% endcomment %}
+{% include 'homepage-block-three-banner' %}
+
+{% comment %} Block Banner Bootom {% endcomment %}
+{% include 'homepage-block-three-banner-bottom' %}
+
+{% comment %} Block New Arrivals {% endcomment %}
+{% include 'homepage-block-new-arrivals' %}
+  </div>
+
+{% comment  %} Block Banner {% endcomment %}
+{% include 'homepage-block-banner' %}
+
+{% comment %} Block Brands Slider {% endcomment %}
+{% include 'brands' %}
+
+{% comment %} Block Trending Now {% endcomment %}
+{% include 'homepage-block-trending' %}
+
+{% include 'homepage-block-blog' %}

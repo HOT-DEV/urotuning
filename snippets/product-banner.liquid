@@ -1,0 +1,12 @@
+<section class="banner_prod wow fadeInUp hidden-xs" style="margin-bottom: -50px; margin-top: -50px!important">
+  {{ 'product_banner.jpg' | asset_url | img_tag }}
+  <div class="container">
+    <div class="inner">
+      <div class="content">
+        {% if collection.image %}<center><img class="lazyload" data-src="{{ collection.image | img_url: '480x480' }}"></center>{% endif %}
+      </div>
+    </div>
+    <a href="{{ collection.url }}" style="position: absolute; left: 20px; bottom: 20px; font-weight: 700; font-size: 18px; color: #fff; text-decoration: none;">{{ collection.title }}</a>
+  </div>
+</section>
+<br><br><br>

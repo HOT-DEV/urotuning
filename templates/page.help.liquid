@@ -1,0 +1,42 @@
+<!--<div style="max-width: 800px;margin: 0 auto !important;float: none !important;">-->
+  {% include 'breadcrumb' %}
+<header class="page-header">
+    <h2>Help/FAQ</h2>
+</header>
+<div class="row">
+  <!-- Begin sidebar -->
+  <div class="col-xs-3 sidebar">
+  
+  {% for link in linklists.help-menu.links %}
+      <a href="{{ link.url }}">{{ link.title }}</a><br>
+  {% endfor %}
+  
+  </div>
+  <!-- End sidebar -->
+
+  <div class="col-xs-9 col-main" style="padding-left: 30px;">
+    
+    <div class="content-blog">
+      {% comment %}
+        Loop through each article in your blog. This is limited to what you set for pagination above.
+
+		For more info on article liquid tags:
+		- http://docs.shopify.com/themes/liquid-variables/article
+      {% endcomment %}
+      
+      <ul class="list-blog">
+        {% comment %}
+  		Regular page content goes here.
+		{% endcomment %}
+
+		<div class="rte">
+ 		 {{ page.content }}
+		</div>
+		<!--</div>-->
+      </ul>
+       </div>
+      
+    </div>
+  
+  </div>
+
